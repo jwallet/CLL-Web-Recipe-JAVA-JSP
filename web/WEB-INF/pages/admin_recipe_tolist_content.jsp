@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <sql:query dataSource="${snapshot}" var="result">
-SELECT * from Employees;
+SELECT * from Recettes;
 </sql:query>
 
 <%-- exemple de table avec un foreach
