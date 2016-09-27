@@ -9,7 +9,6 @@
      url="jdbc:mysql://localhost/dbrecette"
      user="root"  password=""/>
 
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -21,9 +20,11 @@
 	<jsp:include page="/pages/${param.admin}header.jsp"/>
 
 	
-	<h1>${param.title}</h1>
+	<!--<h2>${param.title}</h2>-->
 
-	<jsp:include page="/pages/${param.content}.jsp"/>
+	<jsp:include page="/pages/${param.content}.jsp">
+            <jsp:param name="id" value="<%=request.getParameter("id")%>"/>
+        </jsp:include>
 	
 	<jsp:include page="/pages/${param.admin}footer.jsp"/>
 	

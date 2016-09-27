@@ -1,4 +1,4 @@
-<!--TOUTES LES RECETTES VU PAR LE CLIENT-->
+
 <%--
 <sql:query dataSource="${snapshot}" var="result">
 SELECT * from Recettes;

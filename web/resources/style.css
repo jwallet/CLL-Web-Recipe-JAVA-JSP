@@ -101,11 +101,13 @@ menu .active {
 }
 
 form.semantic {
-	width:70%;
+    width:50%;
+    padding:20px;
 }
 
 form.semantic fieldset
 {
+
 	clear: both;
 	margin: 1em 0 0 0;
 	padding: 10px;
@@ -130,11 +132,12 @@ form.semantic div
 
 form.semantic label 
 {
-	display: block;
+	display: inline-block;
 	float: left;
-	width: 120px;
-	text-align: right;
-	padding: 2px 1ex 6px 0;
+	width: auto;
+	text-align: left;
+	padding-left: 20px;
+        padding-right: 10px;
 	vertical-align: baseline;
 }
           
