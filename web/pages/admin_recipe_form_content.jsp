@@ -14,7 +14,7 @@
 
 <form class="semantic" method="post"
 	action="adding.jsp">
-	
+<c:forEach var="row" items="${result.rows}" varStatus="status">
     <div>
             <label for="title">Titre</label> <input type="text" name="title"
                     id="title" value="${row.titre}" />
@@ -47,9 +47,6 @@
         </div>
     </fieldset>
             
-
-    
-
  <div>
             <label for="ingredients">Ingrédients</label> 
             <textarea name="ingredients" id="ingredients" rows="10" cols="60">${row.ingredients}</textarea>
@@ -65,7 +62,10 @@
     </c:if>
 
 	</fieldset>
-
+        
+        
+</c:forEach>
+        
 	<div class="button-row">
 		<a href="${pageContext.request.contextPath}">Annuler</a> ou <input type="submit" value="Enregistrer" />
 	</div>

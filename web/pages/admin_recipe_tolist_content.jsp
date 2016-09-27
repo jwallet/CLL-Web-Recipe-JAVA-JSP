@@ -11,7 +11,7 @@
 
 <sql:query dataSource="${snapshot}" var="result">SELECT * from recettes WHERE brouillon=1;</sql:query>
 
-<h2>Recettes Brouillons (en conception)</h2>
+<div class="title">Recettes Brouillons (en conception)</div>
         <table class="listing" border="1" width="100%">
             <tr>
                 <th>Titre de la recette<th>
