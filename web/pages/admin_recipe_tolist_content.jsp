@@ -11,7 +11,7 @@
 
 <sql:query dataSource="${snapshot}" var="result">SELECT * from recettes WHERE brouillon=1;</sql:query>
 
-<div class="title">Recettes Brouillons (en conception)</div>
+<div class="title">Recettes Brouillons</div>
         <table class="listing" border="1" width="100%">
             <tr>
                 <th>Titre de la recette<th>
@@ -32,7 +32,7 @@
 
 <sql:query dataSource="${snapshot}" var="result2">SELECT * from recettes WHERE brouillon=0;</sql:query>
 
-<h2>Recettes publiées</h2>
+<div class="title">Recettes publiées</div>
         <table class="listing" border="1" width="100%">
             <tr>
                 <th>Titre de la recette<th>
