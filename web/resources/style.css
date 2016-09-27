@@ -274,7 +274,8 @@ form.semantic label.error
 #footer
 {
   font-size: 80%;
-  text-align: right;
+  text-align : center;
+  margin: 25px;
 }
 
 /* bottom nav */
@@ -283,20 +284,8 @@ form.semantic label.error
   font-family: Verdana, Helvetica, Arial, sans-serif;
   font-size : 90%;
   color : #999;
-}
-
-ul.bottom {
-  list-style-type : none;
-  padding : 0em;
-  margin : 0;
-  margin-top : 3em;
-  text-align : center;
-}
-
-.bottom li {
   display : inline;
-  margin : 0.1em 0.1em;
-  padding : 0.0em;
+  margin-top: 3em;
 }
 
 .bottom a {
@@ -305,18 +294,5 @@ ul.bottom {
 
 .bottom a:hover {
   color : #ffcc33;
-}
-
-/* bottom */
-
-.about {
-  color : #999;
-  font-family : Helvetica, Arial, sans-serif;
-  text-align : center;
-  font-size : 90%;
-}
-
-div.about {
-  margin-top : 1em;
 }
 
