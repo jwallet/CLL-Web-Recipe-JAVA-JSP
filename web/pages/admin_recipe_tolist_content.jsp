@@ -13,19 +13,12 @@
 
 <div class="title">Recettes Brouillons</div>
         <table class="listing" border="1" width="100%">
-            <tr>
-                <th>Titre de la recette<th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
             <c:forEach var="row" items="${result.rows}" varStatus="status">
                 <tr class="${status.index%2==0 ? 'alt' : ''}">
-                    <td>${row.titre}</td>
+                    <td class="apercu"><a href="${pageContext.request.contextPath}/?id=${apercu}">${row.titre}</a></td>
                     <td><a href="admin_recipe_form.jsp?id=${row.id_recette}">Modifier</a></td>
-                    <td><a href="${pageContext.request.contextPath}/?id=${row.id_recette}">Supprimer</a></td>
-                    <td><a href="${pageContext.request.contextPath}/?id=${row.id_recette}">Publier</a></td>
-                    <td><a href="${pageContext.request.contextPath}/?id=${row.id_recette}">Apercu</a></td>
+                    <td><a href="?id=${row.id_recette}">Supprimer</a></td>
+                    <td><a href="?id=${row.id_recette}">Publier</a></td>
                 </tr>
             </c:forEach>
         </table>
@@ -34,19 +27,12 @@
 
 <div class="title">Recettes publiées</div>
         <table class="listing" border="1" width="100%">
-            <tr>
-                <th>Titre de la recette<th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
             <c:forEach var="row" items="${result2.rows}" varStatus="status">
                 <tr class="${status.index%2==0 ? 'alt' : ''}">
-                    <td>${row.titre}</td>
+                    <td class="apercu"><a href="${pageContext.request.contextPath}/?id=${apercu}">${row.titre}</a></td>
                     <td><a href="admin_recipe_form.jsp?id=${row.id_recette}">Modifier</a></td>
-                    <td><a href="${pageContext.request.contextPath}/?id=${row.id_recette}">Supprimer</a></td>
-                    <td><a href="${pageContext.request.contextPath}/?id=${row.id_recette}">Retour en brouillon</a></td>
-                    <td><a href="${pageContext.request.contextPath}/?id=${row.id_recette}">Apercu</a></td>
+                    <td><a href="?id=${row.id_recette}">Supprimer</a></td>
+                    <td><a href="?id=${row.id_recette}">Retour en brouillon</a></td>
                 </tr>
             </c:forEach>
         </table>

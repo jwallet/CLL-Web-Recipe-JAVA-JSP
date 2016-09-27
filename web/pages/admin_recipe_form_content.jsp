@@ -19,7 +19,8 @@
 	action="adding.jsp">   
 <c:choose>
     <c:when test="${recettes.rowCount == 0}">
-        <%-- ajout de recette --%>
+        <sql:query dataSource="${snapshot}" var="recettes">SELECT * FROM recettes;</sql:query>
+        
     </c:when>
     <c:otherwise>
                 <%-- modifier de recette --%>   

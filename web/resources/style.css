@@ -14,21 +14,6 @@ body{
     font-size: 26px;
     padding: 10px;
 }
-.listing tr:nth-child(even) {
-    background-color: #e6e6e6;
-}
-
-.listing tr.alt td {
-    background-color: #e6e6e6;
-}
-
-.listing th {
-  background-color: whitesmoke;  
-}
-
-.listing td{
-    border: 1px solid #ccc;    
-}
 
 .listing {
   background-color: #fafafa;
@@ -42,7 +27,24 @@ body{
   border-top: 1px solid #dddddd;
 }
 
+.listing tr:nth-child(even) {
+    background-color: #e6e6e6;
+}
 
+.listing tr.alt td {
+    background-color: whitesmoke;
+}
+
+.listing td{
+    border: 1px solid #ccc; 
+    padding: 4px;
+    width: 200px;
+}
+
+.listing td.apercu{
+    float:none;
+    width:auto;
+}
 
 
 /* unvisited link */
