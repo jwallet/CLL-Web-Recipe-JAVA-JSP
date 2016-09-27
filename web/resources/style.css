@@ -53,6 +53,53 @@ a:active {text-decoration:underline;}  /* selected link */
 https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 */
 
+#header
+{
+    display:inline-block;
+    width: 100%;
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+}
+
+.menu li {
+    float: left;
+    border-right: 1px solid #bbb;
+}
+
+.menu li:last-child {
+    border-right: none;
+}
+
+.menu li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+menu .active {
+    background-color: #3498DB;
+}
+
+/* Change the link color to #111 (black) on hover */
+.menu li a:hover {
+    background-color: #3498DB;
+    color: #fff
+}
+.banniere
+{
+    font-size:x-large;
+    padding: 20px;
+}
+
 form.semantic {
 	width:70%;
 }
@@ -254,3 +301,4 @@ ul.bottom {
 div.about {
   margin-top : 1em;
 }
+

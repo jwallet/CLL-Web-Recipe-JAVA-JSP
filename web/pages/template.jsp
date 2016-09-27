@@ -18,14 +18,14 @@
 	href="${pageContext.request.contextPath}/resources/style.css" />
 </head>
 <body>
-	<jsp:include page="/pages/header.jsp"/>
+	<jsp:include page="/pages/${param.admin}header.jsp"/>
 
 	
 	<h1>${param.title}</h1>
 
 	<jsp:include page="/pages/${param.content}.jsp"/>
 	
-	<jsp:include page="/pages/footer.jsp"/>
+	<jsp:include page="/pages/${param.admin}footer.jsp"/>
 	
 	
 </body>
