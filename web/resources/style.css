@@ -122,6 +122,52 @@ menu .active {
     padding: 20px;
 }
 
+#encadrement{
+    width: 100%;
+}
+
+.post{
+    display: block;
+    width: 860px;
+    margin: auto;
+    margin-top:10px;
+    margin-bottom:10px;
+    max-width: 100%;
+    padding:20px;
+    line-height: normal;
+    word-wrap: break-word;
+    border: 1px solid #ccc;
+    background-color: #eee;
+}
+
+.post titre{
+    
+}
+
+.post description{
+    
+}
+
+.post sommaire{
+    
+}
+
+.post image{
+    
+}
+
+.post readmore{
+    
+}
+
+.post ingredients{
+    
+}
+
+.post instructions{
+    
+}
+
 form.semantic {
     width:50%;
     padding:20px;
@@ -163,21 +209,6 @@ form.semantic label
 	vertical-align: baseline;
 }
           
-form.semantic label.after 
-{
-	width: auto;
-	text-align: left; 
-	display: inline; 
-	float: none;
-}
-
-form.semantic label.long 
-{
-	clear: both;
-	width: auto;
-	text-align: left;
-	float: none;
-}
 
 form.semantic input
 , form.semantic select
@@ -186,75 +217,6 @@ form.semantic input
 	float: left;
 }
 
-form.semantic input.date {
-	width : 100px;
-}
-
-
-form.semantic input.money {
-	width : 100px;
-}
-
-form.semantic input[type=radio]
-, form.semantic input[type=checkbox]
-{
-	vertical-align: text-bottom;
-}
-
-form.semantic ul {
-	list-style-type: none; 
-	float: left;
-	padding: 0;
-	margin: 0;
-}
-
-form.semantic li {
-	clear: both;
-	padding: 0.2em 0;
-}
-
-form.semantic li label {
-	width: auto;
-	text-align: left;
-	padding: 0;
-}   
-
-form.semantic div.field-row 
-{
-	clear: none;
-	float: left;
-	margin: 0;
-	padding: 0;
-	overflow: visible;
-}
-
-form.semantic div.field-row *
-{
-	float: none;
-	display: inline;
-}
-
-form.semantic .button-row
-{
-	text-align: right;
-}
-
-form.semantic .button-row input
-{
-	float: none;
-}
-
-form.semantic div.long label 
-{
-	width: auto;
-	text-align: left;  
-	float: none;
-}
-
-form.semantic div.long textarea 
-{
-	width: 100%;
-}
 
 /* Errors -- for use with JQuery Validate, etc. */
 
@@ -273,11 +235,6 @@ form.semantic label.error
 	text-align: left;
 }       
 
-/* from caucho.com */
-#footer hr
-{
-  width: 100%;
-}
 #footer
 {
   font-size: 80%;
@@ -285,7 +242,7 @@ form.semantic label.error
   margin: 25px;
 }
 
-/* bottom nav */
+/* bottom */
 
 .bottom {
   font-family: Verdana, Helvetica, Arial, sans-serif;

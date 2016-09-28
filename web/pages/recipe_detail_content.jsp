@@ -16,18 +16,18 @@
 
 
 <c:forEach var="rec" items="${recettes.rows}" varStatus="status">
-    <div id="recette">
-        <div class="recette_titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>
-        <div class="recette_description">${rec.description}</div>
-        <div class="recette_sommaire">
+    <div class="post">
+        <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>
+        <div class="description">${rec.description}</div>
+        <div class="sommaire">
             <c:forEach var="som" items="${sommaire.rows}" varStatus="status">
-                <div class="recette_${som.type}"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>                
+                <div class="${som.type}"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>                
             </c:forEach>
         </div>   
 <!-- IMAGE URL HERE -->
-        <div class="recette_image"></div>
+        <div class="image"></div>
         
-        <div class="recette_ingredients">
+        <div class="ingredients">
              <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="status"> 
                  <ul>
                      <li>${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
@@ -35,6 +35,6 @@
             </c:forEach>
         </div>
         
-        <div class="recette_instructions">${rec.instructions}</div>
+        <div class="instructions">${rec.instructions}</div>
     </div>
 </c:forEach>
