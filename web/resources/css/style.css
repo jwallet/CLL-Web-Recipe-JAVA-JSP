@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 body{
     font-family: Tahoma;
-    background-image: url("background.png");
+    background-image: url("../images/background.png");
 }
 .title{
     font-size: 26px;
@@ -153,6 +153,17 @@ menu .active {
 
 .post .image{
     float:right;
+}
+
+.post .image .thumbnail{
+    
+    width:200px;
+    height:133px;
+}
+
+.post .image .hidden-thumbnail{
+    width:0px;
+    height:0px;
 }
 
 .post .image .msg{
