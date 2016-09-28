@@ -9,6 +9,7 @@ and open the template in the editor.
 */
 body{
     font-family: Tahoma;
+    background-image: url("background.png");
 }
 .title{
     font-size: 26px;
@@ -87,7 +88,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     padding: 0;
     overflow: hidden;
     border: 1px solid #e7e7e7;
-    background-color: #f3f3f3;
+    background-color: rgba(255,255,255,0.8);
 }
 
 .menu li {
@@ -124,6 +125,7 @@ menu .active {
 
 #encadrement{
     width: 100%;
+    
 }
 
 .post{
@@ -137,35 +139,41 @@ menu .active {
     line-height: normal;
     word-wrap: break-word;
     border: 1px solid #ccc;
-    background-color: #eee;
+    background-color: rgba(255,255,255,0.8);
 }
 
-.post titre{
-    
+.post .titre{
+    font-size: 30px;
+    margin-bottom: 20px;
 }
 
-.post description{
-    
+.post .description{
+    margin-bottom:20px;
 }
 
-.post sommaire{
-    
+.post .image{
+    float:right;
 }
 
-.post image{
-    
+.post .image .msg{
+    font-variant:all-small-caps;
 }
 
-.post readmore{
-    
+
+.post .sommaire{
+    margin-bottom:20px;
 }
 
-.post ingredients{
-    
+.post .readmore{
+    margin-bottom:10px;
 }
 
-.post instructions{
-    
+.post .ingredients{
+    margin-bottom:20px;
+}
+
+.post .instructions{
+    margin-bottom:15px;
 }
 
 form.semantic {
