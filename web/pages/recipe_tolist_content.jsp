@@ -22,13 +22,13 @@
             <div class="image">                
                 <c:choose>
                     <c:when test="${loopimg.index eq 0}"> 
-                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="1">
+                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
                             <img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
                             </a>
                             <div class="msg">Cliquez sur l'image pour agrandir</div>
                     </c:when>
                     <c:otherwise>
-                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="1">
+                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
                             <img class='hidden_thumbnail'width="0px" height="0px" alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}" />
                             </a>
                     </c:otherwise>

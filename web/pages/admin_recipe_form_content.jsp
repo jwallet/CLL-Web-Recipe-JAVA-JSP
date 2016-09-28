@@ -142,30 +142,32 @@
             <div>
                 <label for="recette_ingredients">Ingrédients</label>
             </div>
-           
+           <div class="input_fields_wrap">
+                <button class="add_field_button">Ajouter un ingrédient</button>
                     <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="loop">
                       <div>   
-                        <input name="recette_ing_quantite" id="recette_ing_quantite" value="${ing.quantite}" />
+                        <input name="recette_ing_quantite[]" id="recette_ing_quantite" value="${ing.quantite}" />
                         
                         <select>
                         <c:forEach var="unite" items="${unites.rows}">
                             <c:choose>
 
                                     <c:when test="${unite.id_type_unite eq ing.id_type_unite}">
-                                        <option name="recette_ing_type_unite_${loop.index}" value="${unite.id_type_unite}" selected>${unite.type_unite}</option>
+                                        <option name="recette_ing_type_unite_${loop.index}[]" value="${unite.id_type_unite}" selected>${unite.type_unite}</option>
                                     </c:when>
                                     <c:otherwise>
-                                        <option name="recette_ing_type_unite_${loop.index}" value="${unite.id_type_unite}">${unite.type_unite}</option>
+                                        <option name="recette_ing_type_unite_${loop.index}[]" value="${unite.id_type_unite}">${unite.type_unite}</option>
                                     </c:otherwise>
 
                             </c:choose>
                         </c:forEach>
                         </select>
                         
-                        <input name="recette_ing_ingredient" id="ingredient" value="${ing.ingredient}" />
+                        <input name="recette_ing_ingredient[]" id="ingredient" value="${ing.ingredient}" />
                         
-                      </div>  
+                      </div>                          
                     </c:forEach>
+                </div>
             
             
 
@@ -187,3 +189,76 @@
 </c:choose> 
 </form>        
 
+<!--<script>
+    $(document).ready(function() {
+        var max_fields      = 10; //maximum input boxes allowed
+        var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+        var add_button      = $(".add_field_button"); //Add button ID
+
+        var x = 1; //initlal text box count
+        $(add_button).click(function(e){ //on add input button click
+            e.preventDefault();
+            if(x < max_fields){ //max input box allowed
+                x++; //text box increment
+                $(wrapper).append('<div class="ingredient">\
+    <input name="recette_ing_quantite[]" id="recette_ing_quantite" value="" />\
+    <select><option name="recette_label" value="" selected></option></select>\
+    <input name="recette_ing_ingredient[]" id="ingredient" value="" />\
+    <a href="#" class="remove_field"><img style="padding-left:5px;" src="../resources/images/x.png"/></a></div>'); //add input box
+            }
+        });
+
+        $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+            e.preventDefault(); $(this).parent('div').remove();
+            x--;
+        });
+        });
+</script>-->
+
+<script>
+    $(document).ready(function() {
+        var max_fields      = 10; //maximum input boxes allowed
+        var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+        var add_button      = $(".add_field_button"); //Add button ID
+
+        var x = 1; //initlal text box count
+        $(add_button).click(function(e){ //on add input button click
+            e.preventDefault();
+            if(x < max_fields){ //max input box allowed
+                x++; //text box increment
+                $(wrapper).append('<div class="ingredient">\
+    <input name="recette_ing_quantite[]" id="recette_ing_quantite" value="" />');
+                $.each(items, function (${unites.rows}, item)
+        {
+            $('#mySelect').append($('<option>', 
+        {
+        value: item.value,
+        text : item.text 
+    }));
+});
+                $(wrapper).append($('#mySelect'));
+                $(wrapper).append('<input name="recette_ing_ingredient[]" id="ingredient" value="" />\
+    <a href="#" class="remove_field"><img style="padding-left:5px;" src="../resources/images/x.png"/></a></div>'); //add input box
+            }
+        });
+
+        $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+            e.preventDefault(); $(this).parent('div').remove();
+            x--;
+        });
+        });
+</script>
+<%--
+$.each(items, function (${unites.rows}, item)
+        {
+            $('#mySelect').append($('<option name=recette_label>', 
+        { 
+        value: item.value,
+        text : item.text 
+    }));
+});<select>')+$('#mySelect')+('</select>\
+            $(wrapper).append('<div class="ingredient">\
+    <input name="recette_ing_quantite[]" id="recette_ing_quantite" value="" />\
+    <select>)<option name="recette_label" value="" selected></option></select>\
+    <input name="recette_ing_ingredient[]" id="ingredient" value="" />\
+    <a href="#" class="remove_field"><img style="padding-left:10px;" src="../resources/images/x.png"/></a></div>'); //add input box--%>
