@@ -15,10 +15,11 @@
         <table class="listing" border="1" width="100%">
             <c:forEach var="row" items="${result.rows}" varStatus="status">
                 <tr class="${status.index%2==0 ? 'alt' : ''}">
-                    <td class="apercu"><a href="${pageContext.request.contextPath}/?id=${apercu}">${row.titre}</a></td>
+                    <td class="titre">${row.titre}</a</td>
+                    <td><a href="admin_recipe_apercu.jsp?id=${row.id_recette}">Aperçu</a></td>
                     <td><a href="admin_recipe_form.jsp?id=${row.id_recette}">Modifier</a></td>
-                    <td><a href="?id=${row.id_recette}">Supprimer</a></td>
-                    <td><a href="?id=${row.id_recette}">Publier</a></td>
+                    <td><a href="admin_recipe_delete.jsp?id=${row.id_recette}">Supprimer</a></td>
+                    <td><a href="admin_recipe_publish.jsp?id=${row.id_recette}">Publier</a></td>
                 </tr>
             </c:forEach>
         </table>
@@ -29,10 +30,11 @@
         <table class="listing" border="1" width="100%">
             <c:forEach var="row" items="${result2.rows}" varStatus="status">
                 <tr class="${status.index%2==0 ? 'alt' : ''}">
-                    <td class="apercu"><a href="${pageContext.request.contextPath}/?id=${apercu}">${row.titre}</a></td>
+                    <td class="titre">${row.titre}</a</td>
+                    <td><a href="admin_recipe_apercu.jsp?id=${row.id_recette}">Aperçu</a></td>
                     <td><a href="admin_recipe_form.jsp?id=${row.id_recette}">Modifier</a></td>
                     <td><a href="?id=${row.id_recette}">Supprimer</a></td>
-                    <td><a href="?id=${row.id_recette}">Retour en brouillon</a></td>
+                    <td><a href="admin_recipe_draft.jsp?id=${row.id_recette}">Retour en brouillon</a></td>
                 </tr>
             </c:forEach>
         </table>

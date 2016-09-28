@@ -12,7 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1><a href="${pageContext.request.contextPath}/pages/admin_recipe_form.jsp">form</a></h1>
-        <h1><a href="${pageContext.request.contextPath}/pages/admin_recipe_tolist.jsp">list</a></h1>
+        <h1><a href="${pageContext.request.contextPath}/pages/admin_recipe_form.jsp">admin_form (ajout/modif)</a></h1>
+        <h1><a href="${pageContext.request.contextPath}/pages/admin_recipe_tolist.jsp">admin_list (to list)</a></h1>
+        <h1><a href="${pageContext.request.contextPath}/pages/recipe_tolist.jsp">listing</a></h1>
+        <h1><a href="${pageContext.request.contextPath}/pages/recipe_detail.jsp">detail (1)</a></h1>
     </body>
 </html>

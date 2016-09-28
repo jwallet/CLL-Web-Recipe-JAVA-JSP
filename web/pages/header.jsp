@@ -7,11 +7,11 @@
         
     <div class='menu'>
     <ul>
-        <li><a href="#home">Toutes les recettes</a></li>
-        <li><a href="#news">Repas</a></li>
-        <li><a href="#news">Soupe</a></li>
-        <li><a href="#news">Dessert</a></li>
-        <li><a href="#news">Divers</a></li>
+        <li><a href="recipe_tolist.jsp">Toutes les recettes</a></li>
+        <li><a href="recipe_tolist.jsp">Repas</a></li>
+        <li><a href="recipe_tolist.jsp">Soupe</a></li>
+        <li><a href="recipe_tolist.jsp">Dessert</a></li>
+        <li><a href="recipe_tolist.jsp">Divers</a></li>
         <li style="float:right"><a class="active" href="${pageContext.request.contextPath}">Commentaires</a></li>
     </ul>        
     </div>
