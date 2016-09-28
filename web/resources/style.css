@@ -1,0 +1,298 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 26, 2016, 2:12:54 PM
+    Author     : Admin
+*/
+body{
+    font-family: Tahoma;
+}
+.title{
+    font-size: 26px;
+    padding: 10px;
+}
+
+.listing {
+  background-color: #fafafa;
+  border:1px solid #ccc;
+  border-radius: 4px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  padding: 8px;
+  line-height: 1.428571429;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+}
+
+.listing tr:nth-child(even) {
+    background-color: #e6e6e6;
+}
+
+.listing tr.alt td {
+    background-color: whitesmoke;
+}
+
+.listing td{
+    border: 1px solid #ccc; 
+    padding: 4px;
+    width: 200px;
+}
+
+.listing td.apercu{
+    float:none;
+    width:auto;
+}
+
+
+/* unvisited link */
+a:link 
+{
+	text-decoration:none;
+	color:#000000; 
+}
+
+/* visited link */
+a:visited 
+{
+	text-decoration:none; 
+	color: #707070 ;
+}
+
+a:hover {text-decoration:underline;}   /* mouse over link */
+a:active {text-decoration:underline;}  /* selected link */
+
+/* The CSS for the form was taken from this project. 
+https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
+*/
+
+#header
+{
+    display:inline-block;
+    width: 100%;
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+}
+
+.menu li {
+    float: left;
+    border-right: 1px solid #bbb;
+}
+
+.menu li:last-child {
+    border-right: none;
+}
+
+.menu li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+menu .active {
+    background-color: #3498DB;
+}
+
+/* Change the link color to #111 (black) on hover */
+.menu li a:hover {
+    background-color: #3498DB;
+    color: #fff
+}
+.banniere
+{
+    font-size:x-large;
+    padding: 20px;
+}
+
+form.semantic {
+    width:50%;
+    padding:20px;
+}
+
+form.semantic fieldset
+{
+
+	clear: both;
+	margin: 1em 0 0 0;
+	padding: 10px;
+	overflow: auto;
+	background-color: #f8f8f8;
+	border: 1px solid #888;
+}
+
+form.semantic legend
+{
+	font-weight: bold;
+}
+
+form.semantic div
+{
+	clear: both;
+	margin: 0;
+	padding: 0.5em 0 0 0;
+	overflow: visible;
+}
+
+
+form.semantic label 
+{
+	display: inline-block;
+	float: left;
+	width: auto;
+	text-align: left;
+	padding-left: 20px;
+        padding-right: 10px;
+	vertical-align: baseline;
+}
+          
+form.semantic label.after 
+{
+	width: auto;
+	text-align: left; 
+	display: inline; 
+	float: none;
+}
+
+form.semantic label.long 
+{
+	clear: both;
+	width: auto;
+	text-align: left;
+	float: none;
+}
+
+form.semantic input
+, form.semantic select
+, form.semantic textarea
+{
+	float: left;
+}
+
+form.semantic input.date {
+	width : 100px;
+}
+
+
+form.semantic input.money {
+	width : 100px;
+}
+
+form.semantic input[type=radio]
+, form.semantic input[type=checkbox]
+{
+	vertical-align: text-bottom;
+}
+
+form.semantic ul {
+	list-style-type: none; 
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+
+form.semantic li {
+	clear: both;
+	padding: 0.2em 0;
+}
+
+form.semantic li label {
+	width: auto;
+	text-align: left;
+	padding: 0;
+}   
+
+form.semantic div.field-row 
+{
+	clear: none;
+	float: left;
+	margin: 0;
+	padding: 0;
+	overflow: visible;
+}
+
+form.semantic div.field-row *
+{
+	float: none;
+	display: inline;
+}
+
+form.semantic .button-row
+{
+	text-align: right;
+}
+
+form.semantic .button-row input
+{
+	float: none;
+}
+
+form.semantic div.long label 
+{
+	width: auto;
+	text-align: left;  
+	float: none;
+}
+
+form.semantic div.long textarea 
+{
+	width: 100%;
+}
+
+/* Errors -- for use with JQuery Validate, etc. */
+
+form.semantic input.error
+, form.semantic select.error
+, form.semantic textarea.error
+{
+	background-color: #77002a;
+	color: white;
+}                                                
+
+form.semantic label.error
+{
+	width: auto;
+	color: #77002a;
+	text-align: left;
+}       
+
+/* from caucho.com */
+#footer hr
+{
+  width: 100%;
+}
+#footer
+{
+  font-size: 80%;
+  text-align : center;
+  margin: 25px;
+}
+
+/* bottom nav */
+
+.bottom {
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  font-size : 90%;
+  color : #999;
+  display : inline;
+  margin-top: 3em;
+}
+
+.bottom a {
+  color : #999;
+}
+
+.bottom a:hover {
+  color : #ffcc33;
+}
+
