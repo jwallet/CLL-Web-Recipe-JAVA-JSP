@@ -20,19 +20,21 @@
         <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>
         <!-- IMAGE URL HERE -->
         <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
+               <div class="image">                
                 <c:choose>
-                    <c:when test="${loopimg.index eq 0}">
-                        <div class="image">
-                            <img width="200px" height="133px" alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
+                    <c:when test="${loopimg.index eq 0}"> 
+                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
+                            <img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
+                            </a>
                             <div class="msg">Cliquez sur l'image pour agrandir</div>
-                        </div>
                     </c:when>
                     <c:otherwise>
-                        <div class="image">
-                            <img width="0px" height="0px" alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
-                        </div>
+                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
+                            <img class='hidden_thumbnail'width="0px" height="0px" alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}" />
+                            </a>
                     </c:otherwise>
-                </c:choose>
+                </c:choose>                
+            </div>
         </c:forEach>
         <div class="description">${rec.description}</div>
         <div class="sommaire">
