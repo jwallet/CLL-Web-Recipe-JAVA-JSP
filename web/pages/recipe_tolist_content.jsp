@@ -9,7 +9,7 @@
      url="jdbc:mysql://localhost/dbrecette"
      user="root"  password=""/>
 
-<sql:query dataSource="${snapshot}" var="recettes">SELECT * FROM recettes;</sql:query>
+<sql:query dataSource="${snapshot}" var="recettes">SELECT * FROM recettes WHERE brouillon=0;</sql:query>
 <%--<sql:query dataSource="${snapshot}" var="labels">SELECT * FROM p_type_label</sql:query>
 <sql:query dataSource="${snapshot}" var="unites">SELECT * FROM p_type_unite</sql:query>
   
