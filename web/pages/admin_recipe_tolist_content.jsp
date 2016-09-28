@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,7 +16,7 @@
             <c:forEach var="row" items="${result.rows}" varStatus="status">
                 <tr class="${status.index%2==0 ? 'alt' : ''}">
                     <td class="titre">${row.titre}</a</td>
-                    <td><a href="admin_recipe_apercu.jsp?id=${row.id_recette}">Aperçu</a></td>
+                    <td><a href="admin_recipe_view.jsp?id=${row.id_recette}" target='_blank'>Aperçu</a></td>
                     <td><a href="admin_recipe_form.jsp?id=${row.id_recette}">Modifier</a></td>
                     <td><a href="admin_recipe_delete.jsp?id=${row.id_recette}">Supprimer</a></td>
                     <td><a href="admin_recipe_publish.jsp?id=${row.id_recette}">Publier</a></td>
@@ -31,7 +31,7 @@
             <c:forEach var="row" items="${result2.rows}" varStatus="status">
                 <tr class="${status.index%2==0 ? 'alt' : ''}">
                     <td class="titre">${row.titre}</a</td>
-                    <td><a href="admin_recipe_apercu.jsp?id=${row.id_recette}">Aperçu</a></td>
+                    <td><a href="admin_recipe_view.jsp?id=${row.id_recette}"target='_blank'>Aperçu</a></td>
                     <td><a href="admin_recipe_form.jsp?id=${row.id_recette}">Modifier</a></td>
                     <td><a href="?id=${row.id_recette}">Supprimer</a></td>
                     <td><a href="admin_recipe_draft.jsp?id=${row.id_recette}">Retour en brouillon</a></td>
