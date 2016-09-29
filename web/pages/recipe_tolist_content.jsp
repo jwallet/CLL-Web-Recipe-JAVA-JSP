@@ -8,12 +8,17 @@
 <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
      url="jdbc:mysql://localhost/dbrecette"
      user="root"  password=""/>
-
-<sql:query dataSource="${snapshot}" var="recettes">SELECT * FROM recettes WHERE brouillon=0;</sql:query>
-
-
+<c:set var="lbl" value="<%=request.getParameter("lbl")%>"/>
+<c:choose>
+    <c:when test="${lbl eq null}">
+        <sql:query dataSource="${snapshot}" var="recettes">SELECT * FROM recettes WHERE brouillon=0;</sql:query>
+    </c:when>
+    <c:otherwise>        
+        <sql:query dataSource="${snapshot}" var="recettes">SELECT * FROM recettes r JOIN label l ON r.id_recette=l.id_recette JOIN p_type_label ptl ON l.id_type_label=ptl.id_type_label WHERE r.brouillon=0 AND ptl.label like '<%=request.getParameter("lbl")%>';</sql:query>
+    </c:otherwise>
+</c:choose>
 <c:forEach var="rec" items="${recettes.rows}" varStatus="status">
-    <div id="encadrement">
+    
     <div class="post">
         <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>
         <!-- IMAGE URL HERE -->
@@ -43,6 +48,5 @@
             </c:forEach>
         </div>   
         <div class="readmore"><a href="recipe_detail.jsp?id=${rec.id_recette}">Lire la recette</a></div>
-    </div>
     </div>
 </c:forEach>   

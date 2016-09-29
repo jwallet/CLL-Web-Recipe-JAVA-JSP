@@ -1,3 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://www.atg.com/taglibs/json" prefix="json" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+
+<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
+     url="jdbc:mysql://localhost/dbrecette"
+     user="root"  password=""/>
+
+<sql:query dataSource="${snapshot}" var="labels">SELECT * FROM p_type_label</sql:query>
+
 <div id=header>
     <div class="banniere">
         <a href="${pageContext.request.contextPath}">BANNIERE DU SITE QUI RETOURNE A LA PAGE PRINCIPALE
@@ -8,10 +22,9 @@
     <div class='menu'>
     <ul>
         <li><a href="recipe_tolist.jsp">Toutes les recettes</a></li>
-        <li><a href="recipe_tolist.jsp">Repas</a></li>
-        <li><a href="recipe_tolist.jsp">Soupe</a></li>
-        <li><a href="recipe_tolist.jsp">Dessert</a></li>
-        <li><a href="recipe_tolist.jsp">Divers</a></li>
+        <c:forEach var="lbl" items="${labels.rows}">
+            <li><a href="recipe_tolist.jsp?lbl=${lbl.label}">${lbl.label}</a></li>
+        </c:forEach>
         <li style="float:right"><a class="active" href="${pageContext.request.contextPath}">Commentaires</a></li>
     </ul>        
     </div>

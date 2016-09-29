@@ -19,7 +19,7 @@
                     <td><a href="admin_recipe_view.jsp?id=${row.id_recette}" target='_blank'>Aperçu</a></td>
                     <td><a href="admin_recipe_form.jsp?id=${row.id_recette}">Modifier</a></td>
                     <td><a href="admin_recipe_delete.jsp?id=${row.id_recette}">Supprimer</a></td>
-                    <td><a href="admin_recipe_publish.jsp?id=${row.id_recette}">Publier</a></td>
+                    <td class="brouillon"><a href="admin_recipe_publish.jsp?id=${row.id_recette}">Publier</a></td>
                 </tr>
             </c:forEach>
         </table>
@@ -34,7 +34,7 @@
                     <td><a href="admin_recipe_view.jsp?id=${row.id_recette}"target='_blank'>Aperçu</a></td>
                     <td><a href="admin_recipe_form.jsp?id=${row.id_recette}">Modifier</a></td>
                     <td><a href="?id=${row.id_recette}">Supprimer</a></td>
-                    <td><a href="admin_recipe_draft.jsp?id=${row.id_recette}">Retour en brouillon</a></td>
+                    <td><a href="admin_recipe_draft.jsp?id=${row.id_recette}">Ébaucher</a></td>
                 </tr>
             </c:forEach>
         </table>

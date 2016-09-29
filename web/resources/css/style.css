@@ -10,6 +10,10 @@ and open the template in the editor.
 body{
     font-family: Tahoma;
     background-image: url("../images/background.png");
+    margin: auto;
+    width: 50%;
+    min-width: 800px;
+    max-width: 1024px;
 }
 .title{
     font-size: 26px;
@@ -41,7 +45,7 @@ body{
     border: 1px solid #ccc; 
     padding: 4px;
     text-align:center;
-    width: 150px;
+    width: 100px;
 }
 
 .listing td.titre{
@@ -82,10 +86,14 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     width: 100%;
 }
 
+.banniere
+{
+    font-size:x-large;
+    padding-top: 20px;
+}
 .menu ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    padding: 0;    
     overflow: hidden;
     border: 1px solid #e7e7e7;
     background-color: rgba(255,255,255,0.8);
@@ -117,21 +125,10 @@ menu .active {
     background-color: #3498DB;
     color: #fff
 }
-.banniere
-{
-    font-size:x-large;
-    padding: 20px;
-}
 
-#encadrement{
-    width: 100%;
-    
-}
 
 .post{
     display: block;
-    width: 860px;
-    margin: auto;
     margin-top:10px;
     margin-bottom:10px;
     max-width: 100%;

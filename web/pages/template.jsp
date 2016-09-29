@@ -25,8 +25,7 @@
 
 	<jsp:include page="/pages/${param.content}.jsp"/>
 	
-	<jsp:include page="/pages/${param.admin}footer.jsp"/>
-        
-        <script src="${pageContext.request.contextPath}/resources/js/lightbox.js"></script>
+	<jsp:include page="/pages/${param.admin}footer.jsp"/>  
+        <script src="${pageContext.request.contextPath}/resources/js/lightbox.js"></script>    
 </body>
 </html>
