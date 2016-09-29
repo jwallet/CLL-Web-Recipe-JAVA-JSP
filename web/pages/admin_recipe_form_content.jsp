@@ -220,7 +220,9 @@
 <script>
     $(document).ready(function() {
         //var target = "";
-        
+        //ESSAI DE FAIRE UN PAGE HTML DES BALISE 1 LIGNE A INSERER
+        //ET LA CALLER EN JSP:INCLUDE AVEC AJAX EN CLIQUANT SUR LE BOUTON
+        //UTILISER LE FORM JSP JSON_SQL_ING_... POUR REMPLIR LA LISTE GET_JSON()
        var first        = "<div><input name='recette_ing_quantite' id='recette_ing_quantite' value='' />";
        var second       ="<select id='target'></select>";
         var third       = "<input name='recette_ing_ingredient' id='ingredient' value='' />"+
