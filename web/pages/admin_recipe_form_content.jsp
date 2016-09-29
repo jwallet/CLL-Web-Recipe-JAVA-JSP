@@ -14,14 +14,18 @@
 <sql:query dataSource="${snapshot}" var="labels">SELECT * FROM p_type_label</sql:query>
 <sql:query dataSource="${snapshot}" var="unites">SELECT * FROM p_type_unite</sql:query>
 
-<form class="semantic" method="post"
-	action="">   
-<c:choose>
-    
+
+<div class="carree_blanc">
+
+<c:choose>    
     <c:when test="${recettes.rowCount == 0}">
         <%-- ajout recette--%>
- <sql:query dataSource="${snapshot}" var="sommaire">SELECT  * FROM p_type_sommaire;</sql:query>       
-        <div>
+ <div class="gros_titre">Ajout d'une recette</div>
+ <form  method="post" action="">
+        <sql:query dataSource="${snapshot}" var="sommaire">SELECT  * FROM p_type_sommaire;</sql:query>  
+
+     
+        <div class="explication">
                     <label for="recette_titre">Titre</label> <input type="text" name="recette_titre"
                             id="recette_titre" value="" />
                     <label for="recette_label">Catégorie</label>
@@ -30,34 +34,40 @@
                         <option name="recette_label" value="${lbls.label}">${lbls.label}</option>                            
                     </c:forEach>
                     </select>
-            </div>
+        </div>
 
-            <div>
+        <div class="explication">
                     <label for="recette_description">Description</label>
-            </div>
         
-            <div>
                     <textarea name="recette_description" id="recette_description" rows="2" cols="100"></textarea>
-            </div>
-
+            
+        </div>
             <fieldset>
-                <legend>
-                    Sommaire
-                </legend>
+                <legend>Sommaire</legend>
+            
                 <c:forEach var="som" items="${sommaire.rows}" varStatus="status">
-
-                <div>
-                    <label for="recette_${som.type}">Temps de ${som.type}</label> 
-                    <input name="recette_${som.type}" id="recette_${som.type}" value="" />
-                </div>
-
+                        <c:choose>    
+                            <c:when test="${som.id_type_sommaire != 4}">
+                                <div>
+                                    <label for="recette_${som.type}">Temps de ${som.type}</label> 
+                                    <input name="recette_${som.type}" id="recette_${som.type}" value="" />
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div>
+                                    <label for="recette_${som.type}">Nombre de ${som.type}</label> 
+                                    <input name="recette_${som.type}" id="recette_${som.type}" value="" />
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                 </c:forEach>
             </fieldset>
 
-            
-            <div>
+            <fieldset>
+                <legend>Ingrédients</legend>
+<!--            <div>
                 <label for="recette_ingredients">Ingrédients</label>
-            </div>
+            </div>-->
            
                       <div>   
                         <input name="recette_ing_quantite" id="recette_ing_quantite" value="0.0" />
@@ -71,24 +81,30 @@
                         <input name="recette_ing_ingredient" id="ingredient" value="" />
                         
                       </div>
-            
-            <div>
-                    <label for="recette_instructions">Instructions</label> 
+            </fieldset>
+            <div class="explication">
+                <label for="recette_instructions">Instructions</label> 
+
+                    <div>
+                            <textarea name="recette_instructions" id="recette_instructions" rows="20" cols="100"></textarea>
+                    </div>
             </div>
-            <div>
-                    <textarea name="recette_instructions" id="recette_instructions" rows="20" cols="100"></textarea>
+<div class="liens_bouton">
+                    <div class="button-row">
+                            <a href="${pageContext.request.contextPath}">Annuler</a> ou <input type="submit" name="recette_save" value="Enregistrer" />
+                    </div>
             </div>
-        
-        <div class="button-row">
-		<a href="${pageContext.request.contextPath}">Annuler</a> ou <input type="submit" name="recette_save" value="Enregistrer" />
-	</div>
-        
+             
+</form>        
+</div>
     </c:when>
-    
     
     
 
     <c:otherwise>
+        
+        <div class="carree_blanc">
+    <form  method="post" action="">
                 <%-- modifier de recette --%>   
 <sql:query dataSource="${snapshot}" var="label_recette">SELECT * FROM label lbl JOIN p_type_label ptl ON lbl.id_type_label=ptl.id_type_label WHERE lbl.id_recette=<%=request.getParameter("id")%>;</sql:query>
 <sql:query dataSource="${snapshot}" var="ingredients_recette">SELECT * FROM ingredients ing JOIN p_type_unite ptu ON ing.id_type_unite=ptu.id_type_unite WHERE ing.id_recette=<%=request.getParameter("id")%>;</sql:query>
@@ -186,10 +202,10 @@
 	<div class="button-row">
 		<a href="${pageContext.request.contextPath}">Annuler</a> ou <input type="submit" name="recette_update" value="Modifier" />
 	</div>
-        
+        </form>        
+</div>
     </c:otherwise>
 </c:choose> 
-</form>        
 
 <!--<script>
     $(document).ready(function() {

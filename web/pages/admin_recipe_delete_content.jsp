@@ -11,10 +11,12 @@
 
  <sql:query dataSource="${snapshot}" var="recette">SELECT  * FROM recettes WHERE id_recette=<%=request.getParameter("id")%>;</sql:query>  
  <c:forEach var="r" items="${recette.rows}" varStatus="status">
-     <div class="title">Supprimer une recette</div>
+ <div class="carree_blanc">
+     <div class="gros_titre">Supprimer une recette</div>
      <div id="supprimer">        
         <div class="explication">Êtes-vous certain de vouloir supprimer la recette: <div class="recette">${r.titre}</div></div>
         <div class="liens_bouton"><a href="admin_recipe_tolist.jsp">Annuler</a> ou
         <a href="admin_recipe_todelete.jsp?id=<%=request.getParameter("id")%>">Supprimer</a></div>
      </div>
+ </div>
 </c:forEach>
