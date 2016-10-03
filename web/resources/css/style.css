@@ -48,12 +48,29 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     font-size:x-large;
     padding-top: 20px;
 }
+
+.banniere_lien
+{
+    font-size:x-large;
+    padding-top: 20px;
+    color: #0066ff ;
+}
+
 .menu ul {
     list-style-type: none;
     padding: 0;    
     overflow: hidden;
     border: 1px solid #ddd;
     background-color: rgba(255,255,255,0.8);
+}
+
+.menu li.lien{
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    
 }
 
 .menu li {
@@ -169,6 +186,12 @@ menu .active {
     margin-bottom: 20px;
 }
 
+.post .titre_lien{
+    font-size: 30px;
+    color: #0066ff ;
+    margin-bottom: 20px;
+}
+
 .post .description{
     margin-bottom:20px;
 }
@@ -219,6 +242,18 @@ menu .active {
 
 .post .ingredients{
     margin-bottom:20px;
+}
+
+.post .ingredients ul{
+    columns: 2;
+    -webkit-columns: 2;
+  -moz-columns: 2;
+}
+
+.post .ingredients li.droit{
+    display:block;
+    position:relative;
+    float:right;
 }
 
 .post .instructions{

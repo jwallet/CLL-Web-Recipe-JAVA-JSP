@@ -1,5 +1,5 @@
 <div id="footer">
-    <div class="bottom_lien">
-       VOIR LE SITE WEB
+    <div class="bottom">
+       RETOURNER AU HAUT DE LA PAGE
     </div>
 </div>

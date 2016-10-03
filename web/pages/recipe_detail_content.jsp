@@ -20,7 +20,7 @@
         <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>
         <!-- IMAGE URL HERE -->
         <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
-               <div class="image">                
+            <div class="image">                
                 <c:choose>
                     <c:when test="${loopimg.index eq 0}"> 
                         <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
@@ -50,11 +50,20 @@
         </div>   
         
         <div class="ingredients"><b>Ingrédients</b>:
-             <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="status"> 
-                 <ul>
-                     <li>${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
-                </ul>
+            <ul>
+             <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="ingloop"> 
+                 <c:choose>                     
+                     <c:when test="${ingloop.index <= ingredients_recette.rowCount/2}">                         
+                         
+                            <li>${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
+                        
+                     </c:when>
+                     <c:otherwise>
+                            <li>${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
+                     </c:otherwise>
+                 </c:choose>
             </c:forEach>
+                            </ul>
         </div>
         
         <div class="instructions"><p><b>Instructions:</b></p>${rec.instructions}</div>
