@@ -173,14 +173,30 @@ menu .active {
     margin-bottom:20px;
 }
 
+.post .image .zoom
+{
+    float:right;
+    position:absolute;
+    width:28px;
+    height:28px;
+    right:4px;
+    bottom:7px;
+}
+
 .post .image{
     float:right;
+    position:relative;
+    margin-top: -8px;
+    
 }
 
 .post .image .thumbnail{
     
-    width:200px;
-    height:133px;
+    width:240px;
+    height:160px;
+    border: 6px solid white;
+    border-radius: 10px;
+    
 }
 
 .post .image .hidden-thumbnail{
@@ -226,14 +242,40 @@ form fieldset
 form fieldset label
 {
     font-weight:normal;
+    float:left;
+    position:static;
+    width: 200px;
+    overflow:hidden;
+    display:block;
 }
 
 form label{
     font-weight:bold;
+    padding-right: 10px;
+}
+form .explication{
+    font-weight: bold;
+}
+
+form .explication .float{
+    position:relative;
+    float:right;
 }
 
 form input{
     margin-right: 20px;
+}
+form .explication input{
+    width:70%;
+}
+form .sommaire input{
+    width:70%;
+}
+
+
+form textarea{
+    width:100%;
+    resize: none;
 }
 
 form select{
@@ -242,7 +284,11 @@ form select{
 
 form legend
 {
-	font-weight: bold;
+    font-weight: bold;
+}
+
+form .liens_bouton{
+    text-align:right;   
 }
 
 

@@ -24,9 +24,8 @@
                 <c:choose>
                     <c:when test="${loopimg.index eq 0}"> 
                         <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
-                            <img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
+                            <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
                             </a>
-                            <div class="msg">Cliquez sur l'image pour agrandir</div>
                     </c:when>
                     <c:otherwise>
                         <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
@@ -39,7 +38,14 @@
         <div class="description">${rec.description}</div>
         <div class="sommaire">
             <c:forEach var="som" items="${sommaire.rows}" varStatus="status">
-                <div class="${som.type}"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>                
+                <c:choose>    
+                    <c:when test="${som.id_type_sommaire != 4}">
+                        <div class="${som.type}"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div> 
+                    </c:when>
+                    <c:otherwise>
+                        <div class="${som.type}"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
+                    </c:otherwise>
+                </c:choose>                 
             </c:forEach>
         </div>   
         

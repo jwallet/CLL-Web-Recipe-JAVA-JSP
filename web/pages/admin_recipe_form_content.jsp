@@ -28,18 +28,20 @@
         <div class="explication">
                     <label for="recette_titre">Titre</label> <input type="text" name="recette_titre"
                             id="recette_titre" value="" />
+                    <div class="float">
                     <label for="recette_label">Catégorie</label>
                     <select>
                     <c:forEach var="lbls" items="${labels.rows}" varStatus="status">
                         <option name="recette_label" value="${lbls.label}">${lbls.label}</option>                            
                     </c:forEach>
                     </select>
+                    </div>
         </div>
 
         <div class="explication">
-                    <label for="recette_description">Description</label>
+                    <div>Description</div>
         
-                    <textarea name="recette_description" id="recette_description" rows="2" cols="100"></textarea>
+                    <textarea name="recette_description" id="recette_description" rows="4"></textarea>
             
         </div>
             <fieldset>
@@ -48,13 +50,13 @@
                 <c:forEach var="som" items="${sommaire.rows}" varStatus="status">
                         <c:choose>    
                             <c:when test="${som.id_type_sommaire != 4}">
-                                <div>
+                                <div class="sommaire">
                                     <label for="recette_${som.type}">Temps de ${som.type}</label> 
                                     <input name="recette_${som.type}" id="recette_${som.type}" value="" />
                                 </div>
                             </c:when>
                             <c:otherwise>
-                                <div>
+                                <div class="sommaire">
                                     <label for="recette_${som.type}">Nombre de ${som.type}</label> 
                                     <input name="recette_${som.type}" id="recette_${som.type}" value="" />
                                 </div>
@@ -65,9 +67,6 @@
 
             <fieldset>
                 <legend>Ingrédients</legend>
-<!--            <div>
-                <label for="recette_ingredients">Ingrédients</label>
-            </div>-->
            
                       <div>   
                         <input name="recette_ing_quantite" id="recette_ing_quantite" value="0.0" />
@@ -89,8 +88,8 @@
                             <textarea name="recette_instructions" id="recette_instructions" rows="20" cols="100"></textarea>
                     </div>
             </div>
-<div class="liens_bouton">
-                    <div class="button-row">
+            <div class="liens_bouton">
+                    <div>
                             <a href="${pageContext.request.contextPath}">Annuler</a> ou <input type="submit" name="recette_save" value="Enregistrer" />
                     </div>
             </div>
@@ -145,12 +144,20 @@
                     Sommaire
                 </legend>
                 <c:forEach var="som" items="${sommaire.rows}" varStatus="status">
-
-                <div>
-                    <label for="recette_${som.type}">Temps de ${som.type}</label> 
-                    <input name="recette_${som.type}" id="recette_${som.type}" value="${som.nbre_unite}" />
-                </div>
-
+                    <c:choose>    
+                        <c:when test="${som.id_type_sommaire != 4}">
+                            <div>
+                                <label for="recette_${som.type}">Temps de ${som.type}</label> 
+                                <input name="recette_${som.type}" id="recette_${som.type}" value="${som.nbre_unite}" />
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div>
+                                <label for="recette_${som.type}">Nombre de ${som.type}</label> 
+                                <input name="recette_${som.type}" id="recette_${som.type}" value="${som.nbre_unite}" />
+                            </div>
+                        </c:otherwise>
+                    </c:choose> 
                 </c:forEach>
             </fieldset>
 

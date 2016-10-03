@@ -24,13 +24,13 @@
         <!-- IMAGE URL HERE -->
         <sql:query dataSource="${snapshot}" var="image">SELECT * FROM images WHERE id_recette=${rec.id_recette};</sql:query>
         <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
+            
             <div class="image">                
                 <c:choose>
                     <c:when test="${loopimg.index eq 0}"> 
                         <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
-                            <img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
+                            <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
                             </a>
-                            <div class="msg">Cliquez sur l'image pour agrandir</div>
                     </c:when>
                     <c:otherwise>
                         <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
@@ -44,7 +44,14 @@
         <div class="sommaire">
             <sql:query dataSource="${snapshot}" var="sommaire">SELECT * FROM sommaire som JOIN p_type_sommaire pts ON som.id_type_sommaire=pts.id_type_sommaire WHERE id_recette=${rec.id_recette};</sql:query>
             <c:forEach var="som" items="${sommaire.rows}" varStatus="status">
-                <div class="${som.type}"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>                
+                <c:choose>    
+                    <c:when test="${som.id_type_sommaire != 4}">
+                        <div class="${som.type}"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div> 
+                    </c:when>
+                    <c:otherwise>
+                        <div class="${som.type}"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
+                    </c:otherwise>
+                </c:choose>                               
             </c:forEach>
         </div>   
         <div class="readmore"><a href="recipe_detail.jsp?id=${rec.id_recette}">Lire la recette</a></div>
