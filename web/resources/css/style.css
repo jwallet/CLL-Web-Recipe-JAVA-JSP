@@ -272,7 +272,7 @@ form fieldset
     border: 1px solid #999;
 }
 
-form fieldset label
+form fieldset.som label
 {
     font-weight:normal;
     float:left;
@@ -280,6 +280,12 @@ form fieldset label
     width: 200px;
     overflow:hidden;
     display:block;
+}
+
+form fieldset.ing label
+{
+    font-weight:normal;
+
 }
 
 form label{
