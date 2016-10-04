@@ -13,7 +13,7 @@
 <sql:query dataSource="${snapshot}" var="recettes">SELECT * FROM recettes WHERE id_recette=<%=request.getParameter("id")%>;</sql:query>
 <sql:query dataSource="${snapshot}" var="labels">SELECT * FROM p_type_label</sql:query>
 <sql:query dataSource="${snapshot}" var="unites">SELECT * FROM p_type_unite</sql:query>
-
+<sql:query dataSource="${snapshot}" var="fractions">SELECT * FROM p_type_fraction</sql:query>
 
 <div class="carree_blanc">
 
@@ -73,12 +73,12 @@
            
                 <div class="lesingredients" id="ings0"><label>Quantité</label>
                         <input name="recette_ing_quantite" id="recette_ing_quantite" size="1" value="1" />
-<!--                        <select style="margin-left:-15px;">
-                        <c:forEach var="fraction" items="${fractions.rows}">
-                            <option name="recette_ing_type_fraction_${loop.index}" value="${unite.id_type_fraction}">${unite.type_fraction}</option>
+                        <select style="margin-left:-15px;">
+                        <c:forEach var="f" items="${fractions.rows}">
+                            <option name="recette_ing_type_fraction_${loop.index}" value="${f.id_type_fraction}">${f.fraction_nohtml}</option>
                         </c:forEach>
-                        </select>-->
-<select style="margin-left:-15px;"><option>1/4</option></select>
+                        </select>
+
                         
                         Mesure
                         <select>
@@ -229,25 +229,7 @@
 </div>
     </c:otherwise>
 </c:choose> 
-<!-- <div>Quantité
-                        <input name="recette_ing_quantite" id="recette_ing_quantite" size="1" value="1" />
-                        <select style="margin-left:-15px;">
-                        <c:forEach var="fraction" items="${fractions.rows}">
-                            <option name="recette_ing_type_fraction_${loop.index}" value="${unite.id_type_fraction}">${unite.type_fraction}</option>
-                        </c:forEach>
-                        </select>
-<select style="margin-left:-15px;"><option>1/4</option></select>
-                        
-                        Mesure
-                        <select>
-                        <c:forEach var="unite" items="${unites.rows}">
-                            <option name="recette_ing_type_unite_${loop.index}" value="${unite.id_type_unite}">${unite.type_unite}</option>
-                        </c:forEach>
-                        </select>
-                        Ingrédient
-                        <input style="width:45%;" name="recette_ing_ingredient" id="ingredient" value="" />
-                        
-                      </div>-->
+
 <script>
      var x = 0;
      var selectmesure = "";
@@ -268,15 +250,15 @@
                 var mesure = val;
                 if(i !== total && i !== 0) 
                 {
-                   selectmesure += "<option name='recette_new_ing_type_unite'"+x+" value='"+i+"'>"+mesure+"</option>";  
+                   selectmesure += "<option name='recette_new_ing_type_unite_"+x+"' value='"+i+"'>"+mesure+"</option>";  
                 }
                 else if(i===0)
                 {
-                    selectmesure+="<select><option name='recette_new_ing_type_unite'"+x+" value='"+i+"'>"+mesure+"</option>";
+                    selectmesure+="<select><option name='recette_new_ing_type_unite_"+x+"' value='"+i+"'>"+mesure+"</option>";
                 }
                 else
                 {
-                    selectmesure+="<option name='recette_new_ing_type_unite'"+x+" value='"+i+"'>"+mesure+"</option></select>";//dernier element
+                    selectmesure+="<option name='recette_new_ing_type_unite_"+x+"' value='"+i+"'>"+mesure+"</option></select>";//dernier element
                 }
             });
         });
@@ -292,15 +274,15 @@
                 var fraction = val;            
                 if(i !== total && i !== 0) 
                 {
-                   selectfraction += "<option name='recette_new_ing_type_unite'"+x+" value='"+fraction+"'>"+fraction+"</option>";  
+                   selectfraction += "<option name='recette_new_ing_type_unite_"+x+"' value='"+i+"'>"+fraction+"</option>";  
                 }
                 else if(i===0)
                 {
-                    selectfraction+="<select><option name='recette_new_ing_type_unite'"+x+" value='"+fraction+"'>"+fraction+"</option>";
+                    selectfraction+="<select><option name='recette_new_ing_type_unite_"+x+"' value='"+i+"'>"+fraction+"</option>";
                 }
                 else
                 {
-                    selectfraction+="<option name='recette_new_ing_type_unite'"+x+" value='"+fraction+"'>"+fraction+"</option></select>";//dernier element
+                    selectfraction+="<option name='recette_new_ing_type_unite_"+x+"' value='"+i+"'>"+fraction+"</option></select>";//dernier element
                 }
             });
         });
@@ -308,23 +290,26 @@
     });
     $("#addingfields").click(function() {
         x++;
-        var fieldWrapper = $("<div class=\"lesingredients\" id=\"ings" + x + "\"/>");
-        var fQuantite = $("<label>Quantité</label><input type=\"text\" id=\"recette_ing_quantite\""+x+" size=\"1\" value=\"1\" />");
+        var fieldWrapper = $("<div class=\"lesingredients\" id=\"ing_" + x + "\"/>");
+        var fQuantite = $("<label>Quantité</label><input type=\"text\" id=\"recette_ing_quantite_"+x+"\" size=\"1\" value=\"1\" />");
+        var fMesure = $("<label>Mesure</label>");
         
-        
-        fieldWrapper.append(fQuantite);
+        fieldWrapper.append(fQuantite);        
         fieldWrapper.append(selectfraction);
         
+        fieldWrapper.append(fMesure);
         fieldWrapper.append(selectmesure);
         
-        var fType = $("<select class=\"fieldtype\"><option value=\"checkbox\">Checked</option><option value=\"textbox\">Text</option><option value=\"textarea\">Paragraph</option></select>");
+        var fType = $("<label>Ingrédient</label><input style=\"width:45%;\" type=\"text\" id=\"recette_ing_ingredient_"+x+"\"/>");
         fieldWrapper.append(fType);
         
-        var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
-        removeButton.click(function() {
+        //var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
+        
+        var retirer = $("<a href='#' class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div>");
+        retirer.click(function() {
             $(this).parent().remove();x--;
         });
-        fieldWrapper.append(removeButton);    
+        fieldWrapper.append(retirer);    
         
         $("#formnewing").append(fieldWrapper);
     });
