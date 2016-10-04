@@ -26,9 +26,7 @@
 
      
         <div class="explication">
-                    <label for="recette_titre">Titre</label> <input type="text" name="recette_titre"
-                            id="recette_titre" value="" />
-                    <div class="float">
+            <div class="float">
                     <label for="recette_label">Catégorie</label>
                     <select>
                     <c:forEach var="lbls" items="${labels.rows}" varStatus="status">
@@ -36,6 +34,11 @@
                     </c:forEach>
                     </select>
                     </div>
+            
+                    <label for="recette_titre">Titre</label><input type="text" name="recette_titre"
+                            id="recette_titre" value="" />
+                    
+                    
         </div>
 
         <div class="explication">
@@ -47,7 +50,7 @@
             <fieldset>
                 <legend>Sommaire</legend>
             
-                <c:forEach var="som" items="${sommaire.rows}" varStatus="status">
+                <c:forEach var="som" items="${sommaire.rows}" varStatus="loopsom">
                         <c:choose>    
                             <c:when test="${som.id_type_sommaire != 4}">
                                 <div class="sommaire">
@@ -66,21 +69,40 @@
             </fieldset>
 
             <fieldset>
-                <legend>Ingrédients</legend>
+                <legend>Ingrédients &#8212; <button class="add_field_button">Ajouter un ingrédient</button></legend>
            
-                      <div>   
-                        <input name="recette_ing_quantite" id="recette_ing_quantite" value="0.0" />
+                <div id="input_fields_wrap">
+                      <div>Quantité
+                        <input name="recette_ing_quantite" id="recette_ing_quantite" size="1" value="1" />
+<!--                        <select style="margin-left:-15px;">
+                        <c:forEach var="fraction" items="${fractions.rows}">
+                            <option name="recette_ing_type_fraction_${loop.index}" value="${unite.id_type_fraction}">${unite.type_fraction}</option>
+                        </c:forEach>
+                        </select>-->
+<select style="margin-left:-15px;"><option>1/4</option></select>
                         
+                        Mesure
                         <select>
                         <c:forEach var="unite" items="${unites.rows}">
                             <option name="recette_ing_type_unite_${loop.index}" value="${unite.id_type_unite}">${unite.type_unite}</option>
                         </c:forEach>
                         </select>
-                        
-                        <input name="recette_ing_ingredient" id="ingredient" value="" />
+                        Ingrédient
+                        <input style="width:45%;" name="recette_ing_ingredient" id="ingredient" value="" />
                         
                       </div>
+                </div>
             </fieldset>
+        
+<fieldset id="buildyourform">
+<legend>Build your own form!</legend>
+</fieldset>
+<input type="button" value="Add a field" class="add" id="add" />
+
+            <div class="explication">
+                <label for="recette_notes_ingredients">Notes additionnelles sur les ingrédients</label>
+                <textarea name="recette_instructions" id="recette_instructions" rows="5" cols="100">${rec.instructions}</textarea>
+            </div>
             <div class="explication">
                 <label for="recette_instructions">Instructions</label> 
 
@@ -167,7 +189,7 @@
             </div>
            <div class='ingredients'>
                 <button class="add_field_button">Ajouter un ingrédient</button>
-                <div class="input_fields_wrap"> 
+                <div id="input_fields_wrap"> 
                     <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="loop">
                       <div class='liste'>   
                         <input name="recette_ing_quantite" id="recette_ing_quantite" value="${ing.quantite}" />
@@ -239,19 +261,84 @@
         });
         });
 </script>-->
-
 <script>
+     var jsonmesure = [];
+    $(document).ready(function() {
+
+        $.getJSON("json_sql_ing_type_unites.jsp",function(data){
+
+            $.each( data, function( key, val ) {
+//              jsonmesure.push( "<option name='recette_new_ing_type_unite_"+key.toString()+"' value='" + val.id +"'>" + val.type_unite + "</option>" );
+              jsonmesure.push( "<option name='recette_new_ing_type_unite_' value='1'>" + val.type_unite + "</option>" );
+            });
+            });
+        
+    });
+    $("#add").click(function() {
+        var intId = $("#buildyourform div").length + 1;
+        var fieldWrapper = $("<div class=\"fieldwrapper\" id=\"field" + intId + "\"/>");
+        var fName = $("<input type=\"text\" class=\"fieldname\" />");
+        fieldWrapper.append(fName);
+        
+        var beginselect = $("<select>");
+        fieldWrapper.append(beginselect);
+        $.each(jsonmesure, function( i, val ) {
+            var mesure = val;
+            fieldWrapper.append(mesure);});
+       
+        var endselect = $("</select>");
+        fieldWrapper.append(endselect);
+        
+        var fType = $("<select class=\"fieldtype\"><option value=\"checkbox\">Checked</option><option value=\"textbox\">Text</option><option value=\"textarea\">Paragraph</option></select>");
+        fieldWrapper.append(fType);
+        
+        var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
+        removeButton.click(function() {
+            $(this).parent().remove();
+        });
+        fieldWrapper.append(removeButton);    
+        
+        $("#buildyourform").append(fieldWrapper);
+    });
+    $("#preview").click(function() {
+        $("#yourform").remove();
+        var fieldSet = $("<fieldset id=\"yourform\"><legend>Your Form</legend></fieldset>");
+        $("#buildyourform div").each(function() {
+            var id = "input" + $(this).attr("id").replace("field","");
+            var label = $("<label for=\"" + id + "\">" + $(this).find("input.fieldname").first().val() + "</label>");
+            var input;
+            switch ($(this).find("select.fieldtype").first().val()) {
+                case "checkbox":
+                    input = $("<input type=\"checkbox\" id=\"" + id + "\" name=\"" + id + "\" />");
+                    break;
+                case "textbox":
+                    input = $("<input type=\"text\" id=\"" + id + "\" name=\"" + id + "\" />");
+                    break;
+                case "textarea":
+                    input = $("<textarea id=\"" + id + "\" name=\"" + id + "\" ></textarea>");
+                    break;    
+            }
+            fieldSet.append(label);
+            fieldSet.append(input);
+        });
+        $("body").append(fieldSet);
+    });
+</script>
+<!--<script>
     $(document).ready(function() {
         //var target = "";
         //ESSAI DE FAIRE UN PAGE HTML DES BALISE 1 LIGNE A INSERER
         //ET LA CALLER EN JSP:INCLUDE AVEC AJAX EN CLIQUANT SUR LE BOUTON
         //UTILISER LE FORM JSP JSON_SQL_ING_... POUR REMPLIR LA LISTE GET_JSON()
-       var first        = "<div><input name='recette_ing_quantite' id='recette_ing_quantite' value='' />";
-       var second       ="<select id='target'></select>";
-        var third       = "<input name='recette_ing_ingredient' id='ingredient' value='' />"+
-                           "<a href='#' class='remove_field'><img style='padding-left:5px;' src='../resources/images/x.png'/></a></div>";
+        var first        = "<div>Quantité<input name='recette_ing_quantite' id='recette_ing_quantite' size='1' value='' />";
+        var second      ="<select style='margin-left:-15px;'><option>1/4</option>";
+        var third       ="</select>"
+        var fourth       ="Mesure<select id='target'><option>c. a soupe</option>";
+        var fifth     ="</select>";
+        var sixth       = "Ingrédient<input style='width:45%;'  name='recette_ing_ingredient' id='ingredient' value='' />"+
+                           "<a href='#' class='remove_field'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div>";
         var max_fields      = 10; //maximum input boxes allowed
-        var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+        var wrapper         = $("#input_fields_wrap"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
         var x = 1; //initlal text box count
         $(add_button).click(function(e){ //on add input button click
@@ -262,7 +349,7 @@
             if(x < max_fields){ //max input box allowed
                 x++; //text box increment
 
-        $(wrapper).append(first+second+third);
+        $(wrapper).append(first+second+third+fourth+fifth+sixth);
             }
             
         var items = [];
@@ -285,7 +372,7 @@
             x--;
         });
         });
-</script>
+</script>-->
 <%--
 $.each(items, function (${unites.rows}, item)
         {

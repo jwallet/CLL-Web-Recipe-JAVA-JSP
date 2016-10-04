@@ -53,19 +53,19 @@
             <ul>
              <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="ingloop"> 
                  <c:choose>                     
-                     <c:when test="${ingloop.index <= ingredients_recette.rowCount/2}">                         
+                     <c:when test="${ingloop.index%2 eq 1}">                         
                          
-                            <li>${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
+                            <li class="gauche">${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
                         
                      </c:when>
                      <c:otherwise>
-                            <li>${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
+                            <li class="droit">${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
                      </c:otherwise>
                  </c:choose>
             </c:forEach>
                             </ul>
         </div>
-        
+        <p>TO DO : Zone note sur un ingredient dans un fieldset ou carre blanc</p>
         <div class="instructions"><p><b>Instructions:</b></p>${rec.instructions}</div>
     </div>
 </c:forEach>

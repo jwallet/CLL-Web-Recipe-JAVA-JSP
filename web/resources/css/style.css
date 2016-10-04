@@ -210,7 +210,7 @@ menu .active {
     float:right;
     position:relative;
     margin-top: -8px;
-    
+    margin-left: 20px;
 }
 
 .post .image .thumbnail{
@@ -219,7 +219,6 @@ menu .active {
     height:160px;
     border: 6px solid white;
     border-radius: 10px;
-    
 }
 
 .post .image .hidden-thumbnail{
@@ -244,16 +243,13 @@ menu .active {
     margin-bottom:20px;
 }
 
-.post .ingredients ul{
-    columns: 2;
-    -webkit-columns: 2;
-  -moz-columns: 2;
+.post .ingredients li.gauche{
+    width:50%;
 }
 
 .post .ingredients li.droit{
-    display:block;
-    position:relative;
-    float:right;
+    float:right; 
+    width: 50%; 
 }
 
 .post .instructions{
@@ -262,7 +258,6 @@ menu .active {
 
 form {
     width:auto;
-    padding:20px;
 }
 
 form fieldset
@@ -270,8 +265,11 @@ form fieldset
 
     clear: both;
     margin: 10px;
-    padding: 10px;
-    border: 1px solid #888;
+    padding-left: 10px;
+    padding-right:10px;
+    padding-top: 15px;
+    padding-bottom:20px;
+    border: 1px solid #999;
 }
 
 form fieldset label
@@ -290,6 +288,7 @@ form label{
 }
 form .explication{
     font-weight: bold;
+    margin-right:4px;
 }
 
 form .explication .float{
@@ -298,7 +297,18 @@ form .explication .float{
 }
 
 form input{
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-left:-1px;
+    margin-top:-2px;
+    padding-top:2px;
+    padding-bottom:2px;
+}
+
+form button{
+    margin-left:-1px;
+    margin-top:-2px;
+    padding-top:4px;
+    padding-bottom:2px;
 }
 form .explication input{
     width:70%;
@@ -311,10 +321,15 @@ form .sommaire input{
 form textarea{
     width:100%;
     resize: none;
+    margin-right:20px;
 }
 
 form select{
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-top:-2px;
+    padding-top:2px;
+    padding-bottom:2px;
+    margin-left:-1px;
 }
 
 form legend

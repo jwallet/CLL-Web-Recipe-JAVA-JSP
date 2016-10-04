@@ -18,11 +18,13 @@
     <div class="post">
         <div class="titre_lien">${rec.titre}</div>
         <!-- IMAGE URL HERE -->
-        <div class="image">
-            <c:forEach var="img" items="${image.rows}">
-                <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
-            </c:forEach>
-        </div>
+        <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
+            <div class="image">                
+                    <c:if test="${loopimg.index eq 0}"> 
+                        <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
+                    </c:if>
+            </div>
+        </c:forEach>
         <div class="description">${rec.description}</div>
         <div class="sommaire">
             <c:forEach var="som" items="${sommaire.rows}" varStatus="status">
@@ -36,21 +38,19 @@
                 </c:choose>                 
             </c:forEach>
         </div>   
-            <div class="ingredients"><b>Ingrédients:</b>               
+            <div class="ingredients"><b>Ingrédients:</b>
+                <ul>
              <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="ingloop">
                  <c:choose>                     
-                     <c:when test="${ingloop.index <= ingredients_recette.rowCount/2}">                         
-                         <ul>
-                            <li>${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
-                        </ul>
+                     <c:when test="${ingloop.index%2 eq 1}">                                              
+                            <li class="gauche">${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
                      </c:when>
                      <c:otherwise>
-                         <ul class="right">
-                            <li>${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
-                        </ul>
+                            <li class="droit">${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
                      </c:otherwise>
                  </c:choose>
             </c:forEach>
+                            </ul>
         </div>
         
         <div class="instructions"><p><b>Instructions:</b></p>${rec.instructions}</div>
