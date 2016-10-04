@@ -73,7 +73,7 @@
            
                 <div class="lesingredients" id="ings0"><label>Quantité</label>
                         <input name="recette_ing_quantite" id="recette_ing_quantite" size="1" value="1" />
-                        <select style="margin-left:-15px;">
+                        <select>
                         <c:forEach var="f" items="${fractions.rows}">
                             <option name="recette_ing_type_fraction_${loop.index}" value="${f.id_type_fraction}">${f.fraction_nohtml}</option>
                         </c:forEach>
