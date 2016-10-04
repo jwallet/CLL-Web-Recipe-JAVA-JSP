@@ -15,6 +15,6 @@
   <json:array name="fraction" var="fr" items="${fractions.rows}">
     <json:object>
       <json:property name="id_type_fraction" value="${fr.id_type_fraction}"/>
-      <json:property name="fraction" value="${fr.fraction}"/>
+      <json:property name="fraction" value="${fr.fraction_nohtml}"/>
     </json:object>
   </json:array>
