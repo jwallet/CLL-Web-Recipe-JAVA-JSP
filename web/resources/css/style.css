@@ -9,6 +9,7 @@ and open the template in the editor.
 */
 body{
     font-family: Tahoma;
+    font-size: 18px;
     background-image: url("../images/background.png");
     margin: auto;
     width: 60%;
@@ -262,7 +263,6 @@ form {
 
 form fieldset
 {
-
     clear: both;
     margin: 10px;
     padding-left: 10px;
@@ -270,22 +270,51 @@ form fieldset
     padding-top: 15px;
     padding-bottom:20px;
     border: 1px solid #999;
+    
+}
+
+form .full{
+    width:100%;
+}
+
+form .upload{
+    float:right;
+    width:50%;
+}
+
+form .som{
+    float:left;
+    width:45%;
 }
 
 form fieldset.som label
 {
     font-weight:normal;
     float:left;
-    position:static;
-    width: 200px;
-    overflow:hidden;
-    display:block;
+    width: 50%;
+}
+
+form fieldset.som input{
+    width:40%;
+}
+
+form fieldset.img label{
+    font-weight:normal;
+    font-variant:all-small-caps;
+    font-size:20px;
+    color:grey;
+    margin-left:20px;
+}
+
+form fieldset.img input{
+    margin-top:2px;
+    float:right;
+    width:auto;
 }
 
 form fieldset.ing label
 {
     font-weight:normal;
-
 }
 
 form label{
@@ -293,7 +322,7 @@ form label{
     padding-right: 10px;
 }
 form .explication{
-    font-weight: bold;
+    font-weight: normal;
     margin-right:4px;
 }
 
@@ -303,19 +332,14 @@ form .explication .float{
 }
 
 form input{
+    font-size:15px;    
     margin-right: 10px;
     margin-left:-1px;
     margin-top:-2px;
-    padding-top:2px;
-    padding-bottom:2px;
+    margin-bottom:10px;
+    padding:4px;
 }
 
-form button{
-    margin-left:-1px;
-    margin-top:-2px;
-    padding-top:4px;
-    padding-bottom:2px;
-}
 form .explication input{
     width:70%;
 }
@@ -323,19 +347,22 @@ form .sommaire input{
     width:70%;
 }
 
-
 form textarea{
     width:100%;
     resize: none;
     margin-right:20px;
+    margin-top:5px;
+    font-size:15px;
+    font-family: arial;
 }
 
 form select{
     margin-right: 10px;
     margin-top:-2px;
-    padding-top:2px;
-    padding-bottom:2px;
+    padding-top:4px;
+    padding-bottom:4px;
     margin-left:-1px;
+    font-size:15px;
 }
 
 form legend
@@ -346,7 +373,6 @@ form legend
 form .liens_bouton{
     text-align:right;   
 }
-
 
 #footer
 {

@@ -21,6 +21,6 @@
             <li><a href="admin_recipe_form.jsp">Ajout d'une recette</a></li>
         </c:if>
             
-        <li style="float:right"><a class="active" href='#logout'>Déconnexion</a></li>
+        <!--<li style="float:right"><a class="active" href='#logout'>Déconnexion</a></li>-->
     </ul>        
 </div>
