@@ -300,8 +300,9 @@ form fieldset.img label{
     font-weight:normal;
     font-variant:all-small-caps;
     font-size:20px;
-    color:grey;
+    color:#0066ff;
     margin-left:20px;
+    margin-top:10px;
 }
 
 form fieldset.img input{

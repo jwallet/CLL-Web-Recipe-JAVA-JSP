@@ -21,7 +21,7 @@
     <c:when test="${recettes.rowCount == 0}">
         <%-- ajout recette--%>
  <div class="gros_titre">Ajout d'une recette</div>
- <form  method="post" action="">
+ <form  method="post" action="admin_recipe_savechanges.jsp" enctype="multipart/form-data">
         <sql:query dataSource="${snapshot}" var="sommaire">SELECT  * FROM p_type_sommaire;</sql:query>  
 
      
@@ -71,19 +71,19 @@
         
         <div class="upload">
             <fieldset class="img">
-                <legend>Téléverser une image</legend>
-                        
-                <label name="filename" id="filename">aucun fichier choisi</label>
-                <input  type="button" style="padding-left:40px;padding-right:40px;" class="upload" id="upload" name="upload" value ="Parcourir"/>
-                <div style="text-align:right;margin-right:20px;font-variant:all-small-caps;color:grey;"><br/>Images . jpg et . png (max 5 mo)</div> 
-                   
+                <legend>Téléversement d'images</legend>
+                <div style="padding-left:20px;font-size:15px;padding-bottom:10px;">Maintenir la touche CTRL pour sélectionner plusieurs images.</div>
+                <input type="file" id="upload" name="upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
+                <div style="float:right;text-align:right;font-variant:all-small-caps;"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('upload').click(); return false"/><div>Taille maximum: 5 mo</div><div name="fileCount" id="fileCount"></div></div> 
+                <label name="filename" id="filename" class="filename">aucune image choisie</label> 
+                  
                 </fieldset>
         </div>
       
             <fieldset class="ing" id="formnewing">
                 <legend>Ingrédients</legend>
-                <input type="button" style="margin-left:10px;margin-bottom:20px;padding-left:40px;padding-right:40px;" class="addingfields" id="addingfields" value ="Ajouter un ingrédient"/>
-                <div class="lesingredients" id="ing_0"><label>Quantité</label>
+                <input type="button" style="margin-left:10px;margin-bottom:20px;padding-left:20px;padding-right:20px;" class="addingfields" id="addingfields" value ="Ajouter un ingrédient"/>
+        <div class="lesingredients" id="ing_0"><label>Quantité</label>
                         <input type="text" name="recette_ing_quantite" id="recette_ing_quantite_0" size="1" value="1" />
                         <select name="recette_ing_type_fraction0" id="recette_ing_type_fraction0">
                         <c:forEach var="f" items="${fractions.rows}">
@@ -300,6 +300,50 @@
         });
         
     });
+    
+    $("#upload").on('change',function(){
+        var nbre_files = this.files.length;
+        var display = "";
+        var one_file_name;
+        for(var i = 0; i < nbre_files ; i++)
+        {
+            var name = this.files.item(i).name;
+            var file_name_constructeur;            
+            one_file_name = name.replace(/\\/g, '/').replace(/.*\//, '');
+            if(one_file_name.length>26)
+            {
+                file_name_constructeur = one_file_name.substring(0, 26);
+                var index_point_ext = one_file_name.indexOf('.');
+                file_name_constructeur += "..."+one_file_name.substring(index_point_ext,one_file_name.length);
+                one_file_name = file_name_constructeur;
+            }
+            if(i!==nbre_files-1)
+            {
+                display+=one_file_name+"</label><br /><label name=\"filename\" id=\"filename\" class=\"filename\">";
+            }
+            else
+            {
+                display+=one_file_name+"</label>";
+            }
+        }
+        if(nbre_files===1)
+        {
+            $('#filename').html(one_file_name);
+            $('#fileCount').html("Nombre de fichier: "+nbre_files.toString());
+        }
+        else if( nbre_files===0)
+        {
+            $('#filename').html("aucune image choisie");
+            $('#fileCount').html("");
+        }
+        else
+        {
+            $('#filename').html(display);
+            $('#fileCount').html("Nombre de fichiers: "+nbre_files.toString());
+        }
+            
+    });
+    
     $("#addingfields").click(function() {
         x++;
         var fieldWrapper = $("<div class=\"lesingredients\" id=\"ing_" + x + "\"/>");
@@ -313,8 +357,6 @@
         
         var fType = $("<label>Ingrédient</label><input style=\"width:45%;\" name=\"recette_ing_ingredient_"+x+"\" type=\"text\" id=\"recette_ing_ingredient_"+x+"\"/>");
         fieldWrapper.append(fType);
-        
-        //var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
         
         var retirer = $("<a href='#' class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div>");
         retirer.click(function() {
