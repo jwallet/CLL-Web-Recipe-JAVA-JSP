@@ -16,7 +16,7 @@
                 <div class="gros_titre">Supprimer une recette</div>    
                 <div class="explication">Êtes-vous certain de vouloir supprimer la recette:</label> <div class="recette">${r.titre}</div></div>
                    <div class="liens_bouton"><a href="admin_recipe_tolist.jsp">Annuler</a> ou
-                       <input type="submit" value="Supprimer"/></div>
+                       <input style="padding-left:20px;padding-right:20px;" type="submit" value="Supprimer"/></div>
 
             </div>     
      </form>

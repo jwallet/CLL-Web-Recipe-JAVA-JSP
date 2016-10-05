@@ -328,6 +328,7 @@ form .explication{
 form .explication .float{
     position:relative;
     float:right;
+   
 }
 
 form input{
@@ -341,7 +342,7 @@ form input{
 }
 
 form .explication input{
-    width:70%;
+    width:40%;
 }
 form .sommaire input{
     width:70%;
