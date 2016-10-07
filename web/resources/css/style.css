@@ -214,8 +214,8 @@ menu .active {
 
 .post .image .thumbnail{
     
-    width:240px;
-    height:160px;
+    width:250px;
+    height:175px;
     border: 6px solid white;
     border-radius: 10px;
 }
@@ -300,7 +300,7 @@ form fieldset.img label{
     font-weight:normal;
     font-variant:all-small-caps;
     font-size:20px;
-    color:#0066ff;
+    color:#0055ee;
     margin-left:20px;
     margin-top:10px;
 }
@@ -309,6 +309,41 @@ form fieldset.img input{
     margin-top:2px;
     float:right;
     width:auto;
+}
+
+form fieldset.img .warning{
+    margin:0;
+    padding-left:10px;
+    padding-bottom:10px;
+    font-weight:normal;
+    font-variant:all-small-caps;
+    font-size:20px;
+    color:#0055ee;
+}
+
+form fieldset.img .warning p {
+    margin:0;
+    float:right;
+    margin-top:-25px;
+}
+
+form fieldset.img input[type=checkbox]{
+    float:none;
+    margin-left:0;
+    margin-right:0;
+    margin-bottom:-20px;
+    margin-top:10px;
+    width: 130px;
+    height: 90px;
+    border:5px solid #fff;
+    background-size:100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance:none;
+}
+
+form fieldset.img input[type=checkbox]:checked{
+    border:5px solid #0066ff;
 }
 
 form fieldset.ing label

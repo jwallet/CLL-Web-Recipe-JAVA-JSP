@@ -16,6 +16,7 @@
 <sql:query dataSource="${snapshot}" var="image">SELECT * FROM images WHERE id_recette=<%=request.getParameter("id")%>;</sql:query>
 
 <c:forEach var="rec" items="${recettes.rows}" varStatus="status">
+    
     <div class="post">
         <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>
         <!-- IMAGE URL HERE -->

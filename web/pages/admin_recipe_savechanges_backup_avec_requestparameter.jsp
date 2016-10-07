@@ -12,53 +12,44 @@
 <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
      url="jdbc:mysql://localhost/dbrecette"
      user="root"  password=""/>
-
-<sql:transaction dataSource="${snapshot}">
-<c:set var="id" value="${param.recette_id}"/>
+<c:set var="id" value="<%=request.getParameter("recette_id")%>"/>
 <c:choose>
 <%--si c'est une nouvelle recette AJOUT--%>
 <c:when test="${empty id}" >        
         <%--Ajout Titre, Description, Etapes preparation, notes additionnelles, brouillon=actif--%>
-        <sql:update  var="count">INSERT INTO recettes (titre, description, instructions, notes, brouillon) VALUES ('${param.recette_titre}', '${param.recette_description}', '${param.recette_instructions}', '${param.recette_notes}', 1)</sql:update>
+        <sql:update dataSource="${snapshot}" var="count">INSERT INTO recettes (titre, description, instructions, notes, brouillon) VALUES (<%=request.getParameter("recette_titre")%>, <%=request.getParameter("recette_description")%>, <%=request.getParameter("recette_instructions")%>, <%=request.getParameter("recette_notes")%>, 1);</sql:update>
         <%--Trouve ID dans BD--%>
-        <sql:query  var="id_recettes">SELECT id_recette FROM recettes ORDER BY id_recette DESC LIMIT 1;</sql:query>
-        <c:set var="id_recette" value="${id_recettes.rows[0].id_recette}"/>
+        <sql:query dataSource="${snapshot}" var="id_recette">SELECT id_recette FROM recettes ORDER BY id_recette DESC LIMIT 1;</sql:query>
         <%--Ajout categorie--%>
-        <c:set var="sql" value=""/>
-        <c:forEach var="lbl" items="${param.recette_label}" varStatus="lblloop">
-           <c:set var="sql" value="${lblloop.first ? '' : sql} ${lbl}"/> 
+        <c:forEach var="lbl" items="<%=request.getParameter("recette_label")%>">
+            <sql:update dataSource="${snapshot}" var="count">INSERT INTO label (id_recette, id_type_label) VALUES (${id_recette},'${lbl}')</sql:update>
         </c:forEach>
-        <sql:update var="count">INSERT INTO label (id_recette, id_type_label) VALUES (${id_recette},1),(${id_recette},2),(${id_recette},4),;</sql:update>
-        
-        
-        
         <%--Ajout sommaire (x4)--%>
-        <sql:update var="count">INSERT INTO sommaire (id_recette, id_type_sommaire, nbre_unite) VALUES (${id_recette},1,'${param.recette_préparation}')</sql:update>
-        <sql:update var="count">INSERT INTO sommaire (id_recette, id_type_sommaire, nbre_unite) VALUES (${id_recette},2,'${param.recette_cuisson}')</sql:update>
-        <sql:update var="count">INSERT INTO sommaire (id_recette, id_type_sommaire, nbre_unite) VALUES (${id_recette},3,'${param.recette_refroidissement}')</sql:update>
-        <sql:update var="count">INSERT INTO sommaire (id_recette, id_type_sommaire, nbre_unite) VALUES (${id_recette},4,'${param.recette_portions}')</sql:update>
+        <sql:update dataSource="${snapshot}" var="count">INSERT INTO sommaire (id_recette, id_type_sommaire, nbre_unite) VALUES (${id_recette},1,<%=request.getParameter("recette_préparation")%>)</sql:update>
+        <sql:update dataSource="${snapshot}" var="count">INSERT INTO sommaire (id_recette, id_type_sommaire, nbre_unite) VALUES (${id_recette},2,<%=request.getParameter("recette_cuisson")%>)</sql:update>
+        <sql:update dataSource="${snapshot}" var="count">INSERT INTO sommaire (id_recette, id_type_sommaire, nbre_unite) VALUES (${id_recette},3,<%=request.getParameter("recette_refroidissement")%>)</sql:update>
+        <sql:update dataSource="${snapshot}" var="count">INSERT INTO sommaire (id_recette, id_type_sommaire, nbre_unite) VALUES (${id_recette},4,<%=request.getParameter("recette_portions")%>)</sql:update>
         <%--Ajout ingredients (tous)--%>
-        <c:forEach var="ingredient" items="${param.recette_ingredient}" varStatus="i">
-            <sql:update var="count">INSERT INTO label (id_recette, quantite, id_type_fraction, id_type_unite, ingredient) VALUES (${id_recette},
+        <c:forEach var="ingredient" items="<%=request.getParameter("recette_ingredient")%>" varStatus="i">
+            <sql:update dataSource="${snapshot}" var="count">INSERT INTO label (id_recette, quantite, id_type_fraction, id_type_unite, ingredient) VALUES (${id_recette},
                     ${paramValues.recette_ing_quantite[i.index].value},
                     ${paramValues.recette_ing_type_fraction[i.index].value},
                     ${paramValues.recette_ing_type_type_unite[i.index].value},
-                    '${ingredient}');
+                    ${ingredient});
             </sql:update>
         </c:forEach>
         <%--Ajout des images--%>
-        <c:forEach var="image" items="${param.recette_upload}" varStatus="i">
-            <sql:update var="count">INSERT INTO label (id_recette, url_local) VALUES (${id_recette},'${image}');</sql:update>
+        <c:forEach var="image" items="<%=request.getParameter("recette_upload")%>" varStatus="i">
+            <sql:update dataSource="${snapshot}" var="count">INSERT INTO label (id_recette, url_local) VALUES (${id_recette},${image});</sql:update>
         </c:forEach>        
     </c:when>
 <%--si c'est une modification d'une recette MODIF--%>
     <c:otherwise>        
-        <sql:update var="count">UPDATE 'recettes' SET 'titre'='${param.recette_titre}', 'description'='${param.recette_description}', 'instructions'='${param.recette_instructions}', 'notes'='${param.recette_notes}' WHERE id_recette'=${param.recette_id};</sql:update>
+        <sql:update dataSource="${snapshot}" var="count">UPDATE 'recettes' SET 'titre'='<%=request.getParameter("recette_titre")%>', 'description'='<%=request.getParameter("recette_description")%>', 'instructions'='<%=request.getParameter("recette_instructions")%>', 'notes'='<%=request.getParameter("recette_notes")%>' WHERE id_recette'=<%=request.getParameter("recette_id")%>;</sql:update>
     </c:otherwise>
         
 </c:choose>
-        </sql:transaction>
-<%--
+
         <%
    File file ;
    int maxFileSize = 5000 * 1024;
@@ -143,6 +134,6 @@
 //      out.println("</body>");
 //      out.println("</html>");
    }
-%>--%>
-<c:redirect url="admin_recipe_tolist.jsp"/>
+%>
+<%--<c:redirect url="admin_recipe_tolist.jsp"/>--%>
 

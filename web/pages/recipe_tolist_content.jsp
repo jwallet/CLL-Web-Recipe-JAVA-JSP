@@ -17,12 +17,12 @@
         <sql:query dataSource="${snapshot}" var="recettes">SELECT * FROM recettes r JOIN label l ON r.id_recette=l.id_recette JOIN p_type_label ptl ON l.id_type_label=ptl.id_type_label WHERE r.brouillon=0 AND ptl.label like '<%=request.getParameter("lbl")%>';</sql:query>
     </c:otherwise>
 </c:choose>
+        
 <c:forEach var="rec" items="${recettes.rows}" varStatus="status">
-    
+    <sql:query dataSource="${snapshot}" var="image">SELECT * FROM images WHERE id_recette=${rec.id_recette};</sql:query>
+    <!--<div style="background-image: url(${pageContext.request.contextPath}${image.rows[0].url_local});background-position: center;background-size:100%;">-->
     <div class="post">
-        <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>
-        <!-- IMAGE URL HERE -->
-        <sql:query dataSource="${snapshot}" var="image">SELECT * FROM images WHERE id_recette=${rec.id_recette};</sql:query>
+        <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>        
         <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
             
             <div class="image">                
@@ -56,4 +56,5 @@
         </div>   
         <div class="readmore"><a href="recipe_detail.jsp?id=${rec.id_recette}">Lire la recette</a></div>
     </div>
+    <!--</div>-->
 </c:forEach>   

@@ -11,9 +11,9 @@
      user="root"  password=""/>
 
 <sql:query dataSource="${snapshot}" var="recettes">SELECT * FROM recettes WHERE id_recette=<%=request.getParameter("id")%>;</sql:query>
-<sql:query dataSource="${snapshot}" var="labels">SELECT * FROM p_type_label</sql:query>
-<sql:query dataSource="${snapshot}" var="unites">SELECT * FROM p_type_unite</sql:query>
-<sql:query dataSource="${snapshot}" var="fractions">SELECT * FROM p_type_fraction</sql:query>
+<sql:query dataSource="${snapshot}" var="labels">SELECT * FROM p_type_label;</sql:query>
+<sql:query dataSource="${snapshot}" var="unites">SELECT * FROM p_type_unite;</sql:query>
+<sql:query dataSource="${snapshot}" var="fractions">SELECT * FROM p_type_fraction;</sql:query>
 
 <div class="carree_blanc">
     <%-- <c:if test="${lbls.id_type_label eq label_recette.rows[loop].id_type_label}">--%>
@@ -21,20 +21,21 @@
     <c:when test="${recettes.rowCount == 0}">
         <%-- ajout recette--%>
  <div class="gros_titre">Ajout d'une recette</div>
- <form  method="post" action="admin_recipe_savechanges.jsp" enctype="multipart/form-data">
+ <form  method="get" action="admin_recipe_savechanges.jsp" enctype="multipart/form-data">
+     
         <sql:query dataSource="${snapshot}" var="sommaire">SELECT  * FROM p_type_sommaire;</sql:query>  
 
      
         <div class="explication">
             <div class="float">
                 <label for="recette_label">Catégorie</label>
-                <c:forEach var="lbls" items="${labels.rows}" varStatus="status">
-                    <input style="width: 20px; height: 20px; margin-left:15px;margin-right:5px;" type="checkbox" name="recette_label" value="${lbls.label}">${lbls.label}                          
+                <c:forEach var="lbls" items="${labels.rows}">
+                    <input style="width: 20px; height: 20px; margin-left:15px;margin-right:5px;" type="checkbox" name="recette_label" id="recette_label" value="${lbls.id_type_label}">${lbls.label}                          
                 </c:forEach>
             </div>
             
             <label for="recette_titre">Titre</label><input type="text" name="recette_titre"
-                            id="recette_titre" value="" />                   
+                            id="recette_titre" value="" required/>                   
                     
         </div>
 
@@ -80,31 +81,25 @@
       
             <fieldset class="ing" id="formnewing">
                 <legend>Ingrédients</legend>
-                <input type="button" style="margin-left:10px;margin-bottom:20px;padding-left:20px;padding-right:20px;" class="addingfields" id="addingfields" value ="Ajouter un ingrédient"/>
-        <div class="lesingredients" id="ing_0"><label>Quantité</label>
-                        <input type="text" name="recette_ing_quantite" id="recette_ing_quantite_0" size="1" value="1" />
-                        <select name="recette_ing_type_fraction_0" id="recette_ing_type_fraction_0">
+                <input type="button" style="margin-left:10px;margin-bottom:20px;padding-left:20px;padding-right:20px;" class="addingfields" id="addingfields" value ="Ajouter un ingrédient"/>                   
+               
+                <div class="lesingredients" id="ing_0"><label>Quantité</label>
+                        <input style="width: 55px;" type="number" min="0" max="9999" name="recette_ing_quantite" id="recette_ing_quantite" size="0" value="0" required/>
+                        <select name="recette_ing_type_fraction" id="recette_ing_type_fraction">
                         <c:forEach var="f" items="${fractions.rows}" varStatus="loop">
                             <option name="recette_ing_type_fraction${loop.index}" id="recette_ing_type_fraction${loop.index}" value="${f.id_type_fraction}">${f.fraction_nohtml}</option>
                         </c:forEach>
                         </select>                        
                         Mesure
-                        <select name="recette_ing_type_unite_0" id="recette_ing_type_unite_0">
+                        <select name="recette_ing_type_unite" id="recette_ing_type_unite">
                         <c:forEach var="unite" items="${unites.rows}" varStatus="loop">
                             <option name="recette_ing_type_unite${loop.index}" id="recette_ing_type_unite${loop.index}" value="${unite.id_type_unite}">${unite.type_unite}</option>
                         </c:forEach>
                         </select>
                         Ingrédient
-                        <input type="text" style="width:45%;" maxlength="40" name="recette_ing_ingredient_0" id="recette_ing_ingredient_0" value="" />                        
+                        <input type="text" style="width:45%;" maxlength="40" name="recette_ing_ingredient" id="recette_ing_ingredient" value="" />                        
                       </div>
-            </fieldset>
-        
-
-            <div class="explication">
-                <label for="recette_notes_ingredients">Notes additionnelles sur les ingrédients</label>
-                <textarea name="recette_notes_ingredients" id="recette_notes_ingredients" rows="5" cols="100"></textarea>
-            </div>
-        
+            </fieldset>  
         
             <div class="explication">
                 <label for="recette_instructions">Étapes de préparation</label> 
@@ -114,7 +109,10 @@
                     </div>
             </div>
         
-        
+            <div class="explication">
+                <label for="recette_notes">Notes additionnelles sur les ingrédients ou la recette</label>
+                <textarea name="recette_notes" id="recette_notes" rows="5" cols="100"></textarea>
+            </div>
         
             <div class="liens_bouton">
                     <div>
@@ -128,30 +126,33 @@
   
     <c:otherwise>
 <sql:query dataSource="${snapshot}" var="label_recette">SELECT * FROM label lbl JOIN p_type_label ptl ON lbl.id_type_label=ptl.id_type_label WHERE lbl.id_recette=<%=request.getParameter("id")%>;</sql:query>
-<sql:query dataSource="${snapshot}" var="ingredients_recette">SELECT * FROM ingredients ing JOIN p_type_unite ptu ON ing.id_type_unite=ptu.id_type_unite WHERE ing.id_recette=<%=request.getParameter("id")%>;</sql:query>
+<sql:query dataSource="${snapshot}" var="ingredients_recette">SELECT * FROM ingredients ing JOIN p_type_unite ptu ON ing.id_type_unite=ptu.id_type_unite JOIN p_type_fraction ptf ON ptf.id_type_fraction=ing.id_type_fraction WHERE ing.id_recette=<%=request.getParameter("id")%>;</sql:query>
 <sql:query dataSource="${snapshot}" var="sommaire">SELECT * FROM sommaire som JOIN p_type_sommaire pts ON som.id_type_sommaire=pts.id_type_sommaire WHERE id_recette=<%=request.getParameter("id")%>;</sql:query>
+<sql:query dataSource="${snapshot}" var="images">SELECT * FROM images WHERE id_recette=<%=request.getParameter("id")%>;</sql:query>
+    
 <c:forEach var="rec" items="${recettes.rows}" varStatus="status">
     <div class="gros_titre">Modification d'une recette</div>
- <form  method="post" action="admin_recipe_savechanges.jsp" enctype="multipart/form-data"> 
+ <form  method="get" action="admin_recipe_savechanges2.jsp" enctype="multipart/form-data"> 
      
         <div class="explication">
             <div class="float">
+                <input type="hidden" name="recette_id" id="recette_id" value="${rec.id_recette}" />
                     <label for="recette_label">Catégorie</label>
                                            
-                    <c:forEach var="lbls" items="${labels.rows}" varStatus="labelcount">
-                        <input style="width: 20px; height: 20px; margin-left:15px;margin-right:5px;" id="recette_label+${labelcount}" type="checkbox" name="recette_label"
+                    <c:forEach var="lbls" items="${labels.rows}">
+                        <input style="width: 20px; height: 20px; margin-left:15px;margin-right:5px;" id="recette_label" type="checkbox" name="recette_label"
                                <c:forEach var="mylbl" items="${label_recette.rows}" varStatus="mylblcount">
                                    <c:if test="${lbls.id_type_label eq mylbl.id_type_label}">
                                        checked="checked"
                                    </c:if>                               
-                               </c:forEach>value="${lbls.label}">${lbls.label}                 
+                               </c:forEach>value="${lbls.id_label}">${lbls.label}                 
                     </c:forEach> 
                            
              </div>         
                     
 
             <label for="recette_titre">Titre</label><input type="text" name="recette_titre"
-                    id="recette_titre" value="${rec.titre}" />                   
+                    id="recette_titre" value="${rec.titre}" required />                   
                     
         </div>
 
@@ -159,6 +160,26 @@
                     <label>Description</label>
         
                     <textarea name="recette_description" id="recette_description" rows="4">${rec.description}</textarea>
+        </div>
+        
+        <div class="uploaded">
+            <fieldset class="img">
+                <legend>Images associées à la recette</legend>
+                
+                <c:choose>
+                    <c:when test="${images.rowCount eq 0}">
+                        <div class="warning">Aucune image n'est associée à cette recette</div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="warning"><p>Les images possédant un encadré bleu seront supprimées à l'enregistrement.</p>
+                        <c:forEach var="img" items="${images.rows}" varStatus="status">
+                            <input class="checkbox" style="background-image: url(${pageContext.request.contextPath}${img.url_local});" id="recette_images_+${labelcount}" type="checkbox" name="recette_images" value="${img.id_image}">
+                        </c:forEach>
+                            </div>
+                    </c:otherwise>
+                </c:choose>
+                            
+            </fieldset>
         </div>
 
             <div class="sommaire">
@@ -198,53 +219,42 @@
             <fieldset class="ing" id="formnewing">
                 <legend>Ingrédients</legend>
                 <input type="button" style="margin-left:10px;margin-bottom:20px;padding-left:20px;padding-right:20px;" class="addingfields" id="addingfields" value ="Ajouter un ingrédient"/>
-        <div class="lesingredients" id="ing_0"><label>Quantité</label>
-                        <input type="text" name="recette_ing_quantite" id="recette_ing_quantite_0" size="1" value="1" />
-                        <select name="recette_ing_type_fraction_0" id="recette_ing_type_fraction_0">
-                        <c:forEach var="f" items="${fractions.rows}" varStatus="loop">
-                            <option name="recette_ing_type_fraction${loop.index}" id="recette_ing_type_fraction${loop.index}" value="${f.id_type_fraction}">${f.fraction_nohtml}</option>
-                        </c:forEach>
-                        </select>                        
-                        Mesure
-                        <select name="recette_ing_type_unite_0" id="recette_ing_type_unite_0">
-                        <c:forEach var="unite" items="${unites.rows}" varStatus="loop">
-                            <option name="recette_ing_type_unite${loop.index}" id="recette_ing_type_unite${loop.index}" value="${unite.id_type_unite}">${unite.type_unite}</option>
-                        </c:forEach>
-                        </select>
-                        Ingrédient
-                        <input type="text" style="width:45%;" maxlength="40" name="recette_ing_ingredient_0" id="recette_ing_ingredient_0" value="" />                        
-                      </div>
-            </fieldset>
-        
-       <%-- <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="loop">
-                       
-                        <input name="recette_ing_quantite" id="recette_ing_quantite" value="${ing.quantite}" />
-                        
-                        <select>
-                        <c:forEach var="unite" items="${unites.rows}">
-                            <c:choose>
-
-                                    <c:when test="${unite.id_type_unite eq ing.id_type_unite}">
-                                        <option name="recette_ing_type_unite_${loop.index}" value="${unite.id_type_unite}" selected>${unite.type_unite}</option>
+                <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="bigloop">
+                    
+                    <div class="lesingredients" name="ing_${bigloop.index}" id="ing_${bigloop.index}">
+                        <label>Quantité</label>
+                        <input style="width: 55px;" type="number" min="0" max="9999" name="recette_ing_quantite" id="recette_ing_quantite" size="1" value="${ing.quantite}" />
+                        <select name="recette_ing_type_fraction" id="recette_ing_type_fraction">
+                            <c:forEach var="f" items="${fractions.rows}" varStatus="loop">
+                                <c:choose>
+                                    <c:when test="${f.id_type_fraction eq ing.id_type_fraction}">
+                                        <option name="recette_ing_type_fraction${loop.index}" id="recette_ing_type_fraction${loop.index}" value="${f.id_type_fraction}" selected>${f.fraction_nohtml}</option>
                                     </c:when>
                                     <c:otherwise>
-                                        <option name="recette_ing_type_unite_${loop.index}" value="${unite.id_type_unite}">${unite.type_unite}</option>
+                                        <option name="recette_ing_type_fraction${loop.index}" id="recette_ing_type_fraction${loop.index}" value="${f.id_type_fraction}">${f.fraction_nohtml}</option>
                                     </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
+                                </c:choose>
+                            </c:forEach>
+                        </select>                        
+                        Mesure
+                        <select name="recette_ing_type_unite" id="recette_ing_type_unite">
+                            <c:forEach var="unite" items="${unites.rows}" varStatus="loop">
+                                <c:choose>
+                                    <c:when test="${unite.id_type_unite eq ing.id_type_unite}">
+                                        <option name="recette_ing_type_unite${loop.index}" id="recette_ing_type_unite${loop.index}" value="${unite.id_type_unite}" selected>${unite.type_unite}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option name="recette_ing_type_unite${loop.index}" id="recette_ing_type_unite${loop.index}" value="${unite.id_type_unite}">${unite.type_unite}</option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
                         </select>
-                        
-                        <input name="recette_ing_ingredient" id="ingredient" value="${ing.ingredient}" />
-                        
-                                              
-                    </c:forEach>--%>
-        
+                        Ingrédient
+                        <input type="text" style="width:45%;" maxlength="40" name="recette_ing_ingredient" id="recette_ing_ingredient_${bigloop.index}" value="${ing.ingredient}" required />                        
+                      </div>
+                </c:forEach>
+            </fieldset>    
 
-            <div class="explication">
-                <label for="recette_notes_ingredients">Notes additionnelles sur les ingrédients</label>
-                <textarea name="recette_notes_ingredients" id="recette_notes_ingredients" rows="5" cols="100"></textarea>
-            </div>
-        
         
             <div class="explication">
                 <label for="recette_instructions">Étapes de préparation</label> 
@@ -254,49 +264,29 @@
                     </div>
             </div>
         
-        
+            <div class="explication">
+                <label for="recette_notes">Notes additionnelles sur les ingrédients ou la recette</label>
+                <textarea name="recette_notes" id="recette_notes" rows="5" cols="100">${rec.notes}</textarea>
+            </div>
         
             <div class="liens_bouton">
                     <div>
-                            <a href="${pageContext.request.contextPath}">Annuler</a> ou <input style="padding-left:20px;padding-right:20px;" type="submit" name="recette_update" value="Modifier" />
+                            <a href="admin_recipe_tolist.jsp">Annuler</a> ou <input style="padding-left:20px;padding-right:20px;" type="submit" name="recette_update" value="Modifier" />
                     </div>
             </div>
              
-</form>     
-                    </c:forEach>
+    </form>     
+    </c:forEach>
 
     </c:otherwise>
-
-    <%--
-            
- 
-            
-            
-
-            <div>
-                    <label for="recette_instructions">Instructions</label> 
-            </div>
-            <div>
-                    <textarea name="recette_instructions" id="recette_instructions" rows="20" cols="100">${rec.instructions}</textarea>
-            </div>
-
-        </c:forEach>   
-
-        
-	<div class="button-row">
-		<a href="${pageContext.request.contextPath}">Annuler</a> ou <input type="submit" name="recette_update" value="Modifier" />
-	</div>
-        </form>        
-</div>
-    </c:otherwise> --%>
 </c:choose> 
  </div>    
 
-<script>
-     
+<script>     
      var selectmesure = "";
      var selectfraction = "";
      var x = 0;
+
     $(document).ready(function() {
         var jsonmesure = [];
         var jsonfraction = [];
@@ -310,17 +300,18 @@
             $.each(jsonmesure, function( i, val ) {
                 var total = jsonmesure.length-1;
                 var mesure = val;
+                var j = i+1;
                 if(i !== total && i !== 0) 
                 {
-                   selectmesure += "<option name='recette_ing_type_unite"+i+"' id=\"recette_ing_type_unite"+i+"\" value='"+i+"'>"+mesure+"</option>";  
+                   selectmesure += "<option name='recette_ing_type_unite"+i+"' id=\"recette_ing_type_unite"+i+"\" value='"+j+"'>"+mesure+"</option>";  
                 }
                 else if(i===0)
                 {
-                    selectmesure+="<select  name='recette_ing_type_unite_"+(i+1)+"' id=\"recette_ing_type_unite_"+(i+1)+"\" ><option name='recette_ing_type_unite"+i+"' id=\"recette_ing_type_unite"+i+"\" value='"+i+"'>"+mesure+"</option>";
+                    selectmesure+="<select  name='recette_ing_type_unite' id=\"recette_ing_type_unite\"><option name='recette_ing_type_unite"+i+"' id=\"recette_ing_type_unite"+i+"\" value='"+j+"'>"+mesure+"</option>";
                 }
                 else
                 {
-                    selectmesure+="<option name='recette_ing_type_unite"+i+"' id=\"recette_ing_type_unite"+i+"\" value='"+i+"'>"+mesure+"</option></select>";//dernier element
+                    selectmesure+="<option name='recette_ing_type_unite"+i+"' id=\"recette_ing_type_unite"+i+"\" value='"+j+"'>"+mesure+"</option></select>";//dernier element
                 }
             });
         });
@@ -333,18 +324,19 @@
             
             $.each(jsonfraction, function( i, val ) {
                 var total = jsonfraction.length-1;
-                var fraction = val;            
+                var fraction = val;     
+                var j = i+1;
                 if(i !== total && i !== 0) 
                 {
-                   selectfraction += "<option name='recette_ing_type_fraction"+i+"' id=\"recette_ing_type_fraction"+i+"\" value='"+i+"'>"+fraction+"</option>";  
+                   selectfraction += "<option name='recette_ing_type_fraction"+i+"' id=\"recette_ing_type_fraction"+i+"\" value='"+j+"'>"+fraction+"</option>";  
                 }
                 else if(i===0)
                 {
-                    selectfraction+="<select name='recette_ing_type_fraction_"+(i+1)+"' id=\"recette_ing_type_fraction_"+(i+1)+"\"><option name='recette_ing_type_fraction"+i+"' id=\"recette_ing_type_fraction"+i+"\" value='"+i+"'>"+fraction+"</option>";
+                    selectfraction+="<select name='recette_ing_type_fraction' id=\"recette_ing_type_fraction\"><option name='recette_ing_type_fraction"+i+"' id=\"recette_ing_type_fraction"+i+"\" value='"+j+"'>"+fraction+"</option>";
                 }
                 else
                 {
-                    selectfraction+="<option name='recette_ing_type_fraction"+i+"' id=\"recette_ing_type_fraction"+i+"\" value='"+i+"'>"+fraction+"</option></select>";//dernier element
+                    selectfraction+="<option name='recette_ing_type_fraction"+i+"' id=\"recette_ing_type_fraction"+i+"\" value='"+j+"'>"+fraction+"</option></select>";//dernier element
                 }
             });
         });
@@ -395,9 +387,9 @@
     });
     
     $("#addingfields").click(function() {
-        x++;
+        x=0; //x++;
         var fieldWrapper = $("<div class=\"lesingredients\" id=\"ing_" + x + "\"/>");
-        var fQuantite = $("<label>Quantité</label><input name=\"recette_ing_quantite_"+x+"\" type=\"text\" id=\"recette_ing_quantite_"+x+"\" size=\"1\" value=\"1\" />");
+        var fQuantite = $("<label>Quantité</label><input name=\"recette_ing_quantite\" style=\"width: 55px;\" type=\"number\" min=\"0\" max=\"9999\"  id=\"recette_ing_quantite\" size=\"1\" value=\"0\" required/>");
         var fMesure = $("<label>Mesure</label>");
         fieldWrapper.append(fQuantite);        
         fieldWrapper.append(selectfraction);
@@ -405,7 +397,7 @@
         fieldWrapper.append(fMesure);
         fieldWrapper.append(selectmesure);
         
-        var fType = $("<label>Ingrédient</label><input style=\"width:45%;\" maxlength=\"40\" name=\"recette_ing_ingredient_"+x+"\" type=\"text\" id=\"recette_ing_ingredient_"+x+"\"/>");
+        var fType = $("<label>Ingrédient</label><input style=\"width:45%;\" maxlength=\"40\" name=\"recette_ing_ingredient\" type=\"text\" id=\"recette_ing_ingredient\"/>");
         fieldWrapper.append(fType);
         
         var retirer = $("<a href='#' class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div>");
