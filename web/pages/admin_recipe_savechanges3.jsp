@@ -50,11 +50,11 @@
          // Process the uploaded file items
          Iterator i = fileItems.iterator();
 
-//         out.println("<html>");
-//         out.println("<head>");
-//         out.println("<title>JSP File upload</title>");  
-//         out.println("</head>");
-//         out.println("<body>");
+         out.println("<html>");
+         out.println("<head>");
+         out.println("<title>JSP File upload</title>");  
+         out.println("</head>");
+         out.println("<body>");
          while ( i.hasNext () ) 
          {
             FileItem fi = (FileItem)i.next();
@@ -78,20 +78,20 @@
             fileName + "<br>");
             }
          }
-//         out.println("</body>");
-//         out.println("</html>");
+         out.println("</body>");
+         out.println("</html>");
       }catch(Exception ex) {
          System.out.println(ex);
       }
    }else{
-//      out.println("<html>");
-//      out.println("<head>");
-//      out.println("<title>Servlet upload</title>");  
-//      out.println("</head>");
-//      out.println("<body>");
-//      out.println("<p>No file uploaded</p>"); 
-//      out.println("</body>");
-//      out.println("</html>");
+      out.println("<html>");
+      out.println("<head>");
+      out.println("<title>Servlet upload</title>");  
+      out.println("</head>");
+      out.println("<body>");
+      out.println("<p>No file uploaded</p>"); 
+      out.println("</body>");
+      out.println("</html>");
    }
 %>
 <%--<c:redirect url="admin_recipe_tolist.jsp"/>--%>

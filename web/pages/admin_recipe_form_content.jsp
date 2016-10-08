@@ -21,7 +21,7 @@
     <c:when test="${recettes.rowCount == 0}">
         <%-- ajout recette--%>
  <div class="gros_titre">Ajout d'une recette</div>
- <form  method="get" action="admin_recipe_savechanges.jsp" enctype="multipart/form-data">
+ <form  method="get" action="admin_recipe_savechanges3.jsp" enctype="multipart/form-data">
      
         <sql:query dataSource="${snapshot}" var="sommaire">SELECT  * FROM p_type_sommaire;</sql:query>  
 
@@ -68,12 +68,12 @@
                 </fieldset>
             </div>
         
-        <div class="upload">
+        <div class="recette_upload">
             <fieldset class="img">
                 <legend>Téléversement d'images</legend>
                 <div style="padding-left:20px;font-size:15px;padding-bottom:10px;">Maintenir la touche CTRL pour sélectionner plusieurs images.</div>
-                <input type="file" id="upload" name="upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
-                <div style="float:right;text-align:right;font-variant:all-small-caps;"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('upload').click(); return false"/><div>Taille maximum: 5 mo</div><div name="fileCount" id="fileCount"></div></div> 
+                <input type="file" id="recette_upload" name="recette_upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
+                <div style="float:right;text-align:right;font-variant:all-small-caps;"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>Taille maximum: 5 mo</div><div name="fileCount" id="fileCount"></div></div> 
                 <label name="filename" id="filename" class="filename">aucune image choisie</label> 
                   
                 </fieldset>
@@ -205,12 +205,12 @@
                 </fieldset>
             </div>
         
-        <div class="upload">
+        <div class="recette_upload">
             <fieldset class="img">
                 <legend>Téléversement d'images</legend>
                 <div style="padding-left:20px;font-size:15px;padding-bottom:10px;">Maintenir la touche CTRL pour sélectionner plusieurs images.</div>
-                <input type="file" id="upload" name="upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
-                <div style="float:right;text-align:right;font-variant:all-small-caps;"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('upload').click(); return false"/><div>Taille maximum: 5 mo</div><div name="fileCount" id="fileCount"></div></div> 
+                <input type="file" id="recette_upload" name="recette_upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
+                <div style="float:right;text-align:right;font-variant:all-small-caps;"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>Taille maximum: 5 mo</div><div name="fileCount" id="fileCount"></div></div> 
                 <label name="filename" id="filename" class="filename">aucune image choisie</label> 
                   
                 </fieldset>
@@ -343,7 +343,7 @@
         
     });
     
-    $("#upload").on('change',function(){
+    $("#recette_upload").on('change',function(){
         var nbre_files = this.files.length;
         var display = "";
         var one_file_name;
