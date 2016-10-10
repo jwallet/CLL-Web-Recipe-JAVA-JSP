@@ -16,15 +16,13 @@
 <sql:query dataSource="${snapshot}" var="fractions">SELECT * FROM p_type_fraction;</sql:query>
 
 <div class="carree_blanc">
-    <%-- <c:if test="${lbls.id_type_label eq label_recette.rows[loop].id_type_label}">--%>
 <c:choose>    
     <c:when test="${recettes.rowCount == 0}">
         <%-- ajout recette--%>
  <div class="gros_titre">Ajout d'une recette</div>
- <form  method="get" action="admin_recipe_savechanges3.jsp" enctype="multipart/form-data">
-     
-        <sql:query dataSource="${snapshot}" var="sommaire">SELECT  * FROM p_type_sommaire;</sql:query>  
+ <form action="admin_recipe_uploadfile.jsp" method="post" enctype="multipart/form-data" ><!--method="post" enctype="multipart/form-data"-->
 
+        <sql:query dataSource="${snapshot}" var="sommaire">SELECT  * FROM p_type_sommaire;</sql:query>  
      
         <div class="explication">
             <div class="float">
@@ -116,7 +114,7 @@
         
             <div class="liens_bouton">
                     <div>
-                            <a href="admin_recipe_tolist.jsp">Annuler</a> ou <input style="padding-left:20px;padding-right:20px;" type="submit" name="save" value="Enregistrer" />
+                            <a href="admin_recipe_tolist.jsp">Annuler</a> ou <input style="padding-left:20px;padding-right:20px;" type="submit" class="save" id="save" name="save" value="Enregistrer" />
                     </div>
             </div>
              
@@ -132,11 +130,9 @@
     
 <c:forEach var="rec" items="${recettes.rows}" varStatus="status">
     <div class="gros_titre">Modification d'une recette</div>
- <form  method="get" action="admin_recipe_savechanges2.jsp" enctype="multipart/form-data"> 
-     
+    <form  action="admin_recipe_uploadfile.jsp?id=<%=request.getParameter("id")%>" method="post" enctype="multipart/form-data" > 
         <div class="explication">
             <div class="float">
-                <input type="hidden" name="recette_id" id="recette_id" value="${rec.id_recette}" />
                     <label for="recette_label">Catégorie</label>
                                            
                     <c:forEach var="lbls" items="${labels.rows}">
@@ -385,6 +381,7 @@
         }
             
     });
+   
     
     $("#addingfields").click(function() {
         x=0; //x++;
