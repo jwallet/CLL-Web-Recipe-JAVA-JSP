@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-15"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
@@ -9,15 +9,15 @@
      url="jdbc:mysql://localhost/dbrecette"
      user="root"  password=""/>
 
-<sql:query dataSource="${snapshot}" var="user">select * FROM login_admin WHERE user_admin like "<%=request.getParameter("txtuser_admin")%>" and pass_admin like "<%=request.getParameter("txtpass_admin")%>";</sql:query>
+<sql:query dataSource="${snapshot}" var="user">select * FROM redacteurs WHERE usager like "<%=request.getParameter("user")%>" and motdepasse like "<%=request.getParameter("password")%>" LIMIT 1;</sql:query>
   
     <c:choose>    
-        <c:when test="${user.rowCount >= 1}">
+        <c:when test="${user.rowCount == 1}">
             <div class="sommaire">
                 <c:redirect url="admin_recipe_tolist.jsp"/>
             </div>
         </c:when>
         <c:otherwise>
-             <c:redirect url="admin_login.jsp"/>
+             <c:redirect url="login.jsp?failed=true"/>
         </c:otherwise>
     </c:choose>
