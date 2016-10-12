@@ -18,13 +18,22 @@
     <div class="post">
         <div class="titre_lien">${rec.titre}</div>
         <!-- IMAGE URL HERE -->
-        <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
-            <div class="image">                
-                    <c:if test="${loopimg.index eq 0}"> 
-                        <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
-                    </c:if>
-            </div>
-        </c:forEach>
+        <c:choose>
+            <c:when test="${image.rowCount==0}">
+                <div class="image">
+                    <img class='thumbnail' alt="Aucune image reliée" src="${pageContext.request.contextPath}/images/aucune.jpg"/>
+                </div>                    
+            </c:when>
+            <c:otherwise>
+                <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
+                    <div class="image">                
+                            <c:if test="${loopimg.index eq 0}"> 
+                                <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
+                            </c:if>
+                    </div>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>        
         <div class="description">${rec.description}</div>
         <div class="sommaire">
             <c:forEach var="som" items="${sommaire.rows}" varStatus="status">

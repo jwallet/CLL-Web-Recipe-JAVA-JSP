@@ -11,11 +11,10 @@
 
 <sql:query dataSource="${snapshot}" var="result">SELECT * from recettes;</sql:query>
 
-                
-            <c:set var="id" value="<%=request.getParameter("id")%>"/>                                   
+<c:set var="id" value="<%=request.getParameter("id")%>"/>                                   
 <div class='menu'>
     <ul>
-        <li><a href="admin_recipe_tolist.jsp">Liste des recettes</a></li>
+        <li ><a href="admin_recipe_tolist.jsp">Liste des recettes</a></li>
 
         <c:if test="${id eq null}">
             <li><a href="admin_recipe_form.jsp">Ajout d'une recette</a></li>

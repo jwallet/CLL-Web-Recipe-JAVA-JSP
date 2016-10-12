@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 body{
     font-family: Tahoma;
-    font-size: 18px;
+    font-size: 16px;
     background-image: url("../images/background.png");
     margin: auto;
     width: 1024px;
@@ -89,13 +89,16 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     text-decoration: none;
 }
 
-menu .active {
-    background-color: #3498DB;
+.menu li.active a{
+    background-color: rgba(40,120,220,0.6);
+    color: #fff;
+    pointer-events: none;
+    cursor: default;
 }
 
 /* Change the link color to #111 (black) on hover */
 .menu li a:hover {
-    background-color: #3498DB;
+    background-color: rgba(40,120,220,0.6);
     color: #fff
 }
 
@@ -174,6 +177,7 @@ menu .active {
     margin-bottom:10px;
     max-width: 100%;
     padding:20px;
+    min-height: 260px;
     line-height: normal;
     word-wrap: break-word;
     border: 1px solid #ccc;
@@ -275,6 +279,15 @@ form .full{
     width:100%;
 }
 
+form .uploaded{
+    width:100%;
+}
+
+form .uploadedMain{
+    float:right;
+    margin:0;
+}
+
 form .recette_upload{
     float:right;
     width:50%;
@@ -299,7 +312,7 @@ form fieldset.som input{
 form fieldset.img label{
     font-weight:normal;
     font-variant:all-small-caps;
-    font-size:20px;
+    font-size:18px;
     color:#0055ee;
     margin-left:20px;
     margin-top:10px;
@@ -315,16 +328,24 @@ form fieldset.img .warning{
     margin:0;
     padding-left:10px;
     padding-bottom:10px;
-    font-weight:normal;
-    font-variant:all-small-caps;
-    font-size:20px;
-    color:#0055ee;
+    font-size:15px;
+    color: #666;
 }
 
-form fieldset.img .warning p {
-    margin:0;
+form fieldset.img .warning .cadre{
+    position:relative;
+    display:inline-block;
+}
+
+form fieldset.img .warning .cadre .insideNum{
     float:right;
-    margin-top:-25px;
+    color:white;
+    background-color:rgba(40,120,220,0.8);
+    position:absolute;
+    padding: 4px 10px 5px 10px;
+    right:8px;
+    bottom:38px;
+    border-radius: 20px;
 }
 
 form fieldset.img input[type=checkbox]{
@@ -351,6 +372,10 @@ form fieldset.ing label
     font-weight:normal;
 }
 
+form fieldset.ing .remove{
+    cursor: pointer;
+}
+
 form label{
     font-weight:bold;
     padding-right: 10px;
@@ -362,8 +387,7 @@ form .explication{
 
 form .explication .float{
     position:relative;
-    float:right;
-   
+    float:right;   
 }
 
 form input{

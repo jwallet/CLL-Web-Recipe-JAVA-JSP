@@ -8,6 +8,7 @@
 <%@ page import="org.apache.commons.io.output.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
      url="jdbc:mysql://localhost/dbrecette"
@@ -55,4 +56,12 @@
 </c:forEach>
     <br><br><br>
 
-<c:out value="${param.recette_ing_quantite}"/>
+<c:out value="${param.recette_ing_quantite}"/><br>
+
+<c:out value="${fn:length(paramValues.recette_ing_ingredient)}"/>
+
+<br>
+<c:set var="mm" value="3"/>
+<c:forEach begin="${mm +1}" end="5" varStatus="l">
+                    <c:out value="${l.index}"/>
+                </c:forEach>

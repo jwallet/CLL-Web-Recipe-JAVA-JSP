@@ -11,8 +11,8 @@
 
  <sql:query dataSource="${snapshot}" var="recette">SELECT  * FROM recettes WHERE id_recette=<%=request.getParameter("id")%>;</sql:query>  
  <c:forEach var="r" items="${recette.rows}" varStatus="status">
-     <form action="admin_recipe_todelete.jsp?id=<%=request.getParameter("id")%>" method="post">
-         
+     <form action="admin_recipe_todelete.jsp" method="post">
+         <input type='hidden' name='id' value='<%=request.getParameter("id")%>'/>
             <div class="carree_blanc">
                 <div class="gros_titre">Supprimer une recette</div>    
                 <div class="explication">Êtes-vous certain de vouloir supprimer la recette:</label> <div class="recette">${r.titre}</div></div>

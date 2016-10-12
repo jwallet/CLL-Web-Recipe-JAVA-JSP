@@ -20,22 +20,31 @@
     <div class="post">
         <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>
         <!-- IMAGE URL HERE -->
-        <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
-            <div class="image">                
-                <c:choose>
-                    <c:when test="${loopimg.index eq 0}"> 
-                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
-                            <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
-                            </a>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
-                            <img class='hidden_thumbnail'width="0px" height="0px" alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}" />
-                            </a>
-                    </c:otherwise>
-                </c:choose>                
-            </div>
-        </c:forEach>
+        <c:choose>
+            <c:when test="${image.rowCount==0}">
+                <div class="image">
+                    <img class='thumbnail' alt="Aucune image reliée" src="${pageContext.request.contextPath}/images/aucune.jpg"/>
+                </div>                    
+            </c:when>
+            <c:otherwise>
+                <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
+                    <div class="image">                
+                        <c:choose>
+                            <c:when test="${loopimg.index eq 0}"> 
+                                <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
+                                    <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
+                                    </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
+                                    <img class='hidden_thumbnail'width="0px" height="0px" alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}" />
+                                    </a>
+                            </c:otherwise>
+                        </c:choose>                
+                    </div>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
         <div class="description">${rec.description}</div>
         <div class="sommaire">
             <c:forEach var="som" items="${sommaire.rows}" varStatus="status">

@@ -11,7 +11,8 @@
      user="root"  password=""/>
 
 <sql:query dataSource="${snapshot}" var="labels">SELECT * FROM p_type_label</sql:query>
-
+<c:set var="lblActuel" value="<%=request.getParameter("lbl")%>"/>
+<c:set var="id" value="<%=request.getParameter("id")%>"/>
 <div id=header>
     <div class="banniere">
         <a href="${pageContext.request.contextPath}">BANNIERE DU SITE QUI RETOURNE A LA PAGE PRINCIPALE
@@ -21,9 +22,9 @@
         
     <div class='menu'>
     <ul>
-        <li><a href="recipe_tolist.jsp">Toutes les recettes</a></li>
+        <li <c:if test="${empty lblActuel && empty id}">class='active'</c:if>><a href="recipe_tolist.jsp">Toutes les recettes</a></li>
         <c:forEach var="lbl" items="${labels.rows}">
-            <li><a href="recipe_tolist.jsp?lbl=${lbl.label}">${lbl.label}</a></li>
+            <li <c:if test="${lblActuel==lbl.label}">class='active'</c:if>><a href="recipe_tolist.jsp?lbl=${lbl.label}">${lbl.label}</a></li>
         </c:forEach>
         <li style="float:right"><a class="active" href="${pageContext.request.contextPath}">Commentaires</a></li>
     </ul>        
