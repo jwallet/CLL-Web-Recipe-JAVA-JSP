@@ -177,7 +177,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     margin-bottom:10px;
     max-width: 100%;
     padding:20px;
-    min-height: 260px;
+    min-height: 185px;
     line-height: normal;
     word-wrap: break-word;
     border: 1px solid #ccc;
@@ -185,8 +185,9 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 }
 
 .post .titre{
-    font-size: 30px;
+    font-size: 28px;
     margin-bottom: 20px;
+    min-height: 40px;
 }
 
 .post .titre_lien{
@@ -197,6 +198,35 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 
 .post .description{
     margin-bottom:20px;
+    min-height: 40px;
+}
+
+.post .notes{
+    width:100%;
+    display:inline-block;
+    position: relative;
+    margin-top:20px;
+}
+
+.post .notes p{
+    width:88%;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:20px;
+    padding-right:20px;
+    color:#666;
+    vertical-align: middle;
+    float:right;
+    background-color: white;
+    border:1px solid #ddd;
+    border-radius: 20px;
+}
+
+.post .notes img{
+    vertical-align:middle;
+    position:absolute;
+    margin-top:-15px;
+    top:30%;
 }
 
 .post .image .zoom
@@ -212,7 +242,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 .post .image{
     float:right;
     position:relative;
-    margin-top: -8px;
+    margin-top: 0px;
     margin-left: 20px;
 }
 
@@ -236,6 +266,16 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 
 .post .sommaire{
     margin-bottom:20px;
+    min-height: 50px;
+}
+
+.post .sommaire .gauche{
+    width:65%;
+}
+
+.post .sommaire .droit{
+    float:right; 
+    width: 35%; 
 }
 
 .post .readmore{

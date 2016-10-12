@@ -18,7 +18,7 @@
     <c:when test="${recettes.rowCount == 0}">
         <%-- ajout recette--%>
  <div class="gros_titre">Ajout d'une recette</div>
-<form action="admin_recipe_uploadfile.jsp" method="post" enctype="multipart/form-data" >
+<form action="admin_recipe_uploadfile.jsp" method="post" enctype="multipart/form-data" accept-charset="utf-8">
 <!--<form  action="admin_recipe_savechanges2.jsp" method="get">-->
         <sql:query dataSource="${snapshot}" var="sommaire">SELECT  * FROM p_type_sommaire;</sql:query>  
      
@@ -112,7 +112,7 @@
     
 <c:forEach var="rec" items="${recettes.rows}" varStatus="status">
     <div class="gros_titre">Modification d'une recette</div>
-    <form  action="admin_recipe_uploadfile.jsp?id=<%=request.getParameter("id")%>" method="post" enctype="multipart/form-data" > 
+    <form  action="admin_recipe_uploadfile.jsp?id=<%=request.getParameter("id")%>" method="post" enctype="multipart/form-data" accept-charset="utf-8"> 
     <!--<form  action="admin_recipe_savechanges2.jsp" method="get">-->
         <div class="explication">
             <input type="hidden" name="recette_id" value=<%=request.getParameter("id")%>>
@@ -258,9 +258,10 @@
 </div>    
 
 <script>     
-     var selectmesure = "";
-     var selectfraction = "";
-     var x = 0;
+    var selectmesure = "";
+    var selectfraction = "";
+    var x = 0;
+    var loaded = 0;
     $(document).ready(function() {
         var jsonmesure = [];
         var jsonfraction = [];
@@ -288,6 +289,7 @@
                     selectmesure+="<option name='recette_ing_type_unite"+i+"' id=\"recette_ing_type_unite"+i+"\" value='"+j+"'>"+mesure+"</option></select>";//dernier element
                 }
             });
+            loaded++;
         });
         
         $.getJSON("json_sql_ing_type_fractions.jsp",function(data){
@@ -313,13 +315,22 @@
                     selectfraction+="<option name='recette_ing_type_fraction"+i+"' id=\"recette_ing_type_fraction"+i+"\" value='"+j+"'>"+fraction+"</option></select>";//dernier element
                 }
             });
+            loaded++;
         });
         
         if(<%=!request.getParameterMap().containsKey("id")%>)
         {
-            setTimeout(function() {
-            $("#addingfields").trigger('click');
-            },200);
+            loop();
+            function loop (){
+                setTimeout(function (){
+                    if(loaded!==2){
+                        loop();
+                    }
+                    else{
+                        $("#addingfields").trigger('click');
+                    }
+                },10);
+            }
         }
         else
         {

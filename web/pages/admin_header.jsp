@@ -10,16 +10,17 @@
      user="root"  password=""/>
 
 <sql:query dataSource="${snapshot}" var="result">SELECT * from recettes;</sql:query>
-
+<c:set var="current" value="<%=request.getRequestURI().substring(request.getRequestURI().lastIndexOf('/')+1, request.getRequestURI().length()) %>"/>
 <c:set var="id" value="<%=request.getParameter("id")%>"/>                                   
+
 <div class='menu'>
     <ul>
-        <li ><a href="admin_recipe_tolist.jsp">Liste des recettes</a></li>
+        <li <c:if test="${current == 'admin_recipe_tolist.jsp'}">class='active'</c:if>><a href="admin_recipe_tolist.jsp">Liste des recettes</a></li>
 
         <c:if test="${id eq null}">
-            <li><a href="admin_recipe_form.jsp">Ajout d'une recette</a></li>
+            <li <c:if test="${current == 'admin_recipe_form.jsp'}">class='active'</c:if>><a href="admin_recipe_form.jsp">Ajout d'une recette</a></li>
         </c:if>
             
-        <!--<li style="float:right"><a class="active" href='#logout'>Déconnexion</a></li>-->
+        <li style="float:right"><a class="active" href='login.jsp'>Déconnexion</a></li>
     </ul>        
 </div>

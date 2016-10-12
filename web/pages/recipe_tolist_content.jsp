@@ -4,6 +4,8 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>--%>
+<%--<% pageContext.setAttribute("newLineChar", "\n"); %>--%>
 
 <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
      url="jdbc:mysql://localhost/dbrecette"
@@ -22,7 +24,7 @@
     <sql:query dataSource="${snapshot}" var="image">SELECT * FROM images WHERE id_recette=${rec.id_recette} ORDER BY principale DESC;</sql:query>
     <!--<div style="background-image: url(${pageContext.request.contextPath}${image.rows[0].url_local});background-position: center;background-size:100%;">-->
     <div class="post">
-        <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>  
+          
         <c:choose>
             <c:when test="${image.rowCount==0}">
                 <div class="image">
@@ -48,21 +50,28 @@
                 </c:forEach>
             </c:otherwise>
         </c:choose>
-        <div class="description">${rec.description}</div>
+        <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>
+        <div class="description">${rec.description}<%--${fn:replace(rec.description, newLineChar, "<br />")}--%></div>
+        <sql:query dataSource="${snapshot}" var="sommaire">SELECT * FROM sommaire som JOIN p_type_sommaire pts ON som.id_type_sommaire=pts.id_type_sommaire WHERE id_recette=${rec.id_recette};</sql:query>
         <div class="sommaire">
-            <sql:query dataSource="${snapshot}" var="sommaire">SELECT * FROM sommaire som JOIN p_type_sommaire pts ON som.id_type_sommaire=pts.id_type_sommaire WHERE id_recette=${rec.id_recette};</sql:query>
-            <c:forEach var="som" items="${sommaire.rows}" varStatus="status">
+            <c:forEach var="som" items="${sommaire.rows}" varStatus="somloop">
                 <c:choose>    
-                    <c:when test="${som.id_type_sommaire != 4}">
-                        <div class="${som.type}"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div> 
+                    <c:when test="${som.id_type_sommaire != 0}">
+                        <c:choose>                     
+                            <c:when test="${somloop.index%2 eq 0}">                       
+                                <div class="droit"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="gauche"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>
+                            </c:otherwise>
+                         </c:choose>
                     </c:when>
                     <c:otherwise>
-                        <div class="${som.type}"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
+                        <div class="gauche"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
                     </c:otherwise>
-                </c:choose>                               
+                </c:choose>                 
             </c:forEach>
         </div>   
-        <div class="readmore"><a href="recipe_detail.jsp?id=${rec.id_recette}">Lire la recette</a></div>
+        <!--<div class="readmore"><a href="recipe_detail.jsp?id=${rec.id_recette}">Lire la recette</a></div>-->
     </div>
-    <!--</div>-->
 </c:forEach>   

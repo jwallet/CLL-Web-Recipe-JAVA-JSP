@@ -1,3 +1,5 @@
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.nio.charset.Charset"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
@@ -14,7 +16,7 @@
      user="root"  password=""/>
 
  <sql:query dataSource="${snapshot}" var="recette">SELECT  id_recette FROM recettes ORDER BY id_recette DESC LIMIT 1;</sql:query>  
-     
+ 
 <c:set var="id_recette" value="${recette.rows[0].id_recette + 1}"/>
 <%
    File file ;
@@ -61,7 +63,7 @@
                     boolean isInMemory = fiImg.isInMemory();
                     long sizeInBytes = fiImg.getSize();
 
-                    getLink+= fieldName + "=" + fileName + "&";
+                    getLink+= fieldName + '=' + URLEncoder.encode(fileName,"Windows-1252") + '&';
                     // Write the file
                     if( fileName.lastIndexOf("\\") >= 0 ){
                     file = new File( filePath + 
@@ -75,7 +77,20 @@
             }
             else
             {
-                getLink+= fi.getFieldName() + "=" + fi.getString("UTF-8") + "&";
+                
+                //String fName = fi.getFieldName();
+                //String fContent = fi.getString("UTF-8");//new String(fi.getString("UTF-8").getBytes("ISO-8859-1"),"UTF-8");
+                //fContent = fContent.replaceAll("\r\n","<br />");
+//                byte[] bytes = fContent.getBytes("UTF-8");
+//                StringBuilder buf = new StringBuilder();
+//                for(int compteur = 0;compteur<bytes.length;compteur++)
+//                {
+//                    buf.append("&#");
+//                    buf.append((int)bytes[compteur]);
+//                    buf.append(';');
+//                }
+                
+                getLink+= fi.getFieldName() + '=' + URLEncoder.encode(fi.getString("UTF-8"),"Windows-1252") + '&';
             }
          }        
          
