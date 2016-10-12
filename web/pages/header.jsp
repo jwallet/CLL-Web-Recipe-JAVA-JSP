@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-15"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
@@ -27,7 +27,7 @@
         <c:forEach var="lbl" items="${labels.rows}">
             <li <c:if test="${lblActuel==lbl.label}">class='active'</c:if>><a href="recipe_tolist.jsp?lbl=${lbl.label}">${lbl.label}</a></li>
         </c:forEach>
-            <li style="float:right" <c:if test="${current == 'login.jsp'}">class='active'</c:if>><a class="active" href="login.jsp">Connexion</a></li>
+            <li style="float:right" <c:if test="${current == 'login.jsp'}">class='active'</c:if>><a class="active" href="admin_recipe_tolist.jsp">Administration</a></li>
     </ul>        
     </div>
 </div>

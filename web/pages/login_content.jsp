@@ -10,6 +10,7 @@
      user="root"  password=""/>
  <sql:query dataSource="${snapshot}" var="user">SELECT * FROM redacteurs;</sql:query> 
  <c:set var="failed" value="<%=request.getParameter("failed")%>"/>
+
  <div class="carree_blanc">
      <form class='som' action="login_inprogress.jsp" method="post">
                 <div class="gros_titre">Connexion</div>    
@@ -18,7 +19,10 @@
                         <label class="float">Mot de passe :</label> <input type="password" name="password" id='password'>
                         </div>
                
-               <div style="" class="liens_bouton"><c:if test="${failed == true}"><label style='padding-left:20px;float:left;color:red;font-weight:bold'>Cet usager ou ce mot de passe est invalide</label></c:if><a href="recipe_tolist.jsp">Annuler</a> ou <input type="submit" value="connexion"/></div>
+               <div style="" class="liens_bouton"><a href="recipe_tolist.jsp">Annuler</a> ou <input type="submit" value="connexion"/></div>
      </form>
 </div>
+ </a>
+ <c:if test="${failed == true}"><div class="failed"><a onclick="this.parentElement.style.display='none';"><div class="box"><p>Connexion Impossible</p></div></a></div></c:if>
+ 
  

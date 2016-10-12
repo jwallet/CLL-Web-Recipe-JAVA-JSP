@@ -102,6 +102,38 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     color: #fff
 }
 
+.failed{
+    position:static;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+.failed .box{
+    top:25%;
+    left:50%;
+    position: absolute;
+}
+.failed .box p{
+    color: #fff;
+    background-color: rgba(255,80,60,0.7);
+    padding: 30px;
+    font-size: 30px;
+    border: 1px solid rgb(200,0,0);
+    border-radius: 10px;
+    top:-50%;
+    left:-50%;
+    position: relative;
+}
+
+.failed a{
+    width:100%;
+    height: 100%;
+    position:absolute;
+    left:0;
+    top:0;
+}
+
 .titre_grille{
     display:block;
     padding: 5px;
