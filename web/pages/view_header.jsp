@@ -12,7 +12,7 @@
 <sql:query dataSource="${snapshot}" var="labels">SELECT * FROM p_type_label</sql:query>
 
 <div id=header>
-    <div class="banniere_lien">BANNIERE DU SITE QUI RETOURNE A LA PAGE PRINCIPALE
+    <div class="banniere_lien">
         <!--<img src="${pageContext.request.contextPath}/resources/logo.png"/>-->
     </div>
         
@@ -22,7 +22,7 @@
         <c:forEach var="lbl" items="${labels.rows}">
             <li class='lien'>${lbl.label}</li>
         </c:forEach>
-        <li class='lien' style="float:right">Commentaires</li>
+        <li class='lien' style="float:right">Administration</li>
     </ul>        
     </div>
 </div>
