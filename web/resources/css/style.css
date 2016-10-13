@@ -110,13 +110,13 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     height:100%;
 }
 .failed .box{
-    top:25%;
+    top:20%;
     left:50%;
     position: absolute;
 }
 .failed .box p{
     color: #fff;
-    background-color: rgba(255,80,60,0.7);
+    background-color: rgba(255,80,60,0.6);
     padding: 30px;
     font-size: 30px;
     border: 1px solid rgb(200,0,0);
@@ -514,20 +514,19 @@ form .liens_bouton{
 }
 
 /* bottom */
-
-.bottom {
-  font-family: Verdana, Helvetica, Arial, sans-serif;
-  font-size : 90%;
-  color : #999;
-  display : inline;
-  margin-top: 3em;
+.bottom{
+    margin:20px;
 }
-
 .bottom a {
-  color : #999;
+    color : #fff;
+    background-color: rgba(80,140,255,0.5);
+    padding: 6px 30px 6px 30px;
+    border: 1px solid rgb(80,140,255);
+    border-radius: 10px;
+    position:initial;
 }
 
 .bottom a:hover {
-  color : #ffcc33;
+    text-decoration: none;
 }
 

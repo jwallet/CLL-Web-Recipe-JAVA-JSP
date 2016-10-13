@@ -7,18 +7,21 @@
 
 <c:set var="hash" value=""/>
 <%
-    String mynewpass = new String();
-    byte[] bHash = "0:?0$É0u3!l3t4T0û7f41tCeprÔJ%7".getBytes();
     String mypass = request.getParameter("password");
-    while(mypass.getBytes().length<30)
-        mypass+=mypass;
-    byte[] bMyPass = mypass.getBytes();
-    byte[] bBuffer = "000000000000000000000000000000".getBytes();
-    for(int i=0;i<bBuffer.length;i++)
-    {            
-        mynewpass += (int)(Math.abs((bMyPass[i])+(bHash[i])));
+    if(!mypass.isEmpty())
+    {
+        String mynewpass = new String();
+        byte[] bHash = "0:?0$É0u3!l3t4T0û7f41tCeprÔJ%7".getBytes();    
+        while(mypass.getBytes().length<30)
+            mypass+=mypass;
+        byte[] bMyPass = mypass.getBytes();
+        byte[] bBuffer = "000000000000000000000000000000".getBytes();
+        for(int i=0;i<bBuffer.length;i++)
+        {            
+            mynewpass += (int)(Math.abs((bMyPass[i])+(bHash[i])));
+        }
+        pageContext.setAttribute("hash", mynewpass);
     }
-    pageContext.setAttribute("hash", mynewpass);
 %>
 
 <c:choose>    

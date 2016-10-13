@@ -25,21 +25,24 @@
         String sPass = rs.getString(4);
         if(sUser.equals(request.getParameter("user")))
         {
-            String mynewpass = new String();
-            byte[] bHash = "0:?0$É0u3!l3t4T0û7f41tCeprÔJ%7".getBytes();
             String mypass = request.getParameter("password");
-            while(mypass.getBytes().length<30)
-                mypass+=mypass;
-            byte[] bMyPass = mypass.getBytes();
-            byte[] bBuffer = "000000000000000000000000000000".getBytes();
-            for(int i=0;i<bBuffer.length;i++)
-            {            
-                mynewpass += (int)(Math.abs((bMyPass[i])+(bHash[i])));
-            }
-            if(sPass.equals(mynewpass))
+            if(!mypass.isEmpty())
             {
-                pageContext.setAttribute("pass", mynewpass);
-                pageContext.setAttribute("ressemblance", true);
+                String mynewpass = new String();
+                byte[] bHash = "0:?0$É0u3!l3t4T0û7f41tCeprÔJ%7".getBytes();
+                while(mypass.getBytes().length<30 && !mypass.isEmpty())
+                    mypass+=mypass;
+                byte[] bMyPass = mypass.getBytes();
+                byte[] bBuffer = "000000000000000000000000000000".getBytes();
+                for(int i=0;i<bBuffer.length;i++)
+                {            
+                    mynewpass += (int)(Math.abs((bMyPass[i])+(bHash[i])));
+                }
+                if(sPass.equals(mynewpass))
+                {
+                    pageContext.setAttribute("pass", mynewpass);
+                    pageContext.setAttribute("ressemblance", true);
+                }
             }
         }
     }

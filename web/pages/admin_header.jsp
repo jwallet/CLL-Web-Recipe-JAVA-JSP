@@ -10,7 +10,8 @@
      user="root"  password=""/>
 
 <sql:query dataSource="${snapshot}" var="result">SELECT * from recettes;</sql:query>                                  
-
+<c:set var="current" value="<%=request.getRequestURI().substring(request.getRequestURI().lastIndexOf('/')+1, request.getRequestURI().length()) %>"/>
+<c:set var="id" value="<%=request.getParameter("id")%>"/> 
 <div class='menu'>
     <ul>
         <li <c:if test="${current == 'admin_recipe_tolist.jsp'}">class='active'</c:if>><a href="admin_recipe_tolist.jsp">Liste des recettes</a></li>

@@ -77,8 +77,7 @@
 <c:if test="${redirectNow==true}">
     <script>document.location.href="login.jsp";</script>
 </c:if>
-<c:set var="current" value="<%=request.getRequestURI().substring(request.getRequestURI().lastIndexOf('/')+1, request.getRequestURI().length()) %>"/>
-<c:set var="id" value="<%=request.getParameter("id")%>"/> 
+
 
 <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
      url="jdbc:mysql://localhost/dbrecette"
