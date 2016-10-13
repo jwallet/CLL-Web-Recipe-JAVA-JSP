@@ -1,7 +1,3 @@
 <div id="footer">
-  <ul class="bottom">
-    <li><a href="">RETOURNER AU HAUT DE LA PAGE</a>
-  </ul>
-  
-<div class="about">Copyright (c) 2017</div>
+  <div class="bottom"><a href="">RETOURNER AU HAUT DE LA PAGE</a></div><div>© 2017 - José Ouellet</div>
 </div>

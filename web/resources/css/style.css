@@ -1,0 +1,532 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 26, 2016, 2:12:54 PM
+    Author     : Admin
+*/
+body{
+    font-family: Tahoma;
+    font-size: 16px;
+    background-image: url("../images/background.png");
+    margin: auto;
+    width: 1024px;
+}
+
+/* unvisited link */
+a:link 
+{
+	text-decoration:none;
+        color: #0066ff ;
+}
+
+/* visited link */
+a:visited 
+{
+	text-decoration:none; 
+        color: #3498DB ;
+}
+
+a:hover {text-decoration:underline;}   /* mouse over link */
+a:active {text-decoration:underline;}  /* selected link */
+
+/* The CSS for the form was taken from this project. 
+https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
+*/
+
+#header
+{
+    display:inline-block;
+    width: 100%;
+}
+
+.banniere
+{
+    font-size:x-large;
+    padding-top: 20px;
+}
+
+.banniere_lien
+{
+    font-size:x-large;
+    padding-top: 20px;
+    color: #0066ff ;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;    
+    overflow: hidden;
+    border: 1px solid #ddd;
+    background-color: rgba(255,255,255,0.8);
+}
+
+.menu li.lien{
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    
+}
+
+.menu li {
+    float: left;
+    border-right: 1px solid #ddd;
+}
+
+.menu li:last-child {
+    border-right: none;
+}
+
+.menu li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.menu li.active a{
+    background-color: rgba(40,120,220,0.6);
+    color: #fff;
+    pointer-events: none;
+    cursor: default;
+}
+
+/* Change the link color to #111 (black) on hover */
+.menu li a:hover {
+    background-color: rgba(40,120,220,0.6);
+    color: #fff
+}
+
+.failed{
+    position:static;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+.failed .box{
+    top:20%;
+    left:50%;
+    position: absolute;
+}
+.failed .box p{
+    color: #fff;
+    background-color: rgba(255,80,60,0.6);
+    padding: 30px;
+    font-size: 30px;
+    border: 1px solid rgb(200,0,0);
+    border-radius: 10px;
+    top:-50%;
+    left:-50%;
+    position: relative;
+}
+
+.failed a{
+    width:100%;
+    height: 100%;
+    position:absolute;
+    left:0;
+    top:0;
+}
+
+.titre_grille{
+    display:block;
+    padding: 5px;
+    padding-left:10px;
+    margin-top: 10px;
+    font-size: 24px;
+    background-color: rgba(255,255,255,0.8);
+    border-left:1px solid #ddd;
+    border-right:1px solid #ddd;
+    border-top:1px solid #ddd;
+}
+.carree_blanc{
+    display:block;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: rgba(255,255,255,0.8);
+    border:1px solid #ddd;
+}
+.carree_blanc .gros_titre{
+    font-size: 24px;
+    padding: 10px;
+}
+
+.carree_blanc .explication{
+    padding: 10px;
+}
+
+.carree_blanc .liens_bouton{
+    padding: 10px;
+}
+
+.listing {
+  background-color: #fafafa;
+  border:1px solid #ddd;
+  color:#444;
+  border-radius: 1px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  padding: 8px;
+  line-height: 1.428571429;
+  vertical-align: top;
+}
+
+.listing tr:nth-child(even) {
+    background-color: #e6e6e6;
+}
+
+.listing tr.alt td {
+    background-color: whitesmoke;
+}
+
+.listing td{
+    border: 1px solid #ccc; 
+    padding: 4px;
+    text-align:center;
+    width: 100px;
+}
+
+.listing td.titre{
+    float:none;
+    width:auto;
+    text-align:left;
+    padding-left:10px;
+}
+
+.listing a:visited{
+    color: #0066ff ;
+}
+
+.post{
+    display: block;
+    margin-top:10px;
+    margin-bottom:10px;
+    max-width: 100%;
+    padding:20px;
+    min-height: 185px;
+    line-height: normal;
+    word-wrap: break-word;
+    border: 1px solid #ccc;
+    background-color: rgba(255,255,255,0.8);
+}
+
+.post .titre{
+    font-size: 28px;
+    margin-bottom: 20px;
+    min-height: 40px;
+}
+
+.post .titre_lien{
+    font-size: 30px;
+    color: #0066ff ;
+    margin-bottom: 20px;
+}
+
+.post .description{
+    margin-bottom:20px;
+    min-height: 40px;
+}
+
+.post .notes{
+    width:100%;
+    display:inline-block;
+    position: relative;
+    margin-top:20px;
+}
+
+.post .notes p{
+    width:88%;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:20px;
+    padding-right:20px;
+    color:#666;
+    vertical-align: middle;
+    float:right;
+    background-color: white;
+    border:1px solid #ddd;
+    border-radius: 20px;
+}
+
+.post .notes img{
+    vertical-align:middle;
+    position:absolute;
+    margin-top:-15px;
+    top:30%;
+}
+
+.post .image .zoom
+{
+    float:right;
+    position:absolute;
+    width:28px;
+    height:28px;
+    right:4px;
+    bottom:7px;
+}
+
+.post .image{
+    float:right;
+    position:relative;
+    margin-top: 0px;
+    margin-left: 20px;
+}
+
+.post .image .thumbnail{
+    
+    width:250px;
+    height:175px;
+    border: 6px solid white;
+    border-radius: 10px;
+}
+
+.post .image .hidden-thumbnail{
+    width:0px;
+    height:0px;
+}
+
+.post .image .msg{
+    font-variant:all-small-caps;
+}
+
+
+.post .sommaire{
+    margin-bottom:20px;
+    min-height: 50px;
+}
+
+.post .sommaire .gauche{
+    width:65%;
+}
+
+.post .sommaire .droit{
+    float:right; 
+    width: 35%; 
+}
+
+.post .readmore{
+    margin-bottom:10px;
+}
+
+.post .ingredients{
+    margin-bottom:20px;
+}
+
+.post .ingredients li.gauche{
+    width:50%;
+}
+
+.post .ingredients li.droit{
+    float:right; 
+    width: 50%; 
+}
+
+.post .instructions{
+    margin-bottom:15px;
+}
+
+form {
+    width:auto;
+}
+
+form fieldset
+{
+    clear: both;
+    margin: 10px;
+    padding-left: 10px;
+    padding-right:10px;
+    padding-top: 15px;
+    padding-bottom:20px;
+    border: 1px solid #999;
+    
+}
+
+form .full{
+    width:100%;
+}
+
+form .uploaded{
+    width:100%;
+}
+
+form .uploadedMain{
+    float:right;
+    margin:0;
+}
+
+form .recette_upload{
+    float:right;
+    width:50%;
+}
+
+form .som{
+    float:left;
+    width:45%;
+}
+
+form fieldset.som label
+{
+    font-weight:normal;
+    float:left;
+    width: 50%;
+}
+
+form fieldset.som input{
+    width:40%;
+}
+
+form fieldset.img label{
+    font-weight:normal;
+    font-variant:all-small-caps;
+    font-size:18px;
+    color:#0055ee;
+    margin-left:20px;
+    margin-top:10px;
+}
+
+form fieldset.img input{
+    margin-top:2px;
+    float:right;
+    width:auto;
+}
+
+form fieldset.img .warning{
+    margin:0;
+    padding-left:10px;
+    padding-bottom:10px;
+    font-size:15px;
+    color: #666;
+}
+
+form fieldset.img .warning .cadre{
+    position:relative;
+    display:inline-block;
+}
+
+form fieldset.img .warning .cadre .insideNum{
+    float:right;
+    color:white;
+    background-color:rgba(40,120,220,0.8);
+    position:absolute;
+    padding: 4px 10px 5px 10px;
+    right:8px;
+    bottom:38px;
+    border-radius: 20px;
+}
+
+form fieldset.img input[type=checkbox]{
+    float:none;
+    margin-left:0;
+    margin-right:0;
+    margin-bottom:-20px;
+    margin-top:10px;
+    width: 130px;
+    height: 90px;
+    border:5px solid #fff;
+    background-size:100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance:none;
+}
+
+form fieldset.img input[type=checkbox]:checked{
+    border:5px solid #0066ff;
+}
+
+form fieldset.ing label
+{
+    font-weight:normal;
+}
+
+form fieldset.ing .remove{
+    cursor: pointer;
+}
+
+form label{
+    font-weight:bold;
+    padding-right: 10px;
+}
+form .explication{
+    font-weight: normal;
+    margin-right:4px;
+}
+
+form .explication .float{
+    position:relative;
+    float:right;   
+}
+
+form input{
+    font-size:15px;    
+    margin-right: 10px;
+    margin-left:-1px;
+    margin-top:-2px;
+    margin-bottom:10px;
+    padding:6px;
+    padding-bottom:4px;
+}
+
+form .explication input{
+    width:40%;
+}
+form .sommaire input{
+    width:70%;
+}
+
+form textarea{
+    width:100%;
+    resize: none;
+    margin-right:20px;
+    margin-top:5px;
+    font-size:15px;
+    font-family: arial;
+}
+
+form select{
+    margin-right: 10px;
+    margin-top:-2px;
+    padding-top:4px;
+    padding-bottom:4px;
+    margin-left:-1px;
+    font-size:15px;
+}
+
+form legend
+{
+    font-weight: bold;
+}
+
+form .liens_bouton{
+    text-align:right;   
+}
+
+#footer
+{
+  font-size: 80%;
+  text-align : center;
+  margin: 25px;
+}
+
+/* bottom */
+.bottom{
+    margin:20px;
+}
+.bottom a {
+    color : #fff;
+    background-color: rgba(80,140,255,0.5);
+    padding: 6px 30px 6px 30px;
+    border: 1px solid rgb(80,140,255);
+    border-radius: 10px;
+    position:initial;
+}
+
+.bottom a:hover {
+    text-decoration: none;
+}
+
