@@ -15,9 +15,9 @@
      url="jdbc:mysql://localhost/dbrecette"
      user="root"  password=""/>
 
- <sql:query dataSource="${snapshot}" var="recette">SELECT  id_recette FROM recettes ORDER BY id_recette DESC LIMIT 1;</sql:query>  
+ <sql:query dataSource="${snapshot}" var="recette">SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbrecette' AND TABLE_NAME = 'recettes';</sql:query>  
  
-<c:set var="id_recette" value="${recette.rows[0].id_recette + 1}"/>
+<c:set var="id_recette" value="${recette.rows[0].AUTO_INCREMENT}"/>
 <%
    File file ;
    int maxFileSize = 5000 * 1024;
@@ -36,7 +36,14 @@
    String Path = context.getRealPath("\\images\\");
    String filePath = Path + "\\" +idRecette + "\\";
    File repertoire = new File(filePath);
-   if(!repertoire.exists()){repertoire.mkdir();}
+   if(!repertoire.exists())
+   {
+       boolean b = repertoire.mkdir();
+       while(!b)
+       {
+           b = repertoire.mkdirs();
+       }
+   }
    String contentType = request.getContentType();
    if ((contentType.indexOf("multipart/form-data") >= 0)) {
       DiskFileItemFactory factory = new DiskFileItemFactory();

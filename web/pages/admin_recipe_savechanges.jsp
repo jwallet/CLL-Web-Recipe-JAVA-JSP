@@ -67,7 +67,7 @@
             <c:if test="${!empty param.recette_upload}">
                 <c:forEach var="image" items="${paramValues.recette_upload}" varStatus="k">
                     <c:choose>
-                        <c:when test="${k.index==0}">
+                        <c:when test="${k.index==0}">"(${id},\"/images/${id}/${image}\",1),"
                             <c:set var="sqlimg" value="(${id_recette},\"/images/${id_recette}/${image}\",1),"/>
                         </c:when>
                         <c:when test="${k.count != fn:length(paramValues.recette_upload)}">
