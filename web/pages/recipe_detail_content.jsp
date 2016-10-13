@@ -25,7 +25,7 @@
         <c:choose>
             <c:when test="${image.rowCount==0}">
                 <div class="image">
-                    <img class='thumbnail' alt="Aucune image reliée" src="${pageContext.request.contextPath}/images/aucune.jpg"/>
+                    <img class='thumbnail' alt="Aucune image reliée" src="${pageContext.request.contextPath}/resources/images/aucune.jpg"/>
                 </div>                    
             </c:when>
             <c:otherwise>
