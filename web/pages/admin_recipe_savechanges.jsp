@@ -74,12 +74,12 @@
                             <c:set var="sqlimg" value="${sqlimg}(${id_recette},\"/images/${id_recette}/${image}\",0),"/>
                         </c:when>
                         <c:otherwise>
-                            <c:set var="sqlimg" value="${sqlimg}(${id_recette},\"/images/${id_recette}/${image}\",0)"/>
+                            <c:set var="sqlimg" value="${sqlimg}(${id_recette},\"/images/${id_recette}/${image}\",0),"/>
                         </c:otherwise>
                     </c:choose>                    
                     <%--<c:set var="sqlimg" value="${k.first ? '' : sqlimg}(${id_recette},"/images/${id_recette}/${image}"),"/>--%>
                 </c:forEach> 
-                <%--<c:set var="sqlimg" value="${fn:substring(sqlimg,0,fn:length(sqlimg)-1)}"/>--%>
+                <c:set var="sqlimg" value="${fn:substring(sqlimg,0,fn:length(sqlimg)-1)}"/>
             <sql:update var="count">INSERT INTO images (id_recette, url_local, principale) VALUES ${sqlimg};</sql:update>
             </c:if>
         </c:when>
