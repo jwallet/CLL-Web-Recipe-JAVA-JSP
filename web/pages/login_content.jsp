@@ -16,10 +16,11 @@
                 <div class="gros_titre">Connexion</div>    
                 
                 <div style='padding-left:30px;padding-top:20px;padding-bottom:10px;'><label class="float">Nom d'usager :</label><input type="text" name="user" id='user' maxlength="30"><br />
-                        <label class="float">Mot de passe :</label> <input type="password" name="password" id='password' maxlength="30"><button type="submit" formaction="login_hash.jsp">Tester cryptation</button>
+                    <label class="float">Mot de passe :</label> <input type="password" name="password" id='password' maxlength="30">
                 </div>
                
-                <div style="" class="liens_bouton"><a href="recipe_tolist.jsp">Annuler</a> ou <input type="submit" value="connexion"/></div>
+                <div style="" class="liens_bouton"><a href="recipe_tolist.jsp" >Annuler</a> ou <input type="submit" value="connexion"/><button type="submit" formaction="login_hash.jsp">Tester cryptation</button></div>
+                
      </form>
 </div>
  </a>

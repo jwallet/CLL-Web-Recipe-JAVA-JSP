@@ -25,16 +25,16 @@
         String sPass = rs.getString(4);
         if(sUser.equals(request.getParameter("user")))
         {
-            byte[] bytes = "0:?0$è0u3!l3t4T0û7f41tCepr#Jè7".getBytes();
-            String mypass = request.getParameter("password");
             String mynewpass = new String();
-            byte[] b = mypass.getBytes();
-            for(int i=0;i<b.length;i++)
-            {
-                b[i] += bytes[i];
-                mynewpass += (char)(b[i]-20)/5;
-                mynewpass += (char)(b[i]*2-17)/2;
-                mynewpass += (char)((b[i]*5))/3;
+            byte[] bHash = "0:?0$É0u3!l3t4T0û7f41tCeprÔJ%7".getBytes();
+            String mypass = request.getParameter("password");
+            while(mypass.getBytes().length<30)
+                mypass+=mypass;
+            byte[] bMyPass = mypass.getBytes();
+            byte[] bBuffer = "000000000000000000000000000000".getBytes();
+            for(int i=0;i<bBuffer.length;i++)
+            {            
+                mynewpass += (int)(Math.abs((bMyPass[i])+(bHash[i])));
             }
             if(sPass.equals(mynewpass))
             {
