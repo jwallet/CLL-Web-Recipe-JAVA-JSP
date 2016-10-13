@@ -288,52 +288,52 @@ ALTER TABLE `sommaire`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id_image` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_image` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `ingredients`
 --
 ALTER TABLE `ingredients`
-  MODIFY `id_ingredient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id_ingredient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `label`
 --
 ALTER TABLE `label`
-  MODIFY `id_label` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=358;
+  MODIFY `id_label` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `p_type_fraction`
 --
 ALTER TABLE `p_type_fraction`
-  MODIFY `id_type_fraction` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_type_fraction` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `p_type_label`
 --
 ALTER TABLE `p_type_label`
-  MODIFY `id_type_label` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_type_label` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `p_type_sommaire`
 --
 ALTER TABLE `p_type_sommaire`
-  MODIFY `id_type_sommaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_type_sommaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `p_type_unite`
 --
 ALTER TABLE `p_type_unite`
-  MODIFY `id_type_unite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_type_unite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `recettes`
 --
 ALTER TABLE `recettes`
-  MODIFY `id_recette` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id_recette` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `redacteurs`
 --
 ALTER TABLE `redacteurs`
-  MODIFY `id_redacteur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_redacteur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `sommaire`
 --
 ALTER TABLE `sommaire`
-  MODIFY `id_sommaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=309;
+  MODIFY `id_sommaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- Constraints for dumped tables
 --

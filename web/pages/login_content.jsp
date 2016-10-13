@@ -15,14 +15,15 @@
      <form class='som' action="login_inprogress.jsp" method="post">
                 <div class="gros_titre">Connexion</div>    
                 
-               <div style='padding-left:30px;padding-top:20px;padding-bottom:10px;'><label class="float">Nom d'usager :</label><input type="text" name="user" id='user'><br />
-                        <label class="float">Mot de passe :</label> <input type="password" name="password" id='password'>
-                        </div>
+                <div style='padding-left:30px;padding-top:20px;padding-bottom:10px;'><label class="float">Nom d'usager :</label><input type="text" name="user" id='user' maxlength="30"><br />
+                        <label class="float">Mot de passe :</label> <input type="password" name="password" id='password' maxlength="30"><button type="submit" formaction="login_hash.jsp">Tester cryptation</button>
+                </div>
                
-               <div style="" class="liens_bouton"><a href="recipe_tolist.jsp">Annuler</a> ou <input type="submit" value="connexion"/></div>
+                <div style="" class="liens_bouton"><a href="recipe_tolist.jsp">Annuler</a> ou <input type="submit" value="connexion"/></div>
      </form>
 </div>
  </a>
  <c:if test="${failed == true}"><div class="failed"><a onclick="this.parentElement.style.display='none';"><div class="box"><p>Connexion Impossible</p></div></a></div></c:if>
+ 
  
  

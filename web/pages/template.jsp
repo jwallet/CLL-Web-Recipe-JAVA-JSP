@@ -56,6 +56,10 @@
                                 pageContext.setAttribute("cookieUser", sName);
                             }
                         }
+                        if(pageContext.getAttribute("cookieUser").equals(""))
+                        {
+                            pageContext.setAttribute("redirectNow", true);
+                        }
                     }
                 }
                 if(usager==""&&pass==""&&i==cookies.length-1)
