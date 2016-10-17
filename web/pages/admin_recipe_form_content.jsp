@@ -26,7 +26,7 @@
             <div class="float">
                 <label for="recette_label">Catégorie</label>
                 <c:forEach var="lbls" items="${labels.rows}">
-                    <input style="width: 20px; height: 20px; margin-left:15px;margin-right:5px;" type="checkbox" name="recette_label" id="recette_label" value="${lbls.id_type_label}">${lbls.label}                          
+                    <input style="width: 20px; height: 20px; margin-left:15px;margin-right:5px;" type="checkbox" name="recette_label" id="recette_label" value="${lbls.id_type_label}">${lbls.label}                 
                 </c:forEach>
             </div>
             
