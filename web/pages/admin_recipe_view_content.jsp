@@ -13,12 +13,12 @@
 
 <sql:query dataSource="${snapshot}" var="recettes">SELECT * from recettes WHERE id_recette=<%=request.getParameter("id")%>;</sql:query>
 <sql:query dataSource="${snapshot}" var="ingredients_recette">SELECT * FROM ingredients ing JOIN p_type_unite ptu ON ing.id_type_unite=ptu.id_type_unite JOIN p_type_fraction ptf ON ing.id_type_fraction=ptf.id_type_fraction WHERE ing.id_recette=<%=request.getParameter("id")%>;</sql:query>
-<sql:query dataSource="${snapshot}" var="sommaire">SELECT * FROM sommaire som JOIN p_type_sommaire pts ON som.id_type_sommaire=pts.id_type_sommaire WHERE id_recette=<%=request.getParameter("id")%>;</sql:query>
+<sql:query dataSource="${snapshot}" var="sommaire">SELECT * FROM sommaire som JOIN p_type_sommaire pts ON som.id_type_sommaire=pts.id_type_sommaire WHERE id_recette=<%=request.getParameter("id")%> ORDER BY pts.type DESC;</sql:query>
 <sql:query dataSource="${snapshot}" var="image">SELECT * FROM images WHERE id_recette=<%=request.getParameter("id")%>;</sql:query>
 <sql:query dataSource="${snapshot}" var="image">SELECT * FROM images WHERE id_recette=<%=request.getParameter("id")%> ORDER BY principale DESC;</sql:query>    
 <c:forEach var="rec" items="${recettes.rows}" varStatus="status">
     <div class="post">
-        <div class="titre_lien">${rec.titre}</div>
+        
         <!-- IMAGE URL HERE -->
         <c:choose>
             <c:when test="${image.rowCount==0}">
@@ -35,16 +35,24 @@
                     </div>
                 </c:forEach>
             </c:otherwise>
-        </c:choose>        
+        </c:choose>   
+        <div class="titre_lien">${rec.titre}</div>
         <div class="description">${rec.description}<%--${fn:replace(rec.description, newLineChar, "<br />")}--%></div>
         <div class="sommaire">
-            <c:forEach var="som" items="${sommaire.rows}" varStatus="status">
+            <c:forEach var="som" items="${sommaire.rows}" varStatus="somloop">
                 <c:choose>    
                     <c:when test="${som.id_type_sommaire != 4}">
-                        <div class="${som.type}"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div> 
+                        <c:choose>                     
+                            <c:when test="${somloop.index%2 eq 0}">                       
+                                <div class="droit"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="gauche"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>
+                            </c:otherwise>
+                         </c:choose>
                     </c:when>
                     <c:otherwise>
-                        <div class="${som.type}"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
+                        <div class="droit"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
                     </c:otherwise>
                 </c:choose>                 
             </c:forEach>

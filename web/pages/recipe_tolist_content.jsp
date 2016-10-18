@@ -52,11 +52,11 @@
         </c:choose>
         <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>
         <div class="description">${rec.description}<%--${fn:replace(rec.description, newLineChar, "<br />")}--%></div>
-        <sql:query dataSource="${snapshot}" var="sommaire">SELECT * FROM sommaire som JOIN p_type_sommaire pts ON som.id_type_sommaire=pts.id_type_sommaire WHERE id_recette=${rec.id_recette};</sql:query>
+        <sql:query dataSource="${snapshot}" var="sommaire">SELECT * FROM sommaire som JOIN p_type_sommaire pts ON som.id_type_sommaire=pts.id_type_sommaire WHERE id_recette=${rec.id_recette} ORDER BY pts.type DESC;</sql:query>
         <div class="sommaire">
             <c:forEach var="som" items="${sommaire.rows}" varStatus="somloop">
                 <c:choose>    
-                    <c:when test="${som.id_type_sommaire != 0}">
+                    <c:when test="${som.id_type_sommaire != 4}">
                         <c:choose>                     
                             <c:when test="${somloop.index%2 eq 0}">                       
                                 <div class="droit"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>
@@ -67,7 +67,7 @@
                          </c:choose>
                     </c:when>
                     <c:otherwise>
-                        <div class="gauche"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
+                        <div class="droit"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
                     </c:otherwise>
                 </c:choose>                 
             </c:forEach>

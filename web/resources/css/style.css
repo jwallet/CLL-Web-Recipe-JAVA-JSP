@@ -76,7 +76,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     display: block;
     color: #666;
     text-align: center;
-    padding: 14px 16px;
+    padding: 14px 0px;
     text-decoration: none;
 }
 .menu li {
@@ -570,7 +570,7 @@ form .liens_bouton{
         background-image: url("../images/background.png");
         margin: 0;
         width: 100%;
-        min-width: 420px;
+        min-width: 300px;
     }
 
     /* The CSS for the form was taken from this project. 
@@ -579,7 +579,7 @@ form .liens_bouton{
 
     .banniere
     {
-        min-width:360px;
+        min-width:300px;
         max-width: 700px;
         width:auto;
         height:60px;

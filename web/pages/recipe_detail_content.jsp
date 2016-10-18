@@ -51,7 +51,7 @@
         <div class="sommaire">
             <c:forEach var="som" items="${sommaire.rows}" varStatus="somloop">
                 <c:choose>    
-                    <c:when test="${som.id_type_sommaire != 0}">
+                    <c:when test="${som.id_type_sommaire != 4}">
                         <c:choose>                     
                             <c:when test="${somloop.index%2 eq 0}">                       
                                 <div class="droit"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>
@@ -62,7 +62,7 @@
                          </c:choose>
                     </c:when>
                     <c:otherwise>
-                        <div class="gauche"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
+                        <div class="droit"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
                     </c:otherwise>
                 </c:choose>                 
             </c:forEach>
