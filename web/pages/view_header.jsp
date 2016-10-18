@@ -11,18 +11,16 @@
 
 <sql:query dataSource="${snapshot}" var="labels">SELECT * FROM p_type_label</sql:query>
 
-<div id=header>
-    <div class="banniere_lien">BANNIERE DU SITE QUI RETOURNE A LA PAGE PRINCIPALE
-        <!--<img src="${pageContext.request.contextPath}/resources/logo.png"/>-->
-    </div>
-        
+<div id='header'>
+    <div class="icon"><a>&#9776;</a></div>
+    <div class="banniere"></div>   
     <div class='menu'>
     <ul>
-        <li class='lien'>Toutes les recettes</a></li>
+        <li class='lien'>Toutes</li>
         <c:forEach var="lbl" items="${labels.rows}">
             <li class='lien'>${lbl.label}</li>
         </c:forEach>
-        <li class='lien' style="float:right">Commentaires</li>
+        <li class='lien' style="float:right">Administration</li>
     </ul>        
     </div>
 </div>

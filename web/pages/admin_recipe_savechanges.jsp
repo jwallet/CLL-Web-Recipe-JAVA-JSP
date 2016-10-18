@@ -33,14 +33,14 @@
                 <c:forEach var="lbl" items="${paramValues.recette_label}" varStatus="j">
                     <c:choose>
                         <c:when test="${j.count != fn:length(paramValues.recette_label)}">
-                            <c:set var="sqllbl" value="${j.first ? '' : sqllbl}(${id_recette},${lbl},1),"/>
+                            <c:set var="sqllbl" value="${j.first ? '' : sqllbl}id_type_label=${lbl} OR "/>
                         </c:when>
                         <c:otherwise>
-                            <c:set var="sqllbl" value="${sqllbl}(${id_recette},${lbl},1)"/>
+                            <c:set var="sqllbl" value="${sqllbl}id_type_label=${lbl}"/>
                         </c:otherwise>
                     </c:choose>                    
                 </c:forEach>
-                <sql:update var="count">INSERT INTO label (id_recette, id_type_label,actif) VALUES ${sqllbl};</sql:update>
+                <sql:update var="count">UPDATE label SET actif=1 WHERE id_recette=${id_recette} AND (${sqllbl});</sql:update>
             </c:if>
 
             <%--Ajout sommaire (x4)--%>

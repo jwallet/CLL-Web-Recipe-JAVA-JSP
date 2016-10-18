@@ -12,14 +12,28 @@
 <sql:query dataSource="${snapshot}" var="result">SELECT * from recettes;</sql:query>                                  
 <c:set var="current" value="<%=request.getRequestURI().substring(request.getRequestURI().lastIndexOf('/')+1, request.getRequestURI().length()) %>"/>
 <c:set var="id" value="<%=request.getParameter("id")%>"/> 
-<div class='menu'>
-    <ul>
-        <li <c:if test="${current == 'admin_recipe_tolist.jsp'}">class='active'</c:if>><a href="admin_recipe_tolist.jsp">Liste des recettes</a></li>
+<div id='header'>
+    <div class="icon"><a href="javascript:void(0);" onclick="burgerpourmobile()">&#9776;</a></div>
+    <div class="banniere"></div>    
+    <div class='menu' id='menu'>
+        <ul>
+            <li <c:if test="${current == 'admin_recipe_tolist.jsp'}">class='active'</c:if>><a href="admin_recipe_tolist.jsp">Liste des recettes</a></li>
 
-        <c:if test="${id eq null}">
-            <li <c:if test="${current == 'admin_recipe_form.jsp'}">class='active'</c:if>><a href="admin_recipe_form.jsp">Ajout d'une recette</a></li>
-        </c:if>
-            
-            <li style="float:right"><a class="active" href='logout.jsp'>Déconnexion (<c:out value="${param.cUser}"/>)</a></li>
-    </ul>        
+            <c:if test="${id eq null}">
+                <li <c:if test="${current == 'admin_recipe_form.jsp'}">class='active'</c:if>><a href="admin_recipe_form.jsp">Ajout d'une recette</a></li>
+            </c:if>
+
+                <li><a class="active" href='logout.jsp'>Déconnexion (<c:out value="${param.cUser}"/>)</a></li>
+        </ul>        
+    </div>
 </div>
+<script>
+function burgerpourmobile() {
+    var x = document.getElementById("menu");
+    if (x.className === "menu") {
+        x.className = "mobile";
+    } else {
+        x.className = "menu";
+    }
+}
+</script>

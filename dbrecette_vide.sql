@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2016 at 11:52 PM
+-- Generation Time: Oct 13, 2016 at 07:19 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -80,12 +80,12 @@ CREATE TABLE `p_type_fraction` (
 
 INSERT INTO `p_type_fraction` (`id_type_fraction`, `fraction`, `fraction_nohtml`) VALUES
 (1, '', ''),
-(2, '&#0189;', '1/2'),
-(3, '&#8531;', '1/3'),
-(4, '&#8532;', '2/3'),
-(5, '&#0188;', '1/4'),
-(6, '&#0190;', '3/4'),
-(7, '&#8539;', '1/8');
+(2, '&#8539;', '1/8'),
+(3, '&#0188;', '1/4'),
+(4, '&#8531;', '1/3'),
+(5, '&#0189;', '1/2'),
+(6, '&#8532;', '2/3'),
+(7, '&#0190;', '3/4');
 
 -- --------------------------------------------------------
 
@@ -192,8 +192,8 @@ CREATE TABLE `redacteurs` (
 --
 
 INSERT INTO `redacteurs` (`id_redacteur`, `usager`, `nom`, `motdepasse`) VALUES
-(1, 'siroisa', 'Anne Sirois', 'patate'),
-(3, 'admin', NULL, 'admin');
+(1, 'siroisa', 'Anne Sirois', '1601551791451524616021416713022415222814920014511115621414916521318320222421172171153156'),
+(3, 'admin', NULL, '145158172153146421482261561432051512251571941459516420716214621617620622221156183142165');
 
 -- --------------------------------------------------------
 
@@ -288,7 +288,7 @@ ALTER TABLE `sommaire`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id_image` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id_image` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ingredients`
 --
