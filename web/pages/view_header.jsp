@@ -11,9 +11,9 @@
 
 <sql:query dataSource="${snapshot}" var="labels">SELECT * FROM p_type_label</sql:query>
 
-<div id=header>
-    <div class="banniere"></div>
-        
+<div id='header'>
+    <div class="icon"><a>&#9776;</a></div>
+    <div class="banniere"></div>   
     <div class='menu'>
     <ul>
         <li class='lien'>Toutes</li>

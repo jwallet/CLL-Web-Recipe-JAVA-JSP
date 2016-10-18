@@ -23,10 +23,10 @@
                         <c:forEach var="br" items="${brouillons.rows}" varStatus="status">
                             <tr class="${status.index%2==0 ? 'alt' : ''}">
                                 <td class="titre">${br.titre}</td>
-                                <td><a href="admin_recipe_view.jsp?id=${br.id_recette}"target='_blank'>Aperçu</a></td>
-                                <td><a href="admin_recipe_form.jsp?id=${br.id_recette}">Modifier</a></td>
-                                <td><a href="admin_recipe_delete.jsp?id=${br.id_recette}">Supprimer</a></td>
-                                <td><a href="admin_recipe_publish.jsp?id=${br.id_recette}">Publier</a></td>
+                                <td class='apercu'><a href="admin_recipe_view.jsp?id=${br.id_recette}"target='_blank'><div class='linkbox'>&nbsp;</div></a></td>
+                                <td class='modifier'><a href="admin_recipe_form.jsp?id=${br.id_recette}"><div class='linkbox'>&nbsp;</div></a></td>
+                                <td class='supprimer'><a href="admin_recipe_delete.jsp?id=${br.id_recette}"><div class='linkbox'>&nbsp;</div></a></td>
+                                <td class='publier'><a href="admin_recipe_publish.jsp?id=${br.id_recette}"><div class='linkbox'>&nbsp;</div></a></td>
                             </tr>
                         </c:forEach>
                     </c:otherwise>
@@ -48,10 +48,10 @@
                         <c:forEach var="pub" items="${publie.rows}" varStatus="status">
                             <tr class="${status.index%2==0 ? 'alt' : ''}">
                                 <td class="titre">${pub.titre}</td>
-                                <td><a href="admin_recipe_view.jsp?id=${pub.id_recette}"target='_blank'>Aperçu</a></td>
-                                <td><a href="admin_recipe_form.jsp?id=${pub.id_recette}">Modifier</a></td>
-                                <td><a href="admin_recipe_delete.jsp?id=${pub.id_recette}">Supprimer</a></td>
-                                <td><a href="admin_recipe_draft.jsp?id=${pub.id_recette}">Ébaucher</a></td>
+                                <td class='apercu'><a href="admin_recipe_view.jsp?id=${pub.id_recette}"target='_blank'><div class='linkbox'>&nbsp;</div></a></td>
+                                <td class='modifier'><a href="admin_recipe_form.jsp?id=${pub.id_recette}"><div class='linkbox'>&nbsp;</div></a></td>
+                                <td class='supprimer'><a href="admin_recipe_delete.jsp?id=${pub.id_recette}"><div class='linkbox'>&nbsp;</div></a></td>
+                                <td class='ebaucher'><a href="admin_recipe_draft.jsp?id=${pub.id_recette}"><div class='linkbox'>&nbsp;</div></a></td>
                             </tr>
                         </c:forEach>
                     </c:otherwise>

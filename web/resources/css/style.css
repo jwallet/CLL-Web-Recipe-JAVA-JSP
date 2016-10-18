@@ -183,23 +183,27 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
   border-collapse: collapse;
   border-spacing: 0;
   padding: 8px;
-  line-height: 1.428571429;
+  line-height: 1.5;
   vertical-align: top;
 }
 
 .listing tr:nth-child(even) {
-    background-color: #e6e6e6;
+    background-color: #eee;
 }
 
 .listing tr.alt td {
-    background-color: whitesmoke;
+    background-color: #fff;
 }
 
 .listing td{
     border: 1px solid #ccc; 
-    padding: 4px;
+    padding: 2px;
     text-align:center;
     width: 100px;
+    height: 25px;
+    background-repeat: no-repeat;
+    background-size: 100px 25px;
+    background-position: center;
 }
 
 .listing td.titre{
@@ -207,6 +211,35 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     width:auto;
     text-align:left;
     padding-left:10px;
+}
+
+.listing td.apercu{
+    background-image: url('../images/xview.png');
+}
+
+.listing td.modifier{
+    background-image: url('../images/xedit.png');
+}
+
+.listing td.supprimer{
+    background-image: url('../images/xdelete.png');
+}
+
+.listing td.publier{
+    background-image: url('../images/xpublish.png');
+}
+
+.listing td.ebaucher{
+    background-image: url('../images/xdraft.png');
+}
+
+.linkbox{
+    width: 100%;
+    height: 100%;
+}
+
+.listing a:hover{
+    text-decoration: none;
 }
 
 .listing a:visited{
@@ -309,7 +342,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 
 .post .sommaire .droit{
     float:right; 
-    width: 35%; 
+    width: 35%;
 }
 
 .post .ingredients li.gauche{
@@ -567,7 +600,7 @@ form .liens_bouton{
         display:block;
         position:relative;
         float:left;
-        background-color:rgba(255,255,255,0.6);
+        background-color:rgba(255,255,255,0.8);
     }
     
     .icon a{
@@ -677,13 +710,43 @@ form .liens_bouton{
     }
 
     .post .ingredients li.gauche{
-        width:45%;
+        width:100%;
     }
 
     .post .ingredients li.droit{
-        width: 45%; 
+        width: 100%;
+        float:none;
+    }
+    
+    .listing td.apercu{
+        background-image: url('../images/view.png');
     }
 
+    .listing td.modifier{
+        background-image: url('../images/edit.png');
+    }
+
+    .listing td.supprimer{
+        background-image: url('../images/delete.png');
+    }
+
+    .listing td.publier{
+        background-image: url('../images/publish.png');
+    }
+
+    .listing td.ebaucher{
+        background-image: url('../images/draft.png');
+    }
+
+    .listing td
+    {
+    padding: 2px;
+    width: 40px;
+    height:40px;
+    background-position: center;
+    background-size: 40px auto;
+    }
+    
 }
 
 @media only screen and (min-width: 700px) and ( max-width: 900px) {
@@ -706,10 +769,9 @@ form .liens_bouton{
     }
     
      .post .ingredients li.gauche{
-        width:40%;
+        width:45%;
     }
     .post .ingredients li.droit{
-        width: 55%; 
+        width: 50%; 
     }
-    
 }
