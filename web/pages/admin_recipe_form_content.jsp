@@ -23,17 +23,25 @@
         <sql:query dataSource="${snapshot}" var="sommaire">SELECT  * FROM p_type_sommaire;</sql:query>  
      
         <div class="explication">
-            <div class="float">
-                <label for="recette_label">Catégorie</label>
-                <c:forEach var="lbls" items="${labels.rows}">
-                    <input style="width: 20px; height: 20px; margin-left:15px;margin-right:5px;" type="checkbox" name="recette_label" id="recette_label" value="${lbls.id_type_label}">${lbls.label}                 
-                </c:forEach>
-            </div>
             
-            <label for="recette_titre">Titre</label><input type="text" name="recette_titre"
-                            id="recette_titre" value="" required/>                   
-                    
-        </div>
+            <table>
+                <tr>
+                    <td class="label">Titre</td>
+                    <td><input type="text" name="recette_titre"
+                    id="recette_titre" value="" required /></td>
+                </tr>
+                <tr>
+                    <td class="label">Catégorie</td>
+                    <td>
+                    <c:forEach var="lbls" items="${labels.rows}">
+                        <div class="cat">
+                            <input id="recette_label" type="checkbox" name="recette_label" value="${lbls.id_type_label}">${lbls.label}
+                        </div>              
+                    </c:forEach>
+                    </td>
+                </tr>
+            </table>
+       </div>
 
         <div class="explication">
                     <label>Description</label>
@@ -116,26 +124,34 @@
     <!--<form  action="admin_recipe_savechanges2.jsp" method="get">-->
         <div class="explication">
             <input type="hidden" name="recette_id" value=<%=request.getParameter("id")%>>
-            <div class="float">
-                    <label for="recette_label">Catégorie</label>
-                                           
+            <table>
+                <tr>
+                    <td class="label">Titre</td>
+                    <td><input type="text" name="recette_titre"
+                    id="recette_titre" value="${rec.titre}" required /></td>
+                </tr>
+                <tr>
+                    <td class="label">Catégorie</td>
+                    <td>
                     <c:forEach var="lbls" items="${labels.rows}">
-                        <input style="width: 20px; height: 20px; margin-left:15px;margin-right:5px;" id="recette_label" type="checkbox" name="recette_label"
+                        <div class="cat"><input id="recette_label" type="checkbox" name="recette_label"
                                <c:forEach var="mylbl" items="${label_recette.rows}" varStatus="mylblcount">
                                    <c:if test="${(lbls.id_type_label eq mylbl.id_type_label) and mylbl.actif==true}">
                                        checked="checked"
                                    </c:if>                               
-                               </c:forEach>value="${lbls.id_type_label}">${lbls.label}                 
-                    </c:forEach> 
-                           
-             </div>         
-                    
-
-            <label for="recette_titre">Titre</label><input type="text" name="recette_titre"
-                    id="recette_titre" value="${rec.titre}" required />                   
-                    
+                               </c:forEach>value="${lbls.id_type_label}">${lbls.label}</div>              
+                    </c:forEach>
+                    </td>
+                </tr>
+            </table>
+            <!--<label for="recette_titre">Titre</label>-->
+            
+            <!--<div class="categorie">-->
+                    <!--<label for="recette_label">Catégorie</label>-->
+                                           
+                     
+             <!--</div>-->                          
         </div>
-
         <div class="explication">
                     <label>Description</label>
         
@@ -205,7 +221,7 @@
                 <input type="button" style="margin-left:10px;margin-bottom:20px;padding-left:20px;padding-right:20px;" class="addingfields" id="addingfields" value ="Ajouter un ingrédient"/>
                 <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="bigloop">   
                     <c:set var="nbreIngredients" value="${bigloop.index}"/>
-                    <div class="lesingredients" name="ing_${bigloop.index}" id="ing_${bigloop.index}"><label>Quantité</label><input style="width: 55px;" type="number" min="0" max="9999" name="recette_ing_quantite" id="recette_ing_quantite" size="1" value="${ing.quantite}"/><select name="recette_ing_type_fraction" id="recette_ing_type_fraction">
+                    <div class="lesingredients" name="ing_${bigloop.index}" id="ing_${bigloop.index}"><div class="jumper"><label>Quantité</label><input  style="width: 50px;" pattern="[0-9]*" type="number" min="0" max="999"   name="recette_ing_quantite" id="recette_ing_quantite" size="1" value="${ing.quantite}"/><select name="recette_ing_type_fraction" id="recette_ing_type_fraction">
                             <c:forEach var="f" items="${fractions.rows}" varStatus="loop">
                                 <c:choose>
                                     <c:when test="${f.id_type_fraction eq ing.id_type_fraction}">
@@ -215,7 +231,7 @@
                                         <option name="recette_ing_type_fraction${loop.index}" id="recette_ing_type_fraction${loop.index}" value="${f.id_type_fraction}">${f.fraction_nohtml}</option>
                                     </c:otherwise>
                                 </c:choose>
-                            </c:forEach></select><label>Mesure</label><select name="recette_ing_type_unite" id="recette_ing_type_unite">
+                            </c:forEach></select></div><div class="jumper"><label>Mesure</label><select name="recette_ing_type_unite" id="recette_ing_type_unite">
                             <c:forEach var="unite" items="${unites.rows}" varStatus="loop">
                                 <c:choose>
                                     <c:when test="${unite.id_type_unite eq ing.id_type_unite}">
@@ -226,7 +242,7 @@
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
-                        </select><label>Ingrédient</label><input type="text" style="width:45%;" maxlength="40" name="recette_ing_ingredient" id="recette_ing_ingredient_${bigloop.index}" value="${ing.ingredient}" required/><a class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div>
+                                </select></div><div class="jumper" id="jumpering"><label>Ingrédient</label><input type="text" maxlength="50" name="recette_ing_ingredient" id="recette_ing_ingredient_${bigloop.index}" value="${ing.ingredient}" required/><a class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div></div>
                 </c:forEach>
             </fieldset>    
 
@@ -386,15 +402,20 @@
     $("#addingfields").click(function() {
         x++;
         var fieldWrapper = $("<div class=\"lesingredients\" name=\"ing_"+x+"\" id=\"ing_"+x+"\">");
-        var fQuantite = $("<label>Quantité</label><input name=\"recette_ing_quantite\" style=\"width: 55px;\" type=\"number\" min=\"0\" max=\"9999\"  id=\"recette_ing_quantite\" size=\"1\" value=\"0\"/>");
-        var fMesure = $("<label>Mesure</label>");
-        fieldWrapper.append(fQuantite);        
-        fieldWrapper.append(selectfraction);
+        temp = '';
         
-        fieldWrapper.append(fMesure);
-        fieldWrapper.append(selectmesure);
+        temp+=("<div class=\"jumper\"><label>Quantité</label><input name=\"recette_ing_quantite\" style=\"width: 50px;\" pattern=\"[0-9]*\" type=\"number\" min=\"0\" max=\"999\"  id=\"recette_ing_quantite\" size=\"1\" value=\"0\"/>");        
+        temp+=(selectfraction);
+        temp+=("</div>");
+        fieldWrapper.append(temp);
         
-        var fType = $("<label>Ingrédient</label><input style=\"width:45%;\" maxlength=\"40\" name=\"recette_ing_ingredient\" type=\"text\" id=\"recette_ing_ingredient\" required/>");
+        temp2 = '';
+        temp2+=("<div class=\"jumper\"><label>Mesure</label>");
+        temp2+=(selectmesure);
+        temp2+=("</div>");
+        fieldWrapper.append(temp2);
+        
+        var fType = $("<div class=\"jumper\" id=\"jumpering\"><label>Ingrédient</label><input style=\"width:40%;\" maxlength=\"50\" name=\"recette_ing_ingredient\" type=\"text\" id=\"recette_ing_ingredient\" required/></div>");
         fieldWrapper.append(fType);
         
         var retirer = $("<a class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div>");
