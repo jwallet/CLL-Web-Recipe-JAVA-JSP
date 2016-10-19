@@ -82,7 +82,7 @@
             </c:forEach>
                             </ul>
         </div><br/> 
-        <c:if test="${!empty rec.notes}"><div class='notes'><img src='../resources/images/note.png' width="70px" height="70px"/><p>${fn:replace(rec.notes, newLineChar, "<br />")}</p></div></c:if>
+        <c:if test="${!empty rec.notes}"><div class='notes'><img src='../resources/images/note.png'/><p>${fn:replace(rec.notes, newLineChar, "<br />")}</p></div></c:if>
         <div class="instructions"><p><b>Instructions:</b></p>${fn:replace(rec.instructions, newLineChar, "<br />")}</div>
         
     </div>
