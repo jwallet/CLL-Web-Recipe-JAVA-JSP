@@ -371,7 +371,7 @@ form fieldset
     padding-top: 15px;
     padding-bottom:20px;
     border: 1px solid #999;
-    
+    overflow: hidden;
 }
 
 form .full{
@@ -408,16 +408,22 @@ form fieldset.som input{
     width:45%;
 }
 
-form fieldset.img label{
-    font-weight:normal;
-    font-variant:all-small-caps;
+form fieldset.img .taillemax{
+    float:right;
+    text-align:right;
+    font-size:80%;
+}
+form fieldset.img label.filename{
+
+    font-size:12px;
     color:#2697e3;
-    margin-left:20px;
+    margin-left:10px;
     margin-top:10px;
 }
 
 form fieldset.img input{
     margin-top:2px;
+    margin-right:0;
     float:right;
     width:auto;
 }
@@ -426,7 +432,6 @@ form fieldset.img .warning{
     margin:0;
     padding-left:10px;
     padding-bottom:10px;
-    font-size:14px;
     color: #666;
 }
 
@@ -476,6 +481,9 @@ form fieldset.ing .lesingredients{
     padding:8px;
     margin-bottom:6px;
     position:relative;
+    background-image: url('../images/xback.png');
+    background-repeat:repeat-y;
+    background-position:right;
 }
 
 form fieldset.ing input{
@@ -508,7 +516,6 @@ form .explication{
 }
 
 form input{
-    font-size:16px;    
     margin-right: 10px;
     margin-left:-1px;
     margin-top:-2px;
@@ -554,7 +561,6 @@ form textarea{
     resize: none;
     margin-right:20px;
     margin-top:5px;
-    font-size:16px;
     font-family: arial;
 }
 
@@ -564,7 +570,6 @@ form select{
     padding-top:4px;
     padding-bottom:4px;
     margin-left:-1px;
-    font-size:15px;
 }
 
 form legend
@@ -791,15 +796,15 @@ form .liens_bouton{
 
     .listing td
     {
-    padding: 2px;
-    width: 40px;
-    height:40px;
-    background-position: center;
-    background-size: 40px auto;
+        padding: 2px;
+        width: 40px;
+        height:40px;
+        background-position: center;
+        background-size: 40px auto;
     }
     
     form {
-        width:100%;
+        width:auto;
     }
 
     form fieldset
@@ -814,21 +819,24 @@ form .liens_bouton{
     }
 
     form .full{
-        width:100%;
+        width:auto;
+        margin:0;
     }
 
     form .uploaded{
-        width:100%;
+        width:auto;
+        margin:0;
     }
 
     form .uploadedMain{
-        float:right;
+        float:none;
         margin:0;
+        padding-left:10px;
     }
 
     form .recette_upload{
         float:none;
-        width:100%;
+        width:auto;
     }
 
     form .som{
@@ -846,27 +854,7 @@ form .liens_bouton{
         width:90%;
     }
 
-    form fieldset.img label{
-        font-weight:normal;
-        font-variant:all-small-caps;
-        color:#2697e3;
-        margin-left:20px;
-        margin-top:10px;
-    }
 
-    form fieldset.img input{
-        margin-top:2px;
-        float:right;
-        width:auto;
-    }
-
-    form fieldset.img .warning{
-        margin:0;
-        padding-left:10px;
-        padding-bottom:10px;
-        font-size:14px;
-        color: #666;
-    }
 
     form fieldset.img .warning .cadre{
         position:relative;
@@ -911,18 +899,22 @@ form .liens_bouton{
     }
 
     form fieldset.ing .jumper{
-        display:inline;
-    }
-    
-    form fieldset.ing #jumpering{
         display:block;
         margin-top:8px;
     }
     
     form fieldset.ing .lesingredients input[type=text]{
-        width:70%;
+        width:57%;
     }
 
+    form fieldset.ing .lesingredients label{     
+        width:70px;
+    }
+    
+    form fieldset.img .taillemax{
+        font-size:55%;
+    }
+    
     form fieldset.ing .remove{
         cursor: pointer;        
     }
@@ -936,8 +928,7 @@ form .liens_bouton{
         margin-right:4px;
     }
 
-    form input{
-        font-size:16px;    
+    form input{  
         margin-right: 10px;
         margin-left:-1px;
         margin-top:-2px;
@@ -955,17 +946,15 @@ form .liens_bouton{
         resize: none;
         margin-right:20px;
         margin-top:5px;
-        font-size:16px;
         font-family: arial;
     }
 
     form select{
         margin-right: 10px;
-        margin-top:-2px;
+        margin-top:0px;
         padding-top:4px;
         padding-bottom:4px;
         margin-left:-1px;
-        font-size:15px;
     }
 
     form legend
@@ -1029,7 +1018,7 @@ form .liens_bouton{
     }
 
     form .uploadedMain{
-        float:none;
+        float:right;
         margin:0;
     }
 
@@ -1045,5 +1034,9 @@ form .liens_bouton{
     
     form fieldset.ing .lesingredients input[type=text]{
         width:70%;
+    }
+    
+    form fieldset.ing .lesingredients label{     
+        width:70px;
     }
 }

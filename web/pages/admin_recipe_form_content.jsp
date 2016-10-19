@@ -77,8 +77,8 @@
                 <legend>Téléversement d'images</legend>
                  <div class="warning">Maintenir la touche CTRL pour sélectionner plusieurs images.</div>
                 <input type="file" id="recette_upload" name="recette_upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
-                <div style="float:right;text-align:right;font-variant:all-small-caps;"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>Taille maximum: 5 mo</div><div name="fileCount" id="fileCount"></div></div> 
-                <label name="filename" id="filename" class="filename">aucune image choisie</label> 
+                <div class="taillemax"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>TAILLE MAXIMUM: 5 MO</div><div name="fileCount" id="fileCount"></div></div> 
+                <label name="filename" id="filename" class="filename">AUCUNE IMAGE CHOISIE</label> 
                   
                 </fieldset>
         </div>
@@ -210,8 +210,8 @@
                 <legend>Téléversement d'images</legend>
                 <div class='warning'>Maintenir la touche CTRL pour sélectionner plusieurs images.</div>
                 <input type="file" id="recette_upload" name="recette_upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
-                <div style="float:right;text-align:right;font-variant:all-small-caps;"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>Taille maximum: 5 mo</div><div name="fileCount" id="fileCount"></div></div> 
-                <label name="filename" id="filename" class="filename">aucune image choisie</label> 
+                <div class="taillemax"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px; margin-right:0;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>TAILLE MAXIMUM: 5 MO</div><div name="fileCount" id="fileCount"></div></div> 
+                <label name="filename" id="filename" class="filename">AUCUNE IMAGE CHOISIE</label> 
                   
                 </fieldset>
         </div>
@@ -242,7 +242,7 @@
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
-                                </select></div><div class="jumper" id="jumpering"><label>Ingrédient</label><input type="text" maxlength="50" name="recette_ing_ingredient" id="recette_ing_ingredient_${bigloop.index}" value="${ing.ingredient}" required/><a class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div></div>
+                                </select></div><div class="jumper" id="jumpering"><label>Ingrédient</label><input type="text" maxlength="50" name="recette_ing_ingredient" id="recette_ing_ingredient_${bigloop.index}" value="${ing.ingredient}" required/></div><a class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div>
                 </c:forEach>
             </fieldset>    
 
@@ -364,11 +364,11 @@
             var name = this.files.item(i).name;
             var file_name_constructeur;            
             one_file_name = name.replace(/\\/g, '/').replace(/.*\//, '');
-            if(one_file_name.length>26)
+            if(one_file_name.length>20)
             {
-                file_name_constructeur = one_file_name.substring(0, 26);
+                file_name_constructeur = one_file_name.substring(0, 20);
                 var index_point_ext = one_file_name.indexOf('.');
-                file_name_constructeur += "..."+one_file_name.substring(index_point_ext,one_file_name.length);
+                file_name_constructeur += "*"+one_file_name.substring(index_point_ext,one_file_name.length);
                 one_file_name = file_name_constructeur;
             }
             if(i!==nbre_files-1)
@@ -383,17 +383,17 @@
         if(nbre_files===1)
         {
             $('#filename').html(one_file_name);
-            $('#fileCount').html("Nombre de fichier: "+nbre_files.toString());
+            $('#fileCount').html("NOMBRE DE FICHIER: "+nbre_files.toString());
         }
         else if( nbre_files===0)
         {
-            $('#filename').html("aucune image choisie");
+            $('#filename').html("AUCUNE IMAGE CHOISIE");
             $('#fileCount').html("");
         }
         else
         {
             $('#filename').html(display);
-            $('#fileCount').html("Nombre de fichiers: "+nbre_files.toString());
+            $('#fileCount').html("NOMBRE DE FICHIERS: "+nbre_files.toString());
         }
             
     });
@@ -415,7 +415,7 @@
         temp2+=("</div>");
         fieldWrapper.append(temp2);
         
-        var fType = $("<div class=\"jumper\" id=\"jumpering\"><label>Ingrédient</label><input style=\"width:40%;\" maxlength=\"50\" name=\"recette_ing_ingredient\" type=\"text\" id=\"recette_ing_ingredient\" required/></div>");
+        var fType = $("<div class=\"jumper\" id=\"jumpering\"><label>Ingrédient</label><input maxlength=\"50\" name=\"recette_ing_ingredient\" type=\"text\" id=\"recette_ing_ingredient\" required/></div>");
         fieldWrapper.append(fType);
         
         var retirer = $("<a class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div>");
@@ -429,27 +429,4 @@
     $(".remove").click(function() {
             $(this).parent("div").remove();x--;
         });
-    $("#preview").click(function() {
-        $("#yourform").remove();
-        var fieldSet = $("<fieldset id=\"yourform\"><legend>Your Form</legend></fieldset>");
-        $("#formnewing div").each(function() {
-            var id = "input" + $(this).attr("id").replace("field","");
-            var label = $("<label for=\"" + id + "\">" + $(this).find("input.fieldname").first().val() + "</label>");
-            var input;
-            switch ($(this).find("select.fieldtype").first().val()) {
-                case "checkbox":
-                    input = $("<input type=\"checkbox\" id=\"" + id + "\" name=\"" + id + "\" />");
-                    break;
-                case "textbox":
-                    input = $("<input type=\"text\" id=\"" + id + "\" name=\"" + id + "\" />");
-                    break;
-                case "textarea":
-                    input = $("<textarea id=\"" + id + "\" name=\"" + id + "\" ></textarea>");
-                    break;    
-            }
-            fieldSet.append(label);
-            fieldSet.append(input);
-        });
-        $("body").append(fieldSet);
-    });
 </script>
