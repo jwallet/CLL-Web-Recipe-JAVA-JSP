@@ -26,7 +26,7 @@ a:link
 a:visited 
 {
 	text-decoration:none; 
-        color: #3090d0 ;
+        color: #2697e3 ;
 }
 
 a:hover {text-decoration:underline;}   /* mouse over link */
@@ -101,7 +101,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 }
     
 .menu li.active a{
-    background-color: rgba(40,120,220,0.6);
+    background-color: rgba(38,151,227,0.6);
     color: #fff;
     pointer-events: none;
     cursor: default;
@@ -241,10 +241,6 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 
 .listing a:hover{
     text-decoration: none;
-}
-
-.listing a:visited{
-    color: #0066ff ;
 }
 
 .post{
@@ -450,7 +446,7 @@ form fieldset.img .warning .cadre{
 form fieldset.img .warning .cadre .insideNum{
     float:right;
     color:white;
-    background-color:rgba(40,120,220,0.8);
+    background-color:rgba(38,151,227,0.8);
     position:absolute;
     padding: 4px 10px 5px 10px;
     right:8px;
@@ -601,9 +597,9 @@ form .liens_bouton{
 }
 .bottom a {
     color : #fff;
-    background-color: rgba(80,140,255,0.5);
+    background-color: rgba(38,151,227,0.5);
     padding: 6px 30px 6px 30px;
-    border: 1px solid rgb(80,140,255);
+    border: 1px solid rgb(38,151,227);
     border-radius: 10px;
     position:initial;
 }
@@ -673,7 +669,7 @@ form .liens_bouton{
     }
 
     .menu ul {
-        background-color:rgba(40,120,220,0.6);
+        background-color:rgba(38,151,227,0.6);
         border:0px solid #fff;
         height: auto;
     }
@@ -683,7 +679,7 @@ form .liens_bouton{
         margin:0;
         padding: 0;    
         overflow: hidden;
-        background-color:rgba(40,120,220,0.6);
+        background-color:rgba(38,151,227,0.6);
         border:0px solid #fff;
         height: auto;
     }
@@ -881,7 +877,7 @@ form .liens_bouton{
     form fieldset.img .warning .cadre .insideNum{
         float:right;
         color:white;
-        background-color:rgba(40,120,220,0.8);
+        background-color:rgba(38,151,227,0.8);
         position:absolute;
         padding: 4px 10px 5px 10px;
         right:8px;
