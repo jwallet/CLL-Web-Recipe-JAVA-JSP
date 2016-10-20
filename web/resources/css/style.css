@@ -48,6 +48,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     background-image: url("../images/logo.png");
     width: 444px;
     background-position:top;
+    background-size: auto 70px;
     height:70px;
     border:2px solid #ddd;
     border-top-left-radius: 60px;
@@ -188,11 +189,11 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 }
 
 .listing tr:nth-child(even) {
-    background-color: #eee;
+    background-color: #fff;
 }
 
 .listing tr.alt td {
-    background-color: #fff;
+    background-color: #eee;
 }
 
 .listing td{
@@ -644,6 +645,7 @@ form .liens_bouton{
         min-width:300px;
         max-width: 700px;
         width:auto;
+        background-size: auto 60px;
         height:60px;
         margin-left:50px;
         border:0px solid #ddd;
