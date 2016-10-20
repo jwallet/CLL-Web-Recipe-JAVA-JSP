@@ -101,7 +101,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 }
     
 .menu li.active a{
-    background-color: rgba(38,151,227,0.6);
+    background-color: rgba(38,151,227,0.9);
     color: #fff;
     pointer-events: none;
     cursor: default;
@@ -109,7 +109,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 
 /* Change the link color to #111 (black) on hover */
 .menu li a:hover {
-    background-color: rgba(40,120,220,0.6);
+    background-color: rgba(38,151,227,0.60);
     color: #fff
 }
 
@@ -597,7 +597,7 @@ form .liens_bouton{
 }
 .bottom a {
     color : #fff;
-    background-color: rgba(38,151,227,0.5);
+    background-color: rgba(38,151,227,0.8);
     padding: 6px 30px 6px 30px;
     border: 1px solid rgb(38,151,227);
     border-radius: 10px;
@@ -669,7 +669,7 @@ form .liens_bouton{
     }
 
     .menu ul {
-        background-color:rgba(38,151,227,0.6);
+        background-color:rgba(38,151,227,0.9);
         border:0px solid #fff;
         height: auto;
     }
@@ -679,7 +679,7 @@ form .liens_bouton{
         margin:0;
         padding: 0;    
         overflow: hidden;
-        background-color:rgba(38,151,227,0.6);
+        background-color:rgba(38,151,227,0.80);
         border:0px solid #fff;
         height: auto;
     }
@@ -692,11 +692,15 @@ form .liens_bouton{
     
     .mobile li a{
         display: block;
-        color: #666;
+        color: #ccc;
         width:100%;
         text-align: center;
         padding: 12px 0px;
         text-decoration:none;
+    }
+    
+    .mobile li a:hover{
+        color:#fff;
     }
     .mobile li.active a{
         background-color: transparent;
