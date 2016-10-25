@@ -24,7 +24,7 @@
      </form>
 </div>
  </a>
- <c:if test="${failed == true}"><div class="failed"><a onclick="this.parentElement.style.display='none';"><div class="box"><p>Connexion Impossible</p></div></a></div></c:if>
+ <c:if test="${failed == true}"><div class="failed"><a onclick="this.parentElement.style.visibility='hidden';"><div class="box"><p>Connexion Impossible</p></div></a></div></c:if>
  
  
  

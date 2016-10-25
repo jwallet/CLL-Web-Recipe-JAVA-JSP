@@ -58,7 +58,7 @@
          while ( i.hasNext () ) 
          {
             x++;
-            FileItem fi = (FileItem)i.next();
+            FileItem fi = (FileItem)i.next();            
             if ( !fi.isFormField () )	
             {
                 // Get the uploaded file parameters
@@ -68,39 +68,29 @@
                 if(fileName!="")
                 {
                     boolean isInMemory = fiImg.isInMemory();
-                    long sizeInBytes = fiImg.getSize();
-
+                    long sizeInBytes = fiImg.getSize();                                  
                     getLink+= fieldName + '=' + URLEncoder.encode(fileName,"Windows-1252") + '&';
                     // Write the file
-                    if( fileName.lastIndexOf("\\") >= 0 ){
-                    file = new File( filePath + 
-                    fileName.substring( fileName.lastIndexOf("\\"))) ;
-                    }else{
-                    file = new File( filePath + 
-                    fileName.substring(fileName.lastIndexOf("\\")+1)) ;
+                    if( fileName.lastIndexOf("\\") >= 0 )
+                    {
+                        file = new File( filePath + 
+                        fileName.substring( fileName.lastIndexOf("\\"))) ;
                     }
-                        fiImg.write( file ) ;
+                    else
+                    {
+                        file = new File( filePath + 
+                        fileName.substring(fileName.lastIndexOf("\\")+1)) ;
+                    }
+                    fiImg.write( file ) ;
                 }
             }
             else
             {
                 
-                //String fName = fi.getFieldName();
-                //String fContent = fi.getString("UTF-8");//new String(fi.getString("UTF-8").getBytes("ISO-8859-1"),"UTF-8");
-                //fContent = fContent.replaceAll("\r\n","<br />");
-//                byte[] bytes = fContent.getBytes("UTF-8");
-//                StringBuilder buf = new StringBuilder();
-//                for(int compteur = 0;compteur<bytes.length;compteur++)
-//                {
-//                    buf.append("&#");
-//                    buf.append((int)bytes[compteur]);
-//                    buf.append(';');
-//                }
-                
                 getLink+= fi.getFieldName() + '=' + URLEncoder.encode(fi.getString("UTF-8"),"Windows-1252") + '&';
             }
          }        
-         
+      
       }catch(Exception ex){
          System.out.println(ex);
       }

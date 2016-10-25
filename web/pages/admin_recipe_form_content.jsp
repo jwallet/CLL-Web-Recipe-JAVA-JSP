@@ -18,7 +18,7 @@
     <c:when test="${recettes.rowCount == 0}">
         <%-- ajout recette--%>
  <div class="gros_titre">Ajout d'une recette</div>
-<form action="admin_recipe_uploadfile.jsp" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+<form action="admin_recipe_uploadfile.jsp" method="post" onsubmit="return valideImage()" enctype="multipart/form-data" accept-charset="utf-8">
 <!--<form  action="admin_recipe_savechanges2.jsp" method="get">-->
         <sql:query dataSource="${snapshot}" var="sommaire">SELECT  * FROM p_type_sommaire;</sql:query>  
      
@@ -77,7 +77,7 @@
                 <legend>Téléversement d'images</legend>
                  <div class="warning">Maintenir la touche CTRL pour sélectionner plusieurs images.</div>
                 <input type="file" id="recette_upload" name="recette_upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
-                <div class="taillemax"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>TAILLE MAXIMUM: 5 MO</div><div name="fileCount" id="fileCount"></div></div> 
+                <div class="taillemax"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>TAILLE MAXIMALE: 5 MO</div><div name="fileCount" id="fileCount"></div></div> 
                 <label name="filename" id="filename" class="filename">AUCUNE IMAGE CHOISIE</label> 
                   
                 </fieldset>
@@ -120,7 +120,7 @@
     
 <c:forEach var="rec" items="${recettes.rows}" varStatus="status">
     <div class="gros_titre">Modification d'une recette</div>
-    <form  action="admin_recipe_uploadfile.jsp?id=<%=request.getParameter("id")%>" method="post" enctype="multipart/form-data" accept-charset="utf-8"> 
+    <form  action="admin_recipe_uploadfile.jsp?id=<%=request.getParameter("id")%>" onsubmit="return valideImage()" method="post" enctype="multipart/form-data" accept-charset="utf-8"> 
     <!--<form  action="admin_recipe_savechanges2.jsp" method="get">-->
         <div class="explication">
             <input type="hidden" name="recette_id" value=<%=request.getParameter("id")%>>
@@ -210,7 +210,7 @@
                 <legend>Téléversement d'images</legend>
                 <div class='warning'>Maintenir la touche CTRL pour sélectionner plusieurs images.</div>
                 <input type="file" id="recette_upload" name="recette_upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
-                <div class="taillemax"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px; margin-right:0;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>TAILLE MAXIMUM: 5 MO</div><div name="fileCount" id="fileCount"></div></div> 
+                <div class="taillemax"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px; margin-right:0;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>TAILLE MAXIMALE: 5 MO</div><div name="fileCount" id="fileCount"></div></div> 
                 <label name="filename" id="filename" class="filename">AUCUNE IMAGE CHOISIE</label> 
                   
                 </fieldset>
@@ -268,16 +268,16 @@
              
     </form>     
     </c:forEach>
-
     </c:otherwise>
 </c:choose> 
 </div>    
-
+<div id="erreur_upload" class="failed" style='visibility: hidden;'><a onclick="this.parentElement.style.visibility='hidden';"><div class="box"><p>La taille maximale de téléversement d'images a été dépassée</p></div></a></div>
 <script>     
     var selectmesure = "";
     var selectfraction = "";
     var x = 0;
     var loaded = 0;
+    var compt_mo = 0;
     $(document).ready(function() {
         var jsonmesure = [];
         var jsonfraction = [];
@@ -354,15 +354,27 @@
         }
     });
     
+    function valideImage()
+    {
+        if(compt_mo>(5.0))
+        {
+            document.getElementById("erreur_upload").style.visibility = "visible";
+            return false;
+        }
+        else
+            return true;
+    }
     
     $("#recette_upload").on('change',function(){
         var nbre_files = this.files.length;
         var display = "";
         var one_file_name;
+        compt_mo = 0;
         for(var i = 0; i < nbre_files ; i++)
         {
             var name = this.files.item(i).name;
-            var file_name_constructeur;            
+            var file_name_constructeur;       
+            compt_mo += this.files.item(i).size;
             one_file_name = name.replace(/\\/g, '/').replace(/.*\//, '');
             if(one_file_name.length>20)
             {
@@ -371,19 +383,21 @@
                 file_name_constructeur += "*"+one_file_name.substring(index_point_ext,one_file_name.length);
                 one_file_name = file_name_constructeur;
             }
-            if(i!==nbre_files-1)
+            if(compt_mo<(5*1024*1024))
             {
-                display+=one_file_name+"</label><br /><label name=\"filename\" id=\"filename\" class=\"filename\">";
+                display+="<label name=\"filename\" id=\"filename\" class=\"filename\">"+one_file_name+"</label>";
             }
             else
             {
-                display+=one_file_name+"</label>";
+                display+="<label name=\"filename\" style=\"color:red;\" id=\"filename\" class=\"filename\">"+one_file_name+"</label>";
             }
         }
+        compt_mo = (compt_mo/1024/1024);
+        compt_mo = parseFloat(compt_mo).toFixed(1);
         if(nbre_files===1)
         {
             $('#filename').html(one_file_name);
-            $('#fileCount').html("NOMBRE DE FICHIER: "+nbre_files.toString());
+            $('#fileCount').html("TAILLE TOTALE: "+compt_mo+" MO<br />NOMBRE IMAGE: "+nbre_files.toString());
         }
         else if( nbre_files===0)
         {
@@ -393,9 +407,8 @@
         else
         {
             $('#filename').html(display);
-            $('#fileCount').html("NOMBRE DE FICHIERS: "+nbre_files.toString());
-        }
-            
+            $('#fileCount').html("TAILLE TOTALE: "+compt_mo+" MO<br />NOMBRE IMAGES: "+nbre_files.toString());
+        }            
     });
    
     

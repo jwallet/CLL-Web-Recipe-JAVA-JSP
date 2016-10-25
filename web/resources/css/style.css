@@ -114,7 +114,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 }
 
 .failed{
-    position:static;
+    position:fixed;
     left:0;
     top:0;
     width:100%;
@@ -123,13 +123,14 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 .failed .box{
     top:20%;
     left:50%;
-    position: absolute;
+    position: fixed;
 }
 .failed .box p{
     color: #fff;
     background-color: rgba(255,80,60,0.6);
     padding: 30px;
     font-size: 30px;
+    text-align:center;
     border: 1px solid rgb(200,0,0);
     border-radius: 10px;
     top:-50%;
@@ -422,6 +423,8 @@ form fieldset.img label.filename{
     color:#2697e3;
     margin-left:10px;
     margin-top:10px;
+    margin-bottom: -8px;
+    display:block;
 }
 
 form fieldset.img input{
