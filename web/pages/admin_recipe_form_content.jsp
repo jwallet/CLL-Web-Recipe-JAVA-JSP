@@ -77,7 +77,7 @@
                 <legend>Téléversement d'images</legend>
                  <div class="warning">Maintenir la touche CTRL pour sélectionner plusieurs images.</div>
                 <input type="file" id="recette_upload" name="recette_upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
-                <div class="taillemax"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>TAILLE MAXIMALE: 5 MO</div><div name="fileCount" id="fileCount"></div></div> 
+                <div class="taillemax"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div name="fileCount" id="fileCount">TAILLE MAXIMALE: 5 MO</div></div> 
                 <label name="filename" id="filename" class="filename">AUCUNE IMAGE CHOISIE</label> 
                   
                 </fieldset>
@@ -210,7 +210,7 @@
                 <legend>Téléversement d'images</legend>
                 <div class='warning'>Maintenir la touche CTRL pour sélectionner plusieurs images.</div>
                 <input type="file" id="recette_upload" name="recette_upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
-                <div class="taillemax"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px; margin-right:0;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>TAILLE MAXIMALE: 5 MO</div><div name="fileCount" id="fileCount"></div></div> 
+                <div class="taillemax"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px; margin-right:0;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div name="fileCount" id="fileCount">TAILLE MAXIMALE: 5 MO</div></div> 
                 <label name="filename" id="filename" class="filename">AUCUNE IMAGE CHOISIE</label> 
                   
                 </fieldset>
@@ -397,17 +397,18 @@
         if(nbre_files===1)
         {
             $('#filename').html(one_file_name);
-            $('#fileCount').html("TAILLE TOTALE: "+compt_mo+" MO<br />NOMBRE IMAGE: "+nbre_files.toString());
+            $('#fileCount').html("TAILLE: "+compt_mo+" / 5 MO<br />NOMBRE IMAGE: "+nbre_files.toString());
         }
         else if( nbre_files===0)
         {
             $('#filename').html("AUCUNE IMAGE CHOISIE");
-            $('#fileCount').html("");
+            $('#fileCount').html("TAILLE MAXIMALE: 5 MO");
+            document.getElementById("fileCount").style.color = "black";
         }
         else
         {
             $('#filename').html(display);
-            $('#fileCount').html("TAILLE TOTALE: "+compt_mo+" MO<br />NOMBRE IMAGES: "+nbre_files.toString());
+            $('#fileCount').html("TAILLE: "+compt_mo+" / 5 MO<br />NOMBRE IMAGES: "+nbre_files.toString()); 
         }            
     });
    

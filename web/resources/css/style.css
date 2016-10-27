@@ -249,16 +249,34 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     margin-top:10px;
     margin-bottom:0px;
     max-width: 100%;
-    padding:20px;
-    min-height: 185px;
     line-height: normal;
     word-wrap: break-word;
     border: 2px solid #ddd;
     background-color: rgba(255,255,255,0.8);
 }
 
+.post-inside{
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:15px;
+    padding-bottom: 15px;
+}
+
+.haut{
+    background-position: 50%;
+    background-size:cover;
+    min-height: 190px;
+}
+
+.haut .post-inside{
+    background-color: rgba(255,255,255,0.6);
+    color:white;
+    padding:20px;
+    font-weight: bold;
+}
+
 .post .titre{
-    font-size: 20px;
+    font-size: 32px;
     margin-bottom: 20px;
     min-height: 40px;
 }
@@ -276,14 +294,17 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 
 .post .notes{
     width:100%;
-    display:inline-block;
+    background-image: url('../images/note.png');
+    background-size:auto 50px;
+    background-repeat: no-repeat;
+    background-position:left center;
 }
 
 .post .notes p{
     width:auto;
-    margin-left:80px;
-    padding-top:10px;
-    padding-bottom:10px;
+    margin-left:60px;
+    padding-top:15px;
+    padding-bottom:15px;
     padding-left:20px;
     padding-right:20px;
     color:#666;
@@ -291,13 +312,6 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     background-color: white;
     border:1px solid #ddd;
     border-radius: 20px;
-}
-
-.post .notes img{
-    margin-top:10px;
-    float: left;
-    width:60px;
-    height:60px;
 }
 
 .post .image .zoom
@@ -356,6 +370,15 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 
 .post .ingredients{
     margin-bottom:-20px;
+}
+
+.post .ingredients strong{
+    color: #444;
+}
+
+.post .ingredients ul{
+    list-style-type:none;
+    padding:0;
 }
 
 .post .instructions{
@@ -418,9 +441,8 @@ form fieldset.img .taillemax{
     font-size:80%;
 }
 form fieldset.img label.filename{
-
+    font-weight: normal;
     font-size:12px;
-    color:#2697e3;
     margin-left:10px;
     margin-top:10px;
     margin-bottom: -8px;
@@ -438,7 +460,7 @@ form fieldset.img .warning{
     margin:0;
     padding-left:10px;
     padding-bottom:10px;
-    color: #666;
+    color: #999;
 }
 
 form fieldset.img .warning .cadre{
@@ -620,6 +642,13 @@ form .liens_bouton{
     {
         display: none !important;
     }
+    body div{
+        border:0;
+    }
+    
+    img{
+        width: 200px;
+    }
 }
 
 
@@ -761,15 +790,19 @@ form .liens_bouton{
         width:180px;
         height:120px;
     }
-
-    .post .notes img{
-        margin-top:30px;
-        width:50px;
-        height:50px;
-    }
     
     .post .notes p{
-        margin-left:60px;
+        margin-left:0;
+        padding-top:40px;
+        background-image: url('../images/note-mob.png');
+        background-size:auto auto;
+        background-repeat: no-repeat;
+        background-position:top left;
+    }
+    
+    .post .notes{
+        width:100%;
+        background-image: none;
     }
 
     .post .sommaire{
@@ -988,7 +1021,13 @@ form .liens_bouton{
 
 }
 
+@media only screen and ( max-width: 500px) {
+    .post .image .thumbnail{
 
+        width:120px;
+        height:auto;
+    }
+}
 
 
 

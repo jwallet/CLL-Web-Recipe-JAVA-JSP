@@ -24,54 +24,56 @@
     <sql:query dataSource="${snapshot}" var="image">SELECT * FROM images WHERE id_recette=${rec.id_recette} ORDER BY principale DESC;</sql:query>
     <!--<div style="background-image: url(${pageContext.request.contextPath}${image.rows[0].url_local});background-position: center;background-size:100%;">-->
     <div class="post">
-          
-        <c:choose>
-            <c:when test="${image.rowCount==0}">
-                <div class="image">
-                    <img class='thumbnail' alt="Aucune image reliée" src="${pageContext.request.contextPath}/resources/images/aucune.jpg"/>
-                </div>                    
-            </c:when>
-            <c:otherwise>
-                <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
-                    <div class="image">                
-                        <c:choose>
-                            <c:when test="${loopimg.index eq 0}"> 
-                                <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
-                                    <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
-                                    </a>
-                            </c:when>
-                            <c:otherwise>
-                                <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
-                                    <img class='hidden_thumbnail'width="0px" height="0px" alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}" />
-                                    </a>
-                            </c:otherwise>
-                        </c:choose>                
-                    </div>
-                </c:forEach>
-            </c:otherwise>
-        </c:choose>
-        <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>
-        <div class="description">${rec.description}<%--${fn:replace(rec.description, newLineChar, "<br />")}--%></div>
-        <sql:query dataSource="${snapshot}" var="sommaire">SELECT * FROM sommaire som JOIN p_type_sommaire pts ON som.id_type_sommaire=pts.id_type_sommaire WHERE id_recette=${rec.id_recette} ORDER BY pts.type DESC;</sql:query>
-        <div class="sommaire">
-            <c:forEach var="som" items="${sommaire.rows}" varStatus="somloop">
-                <c:choose>    
-                    <c:when test="${som.id_type_sommaire != 4}">
-                        <c:choose>                     
-                            <c:when test="${somloop.index%2 eq 0}">                       
-                                <div class="droit"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>
-                            </c:when>
-                            <c:otherwise>
-                                <div class="gauche"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>
-                            </c:otherwise>
-                         </c:choose>
+       <div class="haut" style="background-image: url('..${image.rows[0].url_local}')">
+            <div class='post-inside'>
+                <c:choose>
+                    <c:when test="${image.rowCount==0}">
+                        <div class="image">
+                            <img class='thumbnail' alt="Aucune image reliée" src="${pageContext.request.contextPath}/resources/images/aucune.jpg"/>
+                        </div>                    
                     </c:when>
                     <c:otherwise>
-                        <div class="droit"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
+                        <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
+                            <div class="image">                
+                                <c:choose>
+                                    <c:when test="${loopimg.index eq 0}"> 
+                                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
+                                            <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
+                                            </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
+                                            <img class='hidden_thumbnail'width="0px" height="0px" alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}" />
+                                            </a>
+                                    </c:otherwise>
+                                </c:choose>                
+                            </div>
+                        </c:forEach>
                     </c:otherwise>
-                </c:choose>                 
-            </c:forEach>
-        </div>   
-        <!--<div class="readmore"><a href="recipe_detail.jsp?id=${rec.id_recette}">Lire la recette</a></div>-->
+                </c:choose>
+                <div class="titre"><a href="recipe_detail.jsp?id=${rec.id_recette}">${rec.titre}</a></div>
+                <div class="description">${rec.description}<%--${fn:replace(rec.description, newLineChar, "<br />")}--%></div>
+                <sql:query dataSource="${snapshot}" var="sommaire">SELECT * FROM sommaire som JOIN p_type_sommaire pts ON som.id_type_sommaire=pts.id_type_sommaire WHERE id_recette=${rec.id_recette} ORDER BY pts.type DESC;</sql:query>
+                <div class="sommaire">
+                    <c:forEach var="som" items="${sommaire.rows}" varStatus="somloop">
+                        <c:choose>    
+                            <c:when test="${som.id_type_sommaire != 4}">
+                                <c:choose>                     
+                                    <c:when test="${somloop.index%2 eq 0}">                       
+                                        <div class="droit"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="gauche"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>
+                                    </c:otherwise>
+                                 </c:choose>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="droit"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
+                            </c:otherwise>
+                        </c:choose>                 
+                    </c:forEach>
+                </div>    
+            </div>   
+       </div>
     </div>
 </c:forEach>   
