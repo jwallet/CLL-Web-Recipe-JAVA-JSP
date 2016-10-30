@@ -43,8 +43,8 @@
                 <sql:update var="count">UPDATE label SET actif=1 WHERE id_recette=${id_recette} AND (${sqllbl});</sql:update>
             </c:if>
 
-            <%--Ajout sommaire (x4)--%>
-            <sql:update var="count">INSERT INTO sommaire (id_recette, id_type_sommaire, nbre_unite) VALUES (${id_recette},1,"${param.recette_preparation}"),(${id_recette},2,"${param.recette_cuisson}"),(${id_recette},3,"${param.recette_refroidissement}"),(${id_recette},4,"${param.recette_portions}");</sql:update>
+            <%--Ajout sommaire (x3)--%>
+            <sql:update var="count">INSERT INTO sommaire (id_recette, id_type_sommaire, nbre_unite) VALUES (${id_recette},1,"${param.recette_preparation}"),(${id_recette},2,"${param.recette_cuisson}"),(${id_recette},3,"${param.recette_portions}");</sql:update>
 
             <%--Ajout ingredients (tous)--%>
             <c:if test="${!empty param.recette_ing_ingredient}">
@@ -105,11 +105,10 @@
                 <sql:update var="count">UPDATE label SET actif=1 WHERE id_recette=${id} AND (${sqllbl});</sql:update>
             </c:if>
 
-            <%--Modifier sommaire (x4)--%>recette_preparation
+            <%--Modifier sommaire (x3)--%>
             <sql:update var="count">UPDATE sommaire SET nbre_unite="${param.recette_preparation}" WHERE id_recette=${id} AND id_type_sommaire=1;</sql:update>
             <sql:update var="count">UPDATE sommaire SET nbre_unite="${param.recette_cuisson}" WHERE id_recette=${id} AND id_type_sommaire=2;</sql:update>
-            <sql:update var="count">UPDATE sommaire SET nbre_unite="${param.recette_refroidissement}" WHERE id_recette=${id} AND id_type_sommaire=3;</sql:update>
-            <sql:update var="count">UPDATE sommaire SET nbre_unite="${param.recette_portions}" WHERE id_recette=${id} AND id_type_sommaire=4;</sql:update>
+            <sql:update var="count">UPDATE sommaire SET nbre_unite="${param.recette_portions}" WHERE id_recette=${id} AND id_type_sommaire=3;</sql:update>
 
             <%--Modifier ingredients si y'en a moins maintenant qu'avant, on supprime les entrees de trop--%>
             <sql:query var="sIngredients">SELECT * FROM ingredients WHERE id_recette=${id};</sql:query>

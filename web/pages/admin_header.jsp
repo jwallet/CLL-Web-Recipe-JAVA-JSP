@@ -19,9 +19,9 @@
         <ul>
             <li <c:if test="${current == 'admin_recipe_tolist.jsp'}">class='active'</c:if>><a href="admin_recipe_tolist.jsp">Liste des recettes</a></li>
 
-            <c:if test="${id eq null}">
-                <li <c:if test="${current == 'admin_recipe_form.jsp'}">class='active'</c:if>><a href="admin_recipe_form.jsp">Ajout d'une recette</a></li>
-            </c:if>
+            <%--<c:if test="${id eq null}">--%>
+                <li <c:if test="${current == 'admin_recipe_form.jsp' && id eq null}">class='active'</c:if>><a href="admin_recipe_form.jsp">Ajout d'une recette</a></li>
+            <%--</c:if>--%>
 
                 <li><a class="active" href='logout.jsp'>Déconnexion (<c:out value="${param.cUser}"/>)</a></li>
         </ul>        

@@ -18,63 +18,70 @@
     <c:when test="${recettes.rowCount == 0}">
         <%-- ajout recette--%>
  <div class="gros_titre">Ajout d'une recette</div>
-<form action="admin_recipe_uploadfile.jsp" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+<form action="admin_recipe_uploadfile.jsp" method="post" onsubmit="return valideImage()" enctype="multipart/form-data" accept-charset="utf-8">
 <!--<form  action="admin_recipe_savechanges2.jsp" method="get">-->
         <sql:query dataSource="${snapshot}" var="sommaire">SELECT  * FROM p_type_sommaire;</sql:query>  
      
         <div class="explication">
-            <div class="float">
-                <label for="recette_label">Catégorie</label>
-                <c:forEach var="lbls" items="${labels.rows}">
-                    <input style="width: 20px; height: 20px; margin-left:15px;margin-right:5px;" type="checkbox" name="recette_label" id="recette_label" value="${lbls.id_type_label}">${lbls.label}                 
-                </c:forEach>
-            </div>
             
-            <label for="recette_titre">Titre</label><input type="text" name="recette_titre"
-                            id="recette_titre" value="" required/>                   
-                    
-        </div>
-
-        <div class="explication">
-                    <label>Description</label>
+            <table>
+                <tr>
+                    <td class="label">Titre</td>
+                    <td><input type="text" name="recette_titre"
+                    id="recette_titre" value="" required="required" maxlength="60"/></td>
+                </tr>
+                <tr>
+                    <td class="label">Description</td>
+                    <td><input type="text" name="recette_description" id="recette_description" value="" placeholder="Optionnel" maxlength="60"/></td>
+                </tr>
+                
+                <tr>
+                    <td class="label">Catégorie</td>
+                    <td>
+                    <c:forEach var="lbls" items="${labels.rows}">
+                        <div class="cat">
+                            <input id="recette_label" type="checkbox" name="recette_label" value="${lbls.id_type_label}">${lbls.label}
+                        </div>              
+                    </c:forEach>
+                    </td>
+                </tr>
+            </table>
+       </div>            
         
-                    <textarea name="recette_description" id="recette_description" rows="3"></textarea>
-        </div>
-
-            <div class="sommaire">
-                <fieldset class="som">
+        
+      
+        
+                <fieldset class="som" >
                 <legend>Temps et portions</legend>
-            
+                <div class="sommaire-inline">
                 <c:forEach var="som" items="${sommaire.rows}" varStatus="loopsom">
+                        <div class="sommaire">
+                        <label for="recette_${som.type}">${som.type}</label>
                         <c:choose>    
-                            <c:when test="${som.id_type_sommaire != 4}">
-                                <div class="sommaire">
-                                    <label for="recette_${som.type}">Temps de ${som.type}</label> 
-                                    <input name="recette_${som.type}" id="recette_${som.type}" value="" />
-                                </div>
+                            <c:when test="${som.id_type_sommaire != 3}">                                 
+                                    <input name="recette_${som.type}" type="number" min="0" max="999" id="recette_${som.type}" value="0" />min
                             </c:when>
                             <c:otherwise>
-                                <div class="sommaire">
-                                    <label for="recette_${som.type}">Nombre de ${som.type}</label> 
-                                    <input name="recette_${som.type}" id="recette_${som.type}" value="" />
-                                </div>
+                                    <input name="recette_${som.type}" type="number" id="recette_${som.type}" value="0" />                                
                             </c:otherwise>
                         </c:choose>
+                        </div>
                 </c:forEach>
+                    </div>
                 </fieldset>
-            </div>
         
         <div class="recette_upload">
             <fieldset class="img">
                 <legend>Téléversement d'images</legend>
                  <div class="warning">Maintenir la touche CTRL pour sélectionner plusieurs images.</div>
                 <input type="file" id="recette_upload" name="recette_upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
-                <div style="float:right;text-align:right;font-variant:all-small-caps;"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>Taille maximum: 5 mo</div><div name="fileCount" id="fileCount"></div></div> 
-                <label name="filename" id="filename" class="filename">aucune image choisie</label> 
+                <div class="taillemax"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div name="fileCount" id="fileCount">TAILLE MAXIMALE: 5 MO</div></div> 
+                <label name="filename" id="filename" class="filename">AUCUNE IMAGE CHOISIE</label> 
                   
                 </fieldset>
         </div>
-      
+        
+
             <fieldset class="ing" id="formnewing">
                 <legend>Ingrédients</legend>
                 <input type="button" style="margin-left:10px;margin-bottom:20px;padding-left:20px;padding-right:20px;" class="addingfields" id="addingfields" value ="Ajouter un ingrédient"/>                   
@@ -87,10 +94,14 @@
                     </div>
             </div>
         
-            <div class="explication">
-                <label for="recette_notes">Avertissement et notes additionnelles sur les ingrédients ou la recette</label>
-                <textarea name="recette_notes" id="recette_notes" rows="3" cols="100"></textarea>
-            </div>
+        <div class="explication">
+            <table>
+                <tr>
+                    <td class="label">Notes</td>
+                    <td><input type="text" name="recette_notes" id="recette_notes" placeholder="Optionnel"/></td>
+                </tr>
+            </table>
+        </div> 
         
             <div class="liens_bouton">
                     <div>
@@ -112,36 +123,57 @@
     
 <c:forEach var="rec" items="${recettes.rows}" varStatus="status">
     <div class="gros_titre">Modification d'une recette</div>
-    <form  action="admin_recipe_uploadfile.jsp?id=<%=request.getParameter("id")%>" method="post" enctype="multipart/form-data" accept-charset="utf-8"> 
+    <form  action="admin_recipe_uploadfile.jsp?id=<%=request.getParameter("id")%>" onsubmit="return valideImage()" method="post" enctype="multipart/form-data" accept-charset="utf-8"> 
     <!--<form  action="admin_recipe_savechanges2.jsp" method="get">-->
         <div class="explication">
             <input type="hidden" name="recette_id" value=<%=request.getParameter("id")%>>
-            <div class="float">
-                    <label for="recette_label">Catégorie</label>
-                                           
+            <table>
+                <tr>
+                    <td class="label">Titre</td>
+                    <td><input type="text" name="recette_titre"
+                    id="recette_titre" value="${rec.titre}" required="required" maxlength="60"/></td>
+                </tr>
+                <tr>
+                    <td class="label">Description</td>
+                    <td><input type="text" name="recette_description" id="recette_description" value="${rec.description}" placeholder="Optionnel" maxlength="60"/></td>
+                </tr>
+                <tr>
+                    <td class="label">Catégorie</td>
+                    <td>
                     <c:forEach var="lbls" items="${labels.rows}">
-                        <input style="width: 20px; height: 20px; margin-left:15px;margin-right:5px;" id="recette_label" type="checkbox" name="recette_label"
+                        <div class="cat"><input id="recette_label" type="checkbox" name="recette_label"
                                <c:forEach var="mylbl" items="${label_recette.rows}" varStatus="mylblcount">
                                    <c:if test="${(lbls.id_type_label eq mylbl.id_type_label) and mylbl.actif==true}">
                                        checked="checked"
                                    </c:if>                               
-                               </c:forEach>value="${lbls.id_type_label}">${lbls.label}                 
-                    </c:forEach> 
-                           
-             </div>         
-                    
-
-            <label for="recette_titre">Titre</label><input type="text" name="recette_titre"
-                    id="recette_titre" value="${rec.titre}" required />                   
-                    
-        </div>
-
-        <div class="explication">
-                    <label>Description</label>
-        
-                    <textarea name="recette_description" id="recette_description" rows="3">${rec.description}</textarea>
+                               </c:forEach>value="${lbls.id_type_label}">${lbls.label}</div>              
+                    </c:forEach>
+                    </td>
+                </tr>  
+            </table>
         </div>
         
+        
+
+                
+                <fieldset class="som" >
+                <legend>Temps et portions</legend>
+                <div class="sommaire-inline">
+                <c:forEach var="som" items="${sommaire.rows}" varStatus="loopsom">
+                        <div class="sommaire">
+                        <label for="recette_${som.type}">${som.type}</label>
+                        <c:choose>    
+                            <c:when test="${som.id_type_sommaire != 3}">                                 
+                                    <input name="recette_${som.type}" type="number" min="0" max="999" id="recette_${som.type}" value="${som.nbre_unite}" />min
+                            </c:when>
+                            <c:otherwise>
+                                    <input name="recette_${som.type}" type="number" min="0" max="999" id="recette_${som.type}" value="${som.nbre_unite}" />                                
+                            </c:otherwise>
+                        </c:choose>
+                        </div>
+                </c:forEach>
+                    </div>
+                </fieldset>
         <div class="uploaded">
             <fieldset class="img">
                 <legend>Images associées à la recette</legend>
@@ -164,38 +196,15 @@
                 </c:choose>                    
                         
             </fieldset>
-        </div>
-
-            <div class="sommaire">
-                <fieldset class="som">
-                <legend>Temps et portions</legend>
-            
-                <c:forEach var="som" items="${sommaire.rows}" varStatus="loopsom">
-                        <c:choose>    
-                            <c:when test="${som.id_type_sommaire != 4}">
-                                <div class="sommaire">
-                                    <label for="recette_${som.type}">Temps de ${som.type}</label> 
-                                    <input name="recette_${som.type}" id="recette_${som.type}" value="${som.nbre_unite}" />
-                                </div>
-                            </c:when>
-                            <c:otherwise>
-                                <div class="sommaire">
-                                    <label for="recette_${som.type}">Nombre de ${som.type}</label> 
-                                    <input name="recette_${som.type}" id="recette_${som.type}" value="${som.nbre_unite}" />
-                                </div>
-                            </c:otherwise>
-                        </c:choose>
-                </c:forEach>
-                </fieldset>
-            </div>
+        </div>        
         
         <div class="recette_upload">
             <fieldset class="img">
                 <legend>Téléversement d'images</legend>
                 <div class='warning'>Maintenir la touche CTRL pour sélectionner plusieurs images.</div>
                 <input type="file" id="recette_upload" name="recette_upload" accept="image/*" style="visibility:hidden; width:0px; height:0px;" multiple/>
-                <div style="float:right;text-align:right;font-variant:all-small-caps;"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div>Taille maximum: 5 mo</div><div name="fileCount" id="fileCount"></div></div> 
-                <label name="filename" id="filename" class="filename">aucune image choisie</label> 
+                <div class="taillemax"><input type="button" id="uploadfile" name="uploadfile" style="padding-left:20px;padding-right:20px; margin-right:0;" value ="Parcourir" onclick="document.getElementById('recette_upload').click(); return false"/><div name="fileCount" id="fileCount">TAILLE MAXIMALE: 5 MO</div></div> 
+                <label name="filename" id="filename" class="filename">AUCUNE IMAGE CHOISIE</label> 
                   
                 </fieldset>
         </div>
@@ -205,7 +214,7 @@
                 <input type="button" style="margin-left:10px;margin-bottom:20px;padding-left:20px;padding-right:20px;" class="addingfields" id="addingfields" value ="Ajouter un ingrédient"/>
                 <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="bigloop">   
                     <c:set var="nbreIngredients" value="${bigloop.index}"/>
-                    <div class="lesingredients" name="ing_${bigloop.index}" id="ing_${bigloop.index}"><label>Quantité</label><input style="width: 55px;" type="number" min="0" max="9999" name="recette_ing_quantite" id="recette_ing_quantite" size="1" value="${ing.quantite}"/><select name="recette_ing_type_fraction" id="recette_ing_type_fraction">
+                    <div class="lesingredients" name="ing_${bigloop.index}" id="ing_${bigloop.index}"><div class="jumper"><label>Quantité</label><input  style="width: 50px;" pattern="[0-9]*" type="number" min="0" max="999"   name="recette_ing_quantite" id="recette_ing_quantite" size="1" value="${ing.quantite}"/><select name="recette_ing_type_fraction" id="recette_ing_type_fraction">
                             <c:forEach var="f" items="${fractions.rows}" varStatus="loop">
                                 <c:choose>
                                     <c:when test="${f.id_type_fraction eq ing.id_type_fraction}">
@@ -215,7 +224,7 @@
                                         <option name="recette_ing_type_fraction${loop.index}" id="recette_ing_type_fraction${loop.index}" value="${f.id_type_fraction}">${f.fraction_nohtml}</option>
                                     </c:otherwise>
                                 </c:choose>
-                            </c:forEach></select><label>Mesure</label><select name="recette_ing_type_unite" id="recette_ing_type_unite">
+                            </c:forEach></select></div><div class="jumper"><label>Mesure</label><select name="recette_ing_type_unite" id="recette_ing_type_unite">
                             <c:forEach var="unite" items="${unites.rows}" varStatus="loop">
                                 <c:choose>
                                     <c:when test="${unite.id_type_unite eq ing.id_type_unite}">
@@ -226,7 +235,7 @@
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
-                        </select><label>Ingrédient</label><input type="text" style="width:45%;" maxlength="40" name="recette_ing_ingredient" id="recette_ing_ingredient_${bigloop.index}" value="${ing.ingredient}" required/><a class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div>
+                                </select></div><div class="jumper" id="jumpering"><label>Ingrédient</label><input type="text" maxlength="50" name="recette_ing_ingredient" id="recette_ing_ingredient_${bigloop.index}" value="${ing.ingredient}" required/></div><a class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div>
                 </c:forEach>
             </fieldset>    
 
@@ -240,9 +249,13 @@
             </div>
         
             <div class="explication">
-                <label for="recette_notes">Avertissement et notes additionnelles sur les ingrédients ou la recette</label>
-                <textarea name="recette_notes" id="recette_notes" rows="3" cols="100">${rec.notes}</textarea>
-            </div>
+            <table>
+                <tr>
+                    <td class="label">Notes</td>
+                    <td><input type="text" name="recette_notes" id="recette_notes" placeholder="Optionnel - La note sera affichée dans un encadré" value="${rec.notes}"/></td>
+                </tr>
+            </table>
+        </div> 
         
             <div class="liens_bouton">
                     <div>
@@ -252,16 +265,16 @@
              
     </form>     
     </c:forEach>
-
     </c:otherwise>
 </c:choose> 
 </div>    
-
+<div id="erreur_upload" class="failed" style='visibility: hidden;'><a onclick="this.parentElement.style.visibility='hidden';"><div class="box"><p>La taille maximale de téléversement d'images a été dépassée</p></div></a></div>
 <script>     
     var selectmesure = "";
     var selectfraction = "";
     var x = 0;
     var loaded = 0;
+    var compt_mo = 0;
     $(document).ready(function() {
         var jsonmesure = [];
         var jsonfraction = [];
@@ -338,63 +351,82 @@
         }
     });
     
+    function valideImage()
+    {
+        if(compt_mo>(5.0))
+        {
+            document.getElementById("erreur_upload").style.visibility = "visible";
+            return false;
+        }
+        else
+            return true;
+    }
     
     $("#recette_upload").on('change',function(){
         var nbre_files = this.files.length;
         var display = "";
         var one_file_name;
+        compt_mo = 0;
         for(var i = 0; i < nbre_files ; i++)
         {
             var name = this.files.item(i).name;
-            var file_name_constructeur;            
+            var file_name_constructeur;       
+            compt_mo += this.files.item(i).size;
             one_file_name = name.replace(/\\/g, '/').replace(/.*\//, '');
-            if(one_file_name.length>26)
+            if(one_file_name.length>20)
             {
-                file_name_constructeur = one_file_name.substring(0, 26);
+                file_name_constructeur = one_file_name.substring(0, 20);
                 var index_point_ext = one_file_name.indexOf('.');
-                file_name_constructeur += "..."+one_file_name.substring(index_point_ext,one_file_name.length);
+                file_name_constructeur += "*"+one_file_name.substring(index_point_ext,one_file_name.length);
                 one_file_name = file_name_constructeur;
             }
-            if(i!==nbre_files-1)
+            if(compt_mo<(5*1024*1024))
             {
-                display+=one_file_name+"</label><br /><label name=\"filename\" id=\"filename\" class=\"filename\">";
+                display+="<label name=\"filename\" id=\"filename\" class=\"filename\">"+one_file_name+"</label>";
             }
             else
             {
-                display+=one_file_name+"</label>";
+                display+="<label name=\"filename\" style=\"color:red;\" id=\"filename\" class=\"filename\">"+one_file_name+"</label>";
             }
         }
+        compt_mo = (compt_mo/1024/1024);
+        compt_mo = parseFloat(compt_mo).toFixed(1);
         if(nbre_files===1)
         {
             $('#filename').html(one_file_name);
-            $('#fileCount').html("Nombre de fichier: "+nbre_files.toString());
+            $('#fileCount').html("TAILLE: "+compt_mo+" / 5 MO<br />NOMBRE IMAGE: "+nbre_files.toString());
         }
         else if( nbre_files===0)
         {
-            $('#filename').html("aucune image choisie");
-            $('#fileCount').html("");
+            $('#filename').html("AUCUNE IMAGE CHOISIE");
+            $('#fileCount').html("TAILLE MAXIMALE: 5 MO");
+            document.getElementById("fileCount").style.color = "black";
         }
         else
         {
             $('#filename').html(display);
-            $('#fileCount').html("Nombre de fichiers: "+nbre_files.toString());
-        }
-            
+            $('#fileCount').html("TAILLE: "+compt_mo+" / 5 MO<br />NOMBRE IMAGES: "+nbre_files.toString()); 
+        }            
     });
    
     
     $("#addingfields").click(function() {
         x++;
         var fieldWrapper = $("<div class=\"lesingredients\" name=\"ing_"+x+"\" id=\"ing_"+x+"\">");
-        var fQuantite = $("<label>Quantité</label><input name=\"recette_ing_quantite\" style=\"width: 55px;\" type=\"number\" min=\"0\" max=\"9999\"  id=\"recette_ing_quantite\" size=\"1\" value=\"0\"/>");
-        var fMesure = $("<label>Mesure</label>");
-        fieldWrapper.append(fQuantite);        
-        fieldWrapper.append(selectfraction);
+        temp = '';
         
-        fieldWrapper.append(fMesure);
-        fieldWrapper.append(selectmesure);
+        temp+=("<div class=\"jumper\"><label>Quantité</label><input name=\"recette_ing_quantite\" style=\"width: 50px;\" pattern=\"[0-9]*\" type=\"number\" min=\"0\" max=\"999\"  id=\"recette_ing_quantite\" size=\"1\" value=\"0\"/>");        
+        temp+=(selectfraction);
+        temp+=("</div>");
+        fieldWrapper.append(temp);
         
-        var fType = $("<label>Ingrédient</label><input style=\"width:45%;\" maxlength=\"40\" name=\"recette_ing_ingredient\" type=\"text\" id=\"recette_ing_ingredient\" required/>");
+        temp2 = '';
+        temp2+=("<div class=\"jumper\"><label>Mesure</label>");
+        temp2+=(selectmesure);
+        temp2+=("</div>");
+        fieldWrapper.append(temp2);
+        
+        var fType = $("<div class=\"jumper\" id=\"jumpering\"><label>Ingrédient</label><input maxlength=\"50\" name=\"recette_ing_ingredient\" type=\"text\" id=\"recette_ing_ingredient\" placeholder=\"Nommer l'ingrédient et détailler le à la suite d'un *\" required=\"required\"/></div>");
         fieldWrapper.append(fType);
         
         var retirer = $("<a class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div>");
@@ -408,27 +440,4 @@
     $(".remove").click(function() {
             $(this).parent("div").remove();x--;
         });
-    $("#preview").click(function() {
-        $("#yourform").remove();
-        var fieldSet = $("<fieldset id=\"yourform\"><legend>Your Form</legend></fieldset>");
-        $("#formnewing div").each(function() {
-            var id = "input" + $(this).attr("id").replace("field","");
-            var label = $("<label for=\"" + id + "\">" + $(this).find("input.fieldname").first().val() + "</label>");
-            var input;
-            switch ($(this).find("select.fieldtype").first().val()) {
-                case "checkbox":
-                    input = $("<input type=\"checkbox\" id=\"" + id + "\" name=\"" + id + "\" />");
-                    break;
-                case "textbox":
-                    input = $("<input type=\"text\" id=\"" + id + "\" name=\"" + id + "\" />");
-                    break;
-                case "textarea":
-                    input = $("<textarea id=\"" + id + "\" name=\"" + id + "\" ></textarea>");
-                    break;    
-            }
-            fieldSet.append(label);
-            fieldSet.append(input);
-        });
-        $("body").append(fieldSet);
-    });
 </script>
