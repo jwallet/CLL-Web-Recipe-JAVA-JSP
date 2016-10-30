@@ -28,8 +28,13 @@
                 <tr>
                     <td class="label">Titre</td>
                     <td><input type="text" name="recette_titre"
-                    id="recette_titre" value="" required /></td>
+                    id="recette_titre" value="" required="required" maxlength="60"/></td>
                 </tr>
+                <tr>
+                    <td class="label">Description</td>
+                    <td><input type="text" name="recette_description" id="recette_description" value="" placeholder="Optionnel" maxlength="60"/></td>
+                </tr>
+                
                 <tr>
                     <td class="label">Catégorie</td>
                     <td>
@@ -41,36 +46,29 @@
                     </td>
                 </tr>
             </table>
-       </div>
-
-        <div class="explication">
-                    <label>Description</label>
+       </div>            
         
-                    <textarea name="recette_description" id="recette_description" rows="3"></textarea>
-        </div>
-
-            <div class="sommaire">
-                <fieldset class="som">
+        
+      
+        
+                <fieldset class="som" >
                 <legend>Temps et portions</legend>
-            
+                <div class="sommaire-inline">
                 <c:forEach var="som" items="${sommaire.rows}" varStatus="loopsom">
+                        <div class="sommaire">
+                        <label for="recette_${som.type}">${som.type}</label>
                         <c:choose>    
-                            <c:when test="${som.id_type_sommaire != 4}">
-                                <div class="sommaire">
-                                    <label for="recette_${som.type}">Temps de ${som.type}</label> 
-                                    <input name="recette_${som.type}" id="recette_${som.type}" value="" />
-                                </div>
+                            <c:when test="${som.id_type_sommaire != 3}">                                 
+                                    <input name="recette_${som.type}" type="number" min="0" max="999" id="recette_${som.type}" value="0" />min
                             </c:when>
                             <c:otherwise>
-                                <div class="sommaire">
-                                    <label for="recette_${som.type}">Nombre de ${som.type}</label> 
-                                    <input name="recette_${som.type}" id="recette_${som.type}" value="" />
-                                </div>
+                                    <input name="recette_${som.type}" type="number" id="recette_${som.type}" value="0" />                                
                             </c:otherwise>
                         </c:choose>
+                        </div>
                 </c:forEach>
+                    </div>
                 </fieldset>
-            </div>
         
         <div class="recette_upload">
             <fieldset class="img">
@@ -82,7 +80,8 @@
                   
                 </fieldset>
         </div>
-      
+        
+
             <fieldset class="ing" id="formnewing">
                 <legend>Ingrédients</legend>
                 <input type="button" style="margin-left:10px;margin-bottom:20px;padding-left:20px;padding-right:20px;" class="addingfields" id="addingfields" value ="Ajouter un ingrédient"/>                   
@@ -95,10 +94,14 @@
                     </div>
             </div>
         
-            <div class="explication">
-                <label for="recette_notes">Avertissement et notes additionnelles sur les ingrédients ou la recette</label>
-                <textarea name="recette_notes" id="recette_notes" rows="3" cols="100"></textarea>
-            </div>
+        <div class="explication">
+            <table>
+                <tr>
+                    <td class="label">Notes</td>
+                    <td><input type="text" name="recette_notes" id="recette_notes" placeholder="Optionnel"/></td>
+                </tr>
+            </table>
+        </div> 
         
             <div class="liens_bouton">
                     <div>
@@ -128,7 +131,11 @@
                 <tr>
                     <td class="label">Titre</td>
                     <td><input type="text" name="recette_titre"
-                    id="recette_titre" value="${rec.titre}" required /></td>
+                    id="recette_titre" value="${rec.titre}" required="required" maxlength="60"/></td>
+                </tr>
+                <tr>
+                    <td class="label">Description</td>
+                    <td><input type="text" name="recette_description" id="recette_description" value="${rec.description}" placeholder="Optionnel" maxlength="60"/></td>
                 </tr>
                 <tr>
                     <td class="label">Catégorie</td>
@@ -142,22 +149,31 @@
                                </c:forEach>value="${lbls.id_type_label}">${lbls.label}</div>              
                     </c:forEach>
                     </td>
-                </tr>
+                </tr>  
             </table>
-            <!--<label for="recette_titre">Titre</label>-->
-            
-            <!--<div class="categorie">-->
-                    <!--<label for="recette_label">Catégorie</label>-->
-                                           
-                     
-             <!--</div>-->                          
-        </div>
-        <div class="explication">
-                    <label>Description</label>
-        
-                    <textarea name="recette_description" id="recette_description" rows="3">${rec.description}</textarea>
         </div>
         
+        
+
+                
+                <fieldset class="som" >
+                <legend>Temps et portions</legend>
+                <div class="sommaire-inline">
+                <c:forEach var="som" items="${sommaire.rows}" varStatus="loopsom">
+                        <div class="sommaire">
+                        <label for="recette_${som.type}">${som.type}</label>
+                        <c:choose>    
+                            <c:when test="${som.id_type_sommaire != 3}">                                 
+                                    <input name="recette_${som.type}" type="number" min="0" max="999" id="recette_${som.type}" value="${som.nbre_unite}" />min
+                            </c:when>
+                            <c:otherwise>
+                                    <input name="recette_${som.type}" type="number" min="0" max="999" id="recette_${som.type}" value="${som.nbre_unite}" />                                
+                            </c:otherwise>
+                        </c:choose>
+                        </div>
+                </c:forEach>
+                    </div>
+                </fieldset>
         <div class="uploaded">
             <fieldset class="img">
                 <legend>Images associées à la recette</legend>
@@ -180,30 +196,7 @@
                 </c:choose>                    
                         
             </fieldset>
-        </div>
-
-            <div class="sommaire">
-                <fieldset class="som">
-                <legend>Temps et portions</legend>
-            
-                <c:forEach var="som" items="${sommaire.rows}" varStatus="loopsom">
-                        <c:choose>    
-                            <c:when test="${som.id_type_sommaire != 4}">
-                                <div class="sommaire">
-                                    <label for="recette_${som.type}">Temps de ${som.type}</label> 
-                                    <input name="recette_${som.type}" id="recette_${som.type}" value="${som.nbre_unite}" />
-                                </div>
-                            </c:when>
-                            <c:otherwise>
-                                <div class="sommaire">
-                                    <label for="recette_${som.type}">Nombre de ${som.type}</label> 
-                                    <input name="recette_${som.type}" id="recette_${som.type}" value="${som.nbre_unite}" />
-                                </div>
-                            </c:otherwise>
-                        </c:choose>
-                </c:forEach>
-                </fieldset>
-            </div>
+        </div>        
         
         <div class="recette_upload">
             <fieldset class="img">
@@ -256,9 +249,13 @@
             </div>
         
             <div class="explication">
-                <label for="recette_notes">Avertissement et notes additionnelles sur les ingrédients ou la recette</label>
-                <textarea name="recette_notes" id="recette_notes" rows="3" cols="100">${rec.notes}</textarea>
-            </div>
+            <table>
+                <tr>
+                    <td class="label">Notes</td>
+                    <td><input type="text" name="recette_notes" id="recette_notes" placeholder="Optionnel - La note sera affichée dans un encadré" value="${rec.notes}"/></td>
+                </tr>
+            </table>
+        </div> 
         
             <div class="liens_bouton">
                     <div>
@@ -429,7 +426,7 @@
         temp2+=("</div>");
         fieldWrapper.append(temp2);
         
-        var fType = $("<div class=\"jumper\" id=\"jumpering\"><label>Ingrédient</label><input maxlength=\"50\" name=\"recette_ing_ingredient\" type=\"text\" id=\"recette_ing_ingredient\" required/></div>");
+        var fType = $("<div class=\"jumper\" id=\"jumpering\"><label>Ingrédient</label><input maxlength=\"50\" name=\"recette_ing_ingredient\" type=\"text\" id=\"recette_ing_ingredient\" placeholder=\"Nommer l'ingrédient et détailler le à la suite d'un *\" required=\"required\"/></div>");
         fieldWrapper.append(fType);
         
         var retirer = $("<a class='remove'><img style='margin-bottom:-5px;' src='../resources/images/x.png'/></a></div>");
