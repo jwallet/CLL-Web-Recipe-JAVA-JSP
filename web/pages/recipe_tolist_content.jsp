@@ -29,14 +29,11 @@
 
             <div class="wrap"><a href="recipe_detail.jsp?id=${rec.id_recette}">
                 <c:choose>
-                    <c:when test="${image.rowCount==0}">
-                           
-                            <img class='thumbnail' alt="Aucune image reliée" src="${pageContext.request.contextPath}/resources/images/aucune.png"/>
-                                            
+                    <c:when test="${image.rowCount==0}">                           
+                            <img class='thumbnail' alt="Aucune image reliée" src="${pageContext.request.contextPath}/resources/images/aucune.png"/>                                            
                     </c:when>
                     <c:otherwise>
-                                <img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${image.rows[0].url_local}"/>
-                                          
+                                <img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${image.rows[0].url_local}"/>                                          
                     </c:otherwise>
                 </c:choose>
             <div class="titre"><span>${rec.titre}</span></div>

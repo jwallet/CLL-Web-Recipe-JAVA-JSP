@@ -20,7 +20,7 @@
     
     <div class="post">
         <div class="haut" style="background-image: url('..${image.rows[0].url_local}')">
-            <div class='post-inside'
+            <div class='post-inside'>
                 <!-- IMAGE URL HERE -->
                 <c:choose>
                     <c:when test="${image.rowCount==0}">
@@ -47,10 +47,12 @@
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>
-                <div class="titre"><mid>${rec.titre}</mid></div>
+                <div class="titre">${rec.titre}</div>
                 <c:if test="${!empty rec.description}"><div class="description">${rec.description}</div></c:if>
                 <div class="sommaire"><c:forEach var="som" items="${sommaire.rows}" varStatus="somloop">
-                        <ligne><strong>${som.type}</strong> ${som.nbre_unite} <c:if test="${somloop.count != 3}">min</c:if></ligne>
+                        <c:if test="${!empty som.nbre_unite}">
+                            <ligne><strong>${som.type}</strong> ${som.nbre_unite} <c:if test="${somloop.count != 3}">min</c:if></ligne>
+                        </c:if>
                 </c:forEach></div>
                    
             </div>
@@ -68,7 +70,7 @@
                         <li class="gauche">${ing.quantite}${ing.fraction} ${ing.type_unite}
                         <c:choose>
                                 <c:when test="${fn:contains(ing.ingredient, '*')}">
-                                    <c:out value="${'<strong>'+fn:replace(ing.ingredient,'*','</strong><italic></italic>')+'</strong>'}"/>
+                                    <strong>${fn:replace(ing.ingredient,'*',"</strong><note>")}</note>
                                 </c:when>
                                 <c:otherwise>
                                     <strong>${ing.ingredient}</strong>

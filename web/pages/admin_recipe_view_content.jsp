@@ -18,61 +18,74 @@
 <sql:query dataSource="${snapshot}" var="image">SELECT * FROM images WHERE id_recette=<%=request.getParameter("id")%> ORDER BY principale DESC;</sql:query>    
 <c:forEach var="rec" items="${recettes.rows}" varStatus="status">
     <div class="post">
-        
-        <!-- IMAGE URL HERE -->
-        <c:choose>
-            <c:when test="${image.rowCount==0}">
-                <div class="image">
-                    <img class='thumbnail' alt="Aucune image reliée" src="${pageContext.request.contextPath}/resources/images/aucune.jpg"/>
-                </div>                    
-            </c:when>
-            <c:otherwise>
-                <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
-                    <div class="image">                
-                            <c:if test="${loopimg.index eq 0}"> 
-                                <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
-                            </c:if>
-                    </div>
-                </c:forEach>
-            </c:otherwise>
-        </c:choose>   
-        <div class="titre_lien">${rec.titre}</div>
-        <div class="description">${rec.description}<%--${fn:replace(rec.description, newLineChar, "<br />")}--%></div>
-        <div class="sommaire">
-            <c:forEach var="som" items="${sommaire.rows}" varStatus="somloop">
-                <c:choose>    
-                    <c:when test="${som.id_type_sommaire != 4}">
-                        <c:choose>                     
-                            <c:when test="${somloop.index%2 eq 0}">                       
-                                <div class="droit"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>
-                            </c:when>
-                            <c:otherwise>
-                                <div class="gauche"><b>Temps de ${som.type}:</b> ${som.nbre_unite}</div>
-                            </c:otherwise>
-                         </c:choose>
+        <div class="haut" style="background-image: url('..${image.rows[0].url_local}')">
+            <div class='post-inside'>
+                <!-- IMAGE URL HERE -->
+                <c:choose>
+                    <c:when test="${image.rowCount==0}">
+                        <div class="image">
+                            <img class='thumbnail' alt="Aucune image reliée" src="${pageContext.request.contextPath}/resources/images/aucune.png"/>
+                        </div>                    
                     </c:when>
                     <c:otherwise>
-                        <div class="droit"><b>Nombre de ${som.type}:</b> ${som.nbre_unite}</div> 
+                        <div class="image">                
+                            <a href="${pageContext.request.contextPath}${image.rows[0].url_local}" data-lightbox="${rec.titre}">
+                                <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${image.rows[0].url_local}"/>
+                            </a>              
+                        </div>
                     </c:otherwise>
-                </c:choose>                 
-            </c:forEach>
-        </div>   
-            <div class="ingredients"><b>Ingrédients:</b>
-                <ul>
-             <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="ingloop">
+                </c:choose>
+                <div class="titre"><mid>${rec.titre}</mid></div>
+                <c:if test="${!empty rec.description}"><div class="description">${rec.description}</div></c:if>
+                <div class="sommaire"><c:forEach var="som" items="${sommaire.rows}" varStatus="somloop">
+                        <c:if test="${!empty som.nbre_unite}">
+                            <ligne><strong>${som.type}</strong> ${som.nbre_unite} <c:if test="${somloop.count != 3}">min</c:if></ligne>
+                        </c:if>
+                </c:forEach></div>
+                   
+            </div>
+        </div>
+        <div class="post-inside">
+            <c:if test="${!empty rec.notes}"><div class='notes'><p>${fn:replace(rec.notes, newLineChar, "<br />")}</p></c:if>
+        </div>
+        
+           <div class="post-inside"> 
+        <div class="ingredients"><b>Ingrédients</b>:
+            <ul>
+             <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="ingloop"> 
                  <c:choose>                     
-                     <c:when test="${ingloop.index%2 eq 1}">                                              
-                            <li class="gauche">${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
-                     </c:when>
-                     <c:otherwise>
-                            <li class="droit">${ing.quantite}${ing.fraction} ${ing.type_unite} ${ing.ingredient}</li>
-                     </c:otherwise>
+                    <c:when test="${ingloop.index%2 eq 1}">                       
+                        <li class="gauche">${ing.quantite}${ing.fraction} ${ing.type_unite}
+                        <c:choose>
+                                <c:when test="${fn:contains(ing.ingredient, '*')}">
+                                    <strong>${fn:replace(ing.ingredient,'*',"</strong><note>")}</note>
+                                </c:when>
+                                <c:otherwise>
+                                    <strong>${ing.ingredient}</strong>
+                                </c:otherwise>
+                            </c:choose>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="droit">${ing.quantite}${ing.fraction} ${ing.type_unite} 
+                            <c:choose>
+                                <c:when test="${fn:contains(ing.ingredient, '*')}">
+                                    <strong>${fn:replace(ing.ingredient,'*',"</strong><note>")}</note>
+                                </c:when>
+                                <c:otherwise>
+                                    <strong>${ing.ingredient}</strong>
+                                </c:otherwise>
+                            </c:choose>
+                        </li>
+                    </c:otherwise>
                  </c:choose>
             </c:forEach>
                             </ul>
-        </div>
-        <c:if test="${!empty rec.notes}"><div class='notes'><img src='../resources/images/note.png' width="70px" height="70px"/><p>${fn:replace(rec.notes, newLineChar, "<br />")}</p></div></c:if>
+        </div><br/> 
+        
         <div class="instructions"><p><b>Instructions:</b></p>${fn:replace(rec.instructions, newLineChar, "<br />")}</div>
+        </div>
     </div>
+</div>
 </c:forEach>
 

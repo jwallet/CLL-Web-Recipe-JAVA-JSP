@@ -382,7 +382,6 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     position:relative;
     float:left;
     margin-top: 0px;
-    margin: 0 20px 0 0;
 }
 
 .post .image .thumbnail{
@@ -390,6 +389,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     width:auto;
     height:190px;
     border: 5px solid white;
+    margin: 0 20px 0 0;
 }
 
 .post .image .hidden-thumbnail{
