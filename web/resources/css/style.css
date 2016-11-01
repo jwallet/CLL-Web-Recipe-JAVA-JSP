@@ -246,7 +246,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 
 .poster{
     display:inline-block;
-    margin:12px 0px 0px 0px;
+    margin:0px 0px 0px 0px;
     width: 101%;
     text-align: center;
     
@@ -260,6 +260,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     padding:3px;
     margin-right: 10px;
     margin-bottom: 10px;
+    margin-top:10px;
     -webkit-box-shadow: 3px 3px 3px #777;
      -moz-box-shadow: 3px 3px 3px #777;
           box-shadow: 3px 3px 3px #777;
@@ -350,12 +351,6 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     margin-bottom: 20px;
 }
 
-.post .sommaire{
-
-    position:relative;
-    bottom:0;
-}
-
 .post ligne{
     display:block;
 }
@@ -382,6 +377,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     position:relative;
     float:left;
     margin-top: 0px;
+    
 }
 
 .post .image .thumbnail{
@@ -389,7 +385,7 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     width:auto;
     height:190px;
     border: 5px solid white;
-    margin: 0 20px 0 0;
+	margin: 0 20px 0 0;
 }
 
 .post .image .hidden-thumbnail{
@@ -419,13 +415,11 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
     border-radius: 20px;
 }
 
-.post .ingredients li.gauche{
-    width:45%;
-}
-
-.post .ingredients li.droit{
-    float:right; 
-    width: 45%; 
+.post .ingredients li{
+    line-height:1.5em;
+	float:left;
+	display:inline;
+	width:50%;
 }
 
 .post .ingredients{
@@ -443,6 +437,8 @@ https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
 .post .ingredients ul{
     list-style-type:none;
     padding:0;
+	width:100%;
+	overflow:hidden;
 }
 
 .post .instructions{
@@ -863,6 +859,7 @@ form .liens_bouton{
         width:auto;
         height:138px;
         border:4px solid white;
+		margin-right:0;
     }
     
     .post .image .zoom
@@ -897,13 +894,8 @@ form .liens_bouton{
         background-image: none;
     }
 
-    .post .ingredients li.gauche{
+    .post .ingredients li{
         width:100%;
-    }
-
-    .post .ingredients li.droit{
-        width: 100%;
-        float:none;
     }
     
     .listing td.apercu{
@@ -1080,7 +1072,15 @@ form .liens_bouton{
 }
 
 @media only screen and ( max-width: 500px) {
-    
+
+	.post .titre{
+		font-size:115%;
+	}
+	
+	.post .sommaire{
+		font-size:90%;
+	}
+	
      .post .description{
         display:none;
     }
@@ -1140,13 +1140,7 @@ form .liens_bouton{
         float:none; 
         width: 100%; 
     }   
-    
-     .post .ingredients li.gauche{
-        width:45%;
-    }
-    .post .ingredients li.droit{
-        width: 50%; 
-    }
+   
     
     form .uploaded{
         width:100%;

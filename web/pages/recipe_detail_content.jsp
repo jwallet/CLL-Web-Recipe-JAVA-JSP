@@ -29,22 +29,20 @@
                         </div>                    
                     </c:when>
                     <c:otherwise>
+                        <div class="image">
                         <c:forEach var="img" items="${image.rows}" varStatus="loopimg">
-                            <div class="image">                
+                                            
                                 <c:choose>
                                     <c:when test="${loopimg.index eq 0}"> 
-                                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
-                                            <img class="zoom"src="../resources/images/zoom.png"/><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/>
-                                            </a>
+                                        <img class="zoom" src="../resources/images/zoom.png"/><a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}"><img class='thumbnail' alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}"/></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}">
-                                            <img class='hidden_thumbnail'width="0px" height="0px" alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}" />
-                                            </a>
+                                        <a href="${pageContext.request.contextPath}${img.url_local}" data-lightbox="${rec.titre}"><img class='hidden_thumbnail'width="0px" height="0px" alt="${rec.titre}" src="${pageContext.request.contextPath}${img.url_local}" /></a>
                                     </c:otherwise>
                                 </c:choose>                
-                            </div>
+                            
                         </c:forEach>
+                        </div>
                     </c:otherwise>
                 </c:choose>
                 <div class="titre">${rec.titre}</div>
@@ -64,10 +62,8 @@
            <div class="post-inside"> 
         <div class="ingredients"><b>Ingrédients</b>:
             <ul>
-             <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="ingloop"> 
-                 <c:choose>                     
-                    <c:when test="${ingloop.index%2 eq 1}">                       
-                        <li class="gauche">${ing.quantite}${ing.fraction} ${ing.type_unite}
+             <c:forEach var="ing" items="${ingredients_recette.rows}" varStatus="ingloop">                      
+                        <li>${ing.quantite}${ing.fraction} ${ing.type_unite}
                         <c:choose>
                                 <c:when test="${fn:contains(ing.ingredient, '*')}">
                                     <strong>${fn:replace(ing.ingredient,'*',"</strong><note>")}</note>
@@ -77,20 +73,6 @@
                                 </c:otherwise>
                             </c:choose>
                         </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="droit">${ing.quantite}${ing.fraction} ${ing.type_unite} 
-                            <c:choose>
-                                <c:when test="${fn:contains(ing.ingredient, '*')}">
-                                    <strong>${fn:replace(ing.ingredient,'*',"</strong><note>")}</note>
-                                </c:when>
-                                <c:otherwise>
-                                    <strong>${ing.ingredient}</strong>
-                                </c:otherwise>
-                            </c:choose>
-                        </li>
-                    </c:otherwise>
-                 </c:choose>
             </c:forEach>
                             </ul>
         </div><br/> 
