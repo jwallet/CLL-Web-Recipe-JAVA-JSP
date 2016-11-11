@@ -1,4 +1,4 @@
-<img style="float:right" src="sg5capture.png"/>A website to administrate your own personal recipes, that's your online cookbook. It's really user-friendly to add and edit recipe as an admin.
+<img style="position:absolute;float:right" src="sg5capture.png"/>A website to administrate your own personal recipes, that's your online cookbook. It's really user-friendly to add and edit recipe as an admin.
 
 You can find a working demo here:
 http://205.236.12.41:8080/recette
