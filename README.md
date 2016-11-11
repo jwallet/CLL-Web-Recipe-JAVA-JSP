@@ -1,4 +1,4 @@
-<img style="position:absolute;float:left" src="sg5capture.png"/>
+<img style="position:absolute;float:right" src="sg5capture.png"/>
 <p>A website to administrate your own personal recipes, that's your online cookbook. It's really user-friendly to add and edit recipe as an admin.
 
 You can find a working demo here:
