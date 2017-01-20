@@ -1,0 +1,1172 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 26, 2016, 2:12:54 PM
+    Author     : Admin
+*/
+body{
+    font-family: Tahoma;
+    font-size: 14px;
+    background-image: url("../images/background.png");
+    margin: auto;
+    max-width: 1080px;
+}
+
+/* unvisited link */
+a:link 
+{
+	text-decoration:none;
+        color: #2697e3 ;
+}
+
+/* visited link */
+a:visited 
+{
+	text-decoration:none; 
+        color: #2697e3 ;
+}
+
+a:hover {text-decoration:underline;}   /* mouse over link */
+a:active {text-decoration:underline;}  /* selected link */
+
+/* The CSS for the form was taken from this project. 
+https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
+*/
+
+#header
+{
+    display:inline-block;
+    width: 100%;
+}
+
+.banniere
+{
+    margin:0;
+    background-image: url("../images/logo.png");
+    width: 444px;
+    background-position:top;
+    background-size: auto 70px;
+    height:70px;
+    border:2px solid #ddd;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    margin-bottom:-3px;
+    margin-top:6px;
+    background-repeat: no-repeat;
+    background-color:rgba(255,255,255,0.8);
+}
+
+.icon{
+    display:none;
+}
+
+.menu ul {
+    list-style-type: none;
+    margin:0;
+    padding: 0;    
+    overflow: hidden;
+    border: 2px solid #ddd;
+    background-color: rgba(255,255,255,0.8);
+    margin-bottom:-4px;
+}
+
+.menu li.lien{
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 0px;
+    text-decoration: none;
+}
+.menu li {
+    float: left;
+    border-right: 1px solid #ddd; 
+    min-width:88px;
+}
+
+.menu li:last-child {
+    border-right: none;
+    min-width:140px;
+    float:right;
+}
+
+.menu li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+    
+.menu li.active a{
+    background-color: rgba(38,151,227,0.9);
+    color: #fff;
+    pointer-events: none;
+    cursor: default;
+}
+
+/* Change the link color to #111 (black) on hover */
+.menu li a:hover {
+    background-color: rgba(38,151,227,0.60);
+    color: #fff
+}
+
+.failed{
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+.failed .box{
+    top:20%;
+    left:50%;
+    position: fixed;
+}
+.failed .box p{
+    color: #fff;
+    background-color: rgba(255,80,60,0.6);
+    padding: 30px;
+    font-size: 30px;
+    text-align:center;
+    border: 1px solid rgb(200,0,0);
+    border-radius: 10px;
+    top:-50%;
+    left:-50%;
+    position: relative;
+}
+
+.failed a{
+    width:100%;
+    height: 100%;
+    position:absolute;
+    left:0;
+    top:0;
+}
+
+.titre_grille{
+    display:block;
+    padding: 5px;
+    padding-left:10px;
+    margin-top: 10px;
+    font-size: 20px;
+    background-color: rgba(255,255,255,0.8);
+    border-left:1px solid #ddd;
+    border-right:1px solid #ddd;
+    border-top:1px solid #ddd;
+}
+.carree_blanc{
+    display:block;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: rgba(255,255,255,0.8);
+    border:2px solid #ddd;
+}
+.carree_blanc .gros_titre{
+    font-size: 20px;
+    padding: 10px;
+}
+
+.carree_blanc .explication{
+    padding: 10px;
+}
+
+.carree_blanc .liens_bouton{
+    padding: 10px;
+}
+
+.listing {
+  background-color: #fafafa;
+  border:1px solid #ddd;
+  color:#444;
+  border-radius: 1px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  padding: 8px;
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+.listing tr:nth-child(even) {
+    background-color: #fff;
+}
+
+.listing tr.alt td {
+    background-color: #eee;
+}
+
+.listing td{
+    border: 1px solid #ccc; 
+    padding: 2px;
+    text-align:center;
+    width: 100px;
+    height: 25px;
+    background-repeat: no-repeat;
+    background-size: 100px 25px;
+    background-position: center;
+}
+
+.listing td.titre{
+    float:none;
+    width:auto;
+    text-align:left;
+    padding-left:10px;
+}
+
+.listing td.apercu{
+    background-image: url('../images/xview.png');
+}
+
+.listing td.modifier{
+    background-image: url('../images/xedit.png');
+}
+
+.listing td.supprimer{
+    background-image: url('../images/xdelete.png');
+}
+
+.listing td.publier{
+    background-image: url('../images/xpublish.png');
+}
+
+.listing td.ebaucher{
+    background-image: url('../images/xdraft.png');
+}
+
+.linkbox{
+    width: 100%;
+    height: 100%;
+}
+
+.listing a:hover{
+    text-decoration: none;
+}
+
+.poster{
+    display:inline-block;
+    margin:0px 0px 0px 0px;
+    width: 101%;
+    text-align: center;
+    
+}
+
+.poster .wrap{
+    display:inline-block;
+    border: 2px solid #ddd;
+    background-color: #f3f5f6;
+    width: 233px;
+    padding:3px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top:10px;
+    -webkit-box-shadow: 3px 3px 3px #777;
+     -moz-box-shadow: 3px 3px 3px #777;
+          box-shadow: 3px 3px 3px #777;
+    
+          
+}
+.poster .wrap .titre{
+    background-color: #eae8e6;
+    padding: 4px 2px 8px 2px;
+    text-align: center;
+    height: 44px;
+    font-size:120%;
+    line-height: 44px;
+    overflow-y:hidden;
+    color:#444555;
+    font-family: 'Shadows Into Light Two', cursive;
+    font-weight:bold;
+    margin-top:-4px;
+    border-color:#f3f5f6;    
+    border-style:solid;
+    
+}
+
+.poster .wrap .titre span{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    
+}
+.poster .wrap a:hover{
+    text-decoration:none;
+    
+}
+
+.poster .wrap img{
+    width: 97%;
+    height:180px;
+    border-top: 4px solid #f3f5f6;
+    
+}
+
+.post{
+    display: block;
+    margin-top:10px;
+    margin-bottom:0px;
+    max-width: 100%;
+    line-height: normal;
+    word-wrap: break-word;
+    border: 2px solid #ddd;
+    background-color: rgba(255,255,255,0.8);
+}
+
+.post-inside{
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:15px;
+    padding-bottom: 15px;
+}
+
+.haut{
+    background-position: 50%;
+    background-size:cover;
+    min-height: 190px;
+    position: relative;
+    text-transform:uppercase;
+}
+
+.haut .post-inside{
+    background-color: rgba(0,0,0,0.2);
+    color:white;
+    padding:20px;
+    height: 200px;
+    position: relative;
+    font-size:120%;
+    
+}
+
+.post .titre{
+    font-size: 160%;
+    margin-bottom: 6px;
+    background-color: rgba(0,0,0,0);
+    font-weight: bold;
+}
+
+.post .titre_lien{
+    font-size: 20px;
+    color: #2697e3 ;
+    margin-bottom: 20px;
+}
+
+.post ligne{
+    display:block;
+}
+
+.post .sommaire strong{
+    padding-right:5px;
+}
+
+.post .description{
+    margin-bottom: 10px;
+}
+
+.post .image .zoom
+{
+    position:absolute;
+    background-color: white;
+    padding:4px;
+    width:28px;
+    height:28px;
+    bottom:5px;
+}
+
+.post .image{
+    position:relative;
+    float:left;
+    margin-top: 0px;
+    
+}
+
+.post .image .thumbnail{
+    
+    width:auto;
+    height:190px;
+    border: 5px solid white;
+	margin: 0 20px 0 0;
+}
+
+.post .image .hidden-thumbnail{
+    width:0px;
+    height:0px;
+}
+
+.post .notes{
+    width:100%;
+    background-image: url('../images/note.png');
+    background-size:auto 50px;
+    background-repeat: no-repeat;
+    background-position:left center;
+}
+
+.post .notes p{
+    width:auto;
+    margin-left:60px;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-left:20px;
+    padding-right:20px;
+    color:#666;
+    vertical-align: middle;
+    background-color: white;
+    border:1px solid #ddd;
+    border-radius: 20px;
+}
+
+.post .ingredients li{
+    line-height:1.5em;
+	float:left;
+	display:inline;
+	width:50%;
+}
+
+.post .ingredients{
+    margin-bottom:-20px;
+}
+
+.post .ingredients strong{
+    color: #444;
+}
+
+.post .ingredients note{
+    color: #888;
+}
+
+.post .ingredients ul{
+    list-style-type:none;
+    padding:0;
+	width:100%;
+	overflow:hidden;
+}
+
+.post .instructions{
+    margin-bottom:15px;
+}
+
+form {
+    width:auto;
+}
+
+form fieldset
+{
+    clear: both;
+    margin: 10px;
+    padding-left: 10px;
+    padding-right:10px;
+    padding-top: 15px;
+    padding-bottom:20px;
+    border: 1px solid #999;
+    overflow: hidden;
+}
+
+form .full{
+    width:100%;
+}
+
+form .uploaded{
+    width:100%;
+}
+
+form .uploadedMain{
+    float:right;
+    margin:0;
+}
+
+form .recette_upload{
+    width:100%;
+}
+
+form fieldset.som{
+    clear:both;
+}
+
+form fieldset.som label
+{
+    text-transform:capitalize;
+    padding-right: 6px;
+}
+
+form fieldset.som input{
+    width:35px;
+    margin-right: 3px;
+}
+
+form fieldset .som .sommaire-inline{
+    display:inline-block;
+    text-align:center;
+    width: 100%;
+}
+
+form fieldset.som .sommaire{
+    display:inline-block;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: -10px;
+    margin-top:5px;
+}
+
+form fieldset.img .taillemax{
+    float:right;
+    text-align:right;
+    font-size:80%;
+}
+form fieldset.img label.filename{
+    font-weight: normal;
+    font-size:12px;
+    margin-left:10px;
+    margin-top:10px;
+    margin-bottom: -8px;
+    display:block;
+}
+
+form fieldset.img input{
+    margin-top:2px;
+    margin-right:0;
+    float:right;
+    width:auto;
+}
+
+form fieldset.img .warning{
+    margin:0;
+    padding-left:10px;
+    padding-bottom:10px;
+    color: #999;
+}
+
+form fieldset.img .warning .cadre{
+    position:relative;
+    display:inline-block;
+}
+
+form fieldset.img .warning .cadre .insideNum{
+    float:right;
+    color:white;
+    background-color:rgba(38,151,227,0.8);
+    position:absolute;
+    padding: 4px 10px 5px 10px;
+    right:8px;
+    bottom:38px;
+    border-radius: 20px;
+}
+
+form fieldset.img input[type=checkbox]{
+    float:none;
+    margin-left:0;
+    margin-right:0;
+    margin-bottom:-20px;
+    margin-top:10px;
+    width: 130px;
+    height: 90px;
+    border:5px solid #fff;
+    background-size:100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance:none;
+}
+
+form fieldset.img input[type=checkbox]:checked{
+    border:5px solid #2697e3;
+}
+
+form fieldset.ing label
+{
+    font-weight:normal;
+    display:inline-block;
+}
+
+form fieldset.ing .lesingredients{
+    border:1px dashed #aaa;
+    padding:8px;
+    margin-bottom:6px;
+    position:relative;
+    background-image: url('../images/xback.png');
+    background-repeat:repeat-y;
+    background-position:right;
+}
+
+form fieldset.ing input{
+    margin:0;
+    margin-right: 5px;
+}
+
+form fieldset.ing .lesingredients input[type=text]{
+    width:44%;
+}
+
+    
+form fieldset.ing .jumper{
+    display:inline;
+}
+form fieldset.ing .remove{
+    cursor: pointer;
+    top:35%;
+    right:4px;
+    position:absolute;
+}
+
+form label{
+    font-weight:bold;
+    padding-right: 10px;
+}
+form .explication{
+    font-weight: normal;
+    margin-right:4px;
+}
+
+form input{
+    margin-right: 10px;
+    margin-left:-1px;
+    margin-top:-2px;
+    margin-bottom:10px;
+    padding:6px;
+    padding-bottom:4px;
+}
+
+form .explication table{
+    width:100%;
+    padding-right: 10px;
+}
+
+form .explication td.label{
+    font-weight: bold;
+    width: 100px;    
+}
+
+form .explication td div.cat{
+    display:inline-block;
+    padding-right: 10px;
+}
+
+form .explication td input[type=checkbox]{
+     width: 20px;
+     height: 20px;     
+}
+
+form .explication td input{
+    width:100%;
+}
+
+form .explication label{
+    width:20%;
+}
+
+form textarea{
+    width:100%;
+    resize: none;
+    margin-right:20px;
+    margin-top:5px;
+    font-family: arial;
+}
+
+form select{
+    margin-right: 10px;
+    margin-top:-2px;
+    padding-top:4px;
+    padding-bottom:4px;
+    margin-left:-1px;
+}
+
+form legend
+{
+    font-weight: bold;
+}
+
+form .liens_bouton{
+    text-align:right;   
+}
+
+#footer
+{
+  font-size: 80%;
+  text-align : center;
+  margin: 25px;
+}
+
+/* bottom */
+.bottom{
+    margin:20px;
+}
+.bottom a {
+    color: #ddd;
+    background-color: rgba(38,151,227,0.8);
+    padding: 6px 30px 6px 30px;
+    border: 1px solid rgb(38,151,227);
+    border-radius: 10px;
+    position:initial;
+}
+
+.bottom a:hover {
+    text-decoration: none;
+}
+
+
+
+
+@media print
+{    
+    .banniere, .menu, .bottom, .right 
+    {
+        display: none !important;
+    }
+    body div{
+        border:0;
+    }
+    
+    img{
+        width: 200px;
+    }
+}
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+    body{
+        font-size: 90%;
+        background-image: url("../images/background.png");
+        margin: 0;
+        width: 100%;
+        min-width: 300px;
+    }
+
+    /* The CSS for the form was taken from this project. 
+    https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
+    */
+
+    .banniere
+    {
+        min-width:300px;
+        max-width: 700px;
+        width:auto;
+        background-size: auto 60px;
+        height:60px;
+        margin-left:50px;
+        border:0px solid #ddd;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        margin-bottom:0px;
+        margin-top:0px;
+    }
+    
+    .icon{
+        width:50px;
+        height:60px;
+        font-size: 42px;
+        font-weight: bolder;
+        text-align:center;
+        display:block;
+        position:relative;
+        float:left;
+        background-color:rgba(255,255,255,0.8);
+    }
+    
+    .icon a{
+        text-decoration: none;
+        color:#2697e3;
+    }
+
+    .menu ul {
+        background-color:rgba(38,151,227,0.9);
+        border:0px solid #fff;
+        height: auto;
+    }
+    
+    .mobile ul{
+        list-style-type: none;
+        margin:0;
+        padding: 0;    
+        overflow: hidden;
+        background-color:rgba(38,151,227,0.80);
+        border:0px solid #fff;
+        height: auto;
+    }
+    
+    
+    .mobile li{
+        float:none;
+        height:40px;      
+    }
+    
+    .mobile li a{
+        display: block;
+        color: #ddd;
+        width:100%;
+        text-align: center;
+        padding: 12px 0px;
+        text-decoration:none;
+    }
+    
+    .mobile li a:hover{
+        color:#fff;
+    }
+    .mobile li.active a{
+        background-color: transparent;
+        color: #fff;
+        pointer-events: initial;
+        cursor: default;
+    }
+
+    .menu li {
+       float:none;
+       height:40px;
+    }
+    
+    .menu li:last-child {
+        min-width:0px;
+        float:none;
+    }
+
+    .menu li:not(.active){
+        display:none;
+    }
+
+    .menu li a {
+        width:100%;
+        padding: 12px 0px;
+    }
+
+    .menu li.active a{
+        background-color: transparent;
+        pointer-events: initial;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    .menu li a:hover {
+        background-color: transparent;
+    }
+    
+    .haut{
+        min-height: 0px;
+    }
+
+    .haut .post-inside{
+        background-color: rgba(0,0,0,0.2);
+        min-height: 0px;
+        height: 145px;
+        color:white;
+        padding:10px;
+        font-size:90%;
+    }
+    
+    .post-inside{
+        padding:10px;        
+    }
+    
+    .post .image .thumbnail{
+        width:auto;
+        height:138px;
+        border:4px solid white;
+		margin-right:0;
+    }
+    
+    .post .image .zoom
+    {
+        padding:4px;
+        width:24px;
+        height:24px;
+    }
+    
+    .post .titre{
+        margin-bottom: 5px;
+        background-color: rgba(0,0,0,0);
+        font-weight: bold;
+    }
+
+    .post .image{
+        float:right;
+        margin: 0 0 0 10px;
+    }
+    
+    .post .notes p{
+        margin-left:0;
+        padding-top:40px;
+        background-image: url('../images/note-mob.png');
+        background-size:auto auto;
+        background-repeat: no-repeat;
+        background-position:top left;
+    }
+    
+    .post .notes{
+        width:100%;
+        background-image: none;
+    }
+
+    .post .ingredients li{
+        width:100%;
+    }
+    
+    .listing td.apercu{
+        background-image: url('../images/view.png');
+    }
+
+    .listing td.modifier{
+        background-image: url('../images/edit.png');
+    }
+
+    .listing td.supprimer{
+        background-image: url('../images/delete.png');
+    }
+
+    .listing td.publier{
+        background-image: url('../images/publish.png');
+    }
+
+    .listing td.ebaucher{
+        background-image: url('../images/draft.png');
+    }
+
+    .listing td
+    {
+        padding: 2px;
+        width: 40px;
+        height:40px;
+        background-position: center;
+        background-size: 40px auto;
+    }
+    
+    form {
+        width:auto;
+    }
+
+    form fieldset
+    {
+        clear: both;
+        margin: 10px;
+        padding-left: 10px;
+        padding-right:10px;
+        padding-top: 15px;
+        padding-bottom:20px;
+        border: 1px solid #999;
+    }
+
+    form .full{
+        width:auto;
+        margin:0;
+    }
+
+    form .uploaded{
+        width:auto;
+        margin:0;
+    }
+
+    form .uploadedMain{
+        float:none;
+        margin:0;
+        padding-left:10px;
+    }
+
+    form .recette_upload{
+        float:none;
+        width:auto;
+    }
+
+    form fieldset.img .warning .cadre{
+        position:relative;
+        display:inline-block;
+    }
+
+    form fieldset.img .warning .cadre .insideNum{
+        float:right;
+        color:white;
+        background-color:rgba(38,151,227,0.8);
+        position:absolute;
+        padding: 4px 10px 5px 10px;
+        right:8px;
+        bottom:38px;
+        border-radius: 20px;
+    }
+
+    form fieldset.img input[type=checkbox]{
+        float:none;
+        margin-left:0;
+        margin-right:0;
+        margin-bottom:-20px;
+        margin-top:10px;
+        width: 130px;
+        height: 90px;
+        border:5px solid #fff;
+        background-size:100%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance:none;
+    }
+
+    form fieldset.img input[type=checkbox]:checked{
+        border:5px solid #2697e3;
+    }
+
+    form fieldset.ing .lesingredients{
+        border:1px dashed black;
+        padding-top:8px;  
+        padding-left:8px;
+        padding-right:8px;
+    }
+
+    form fieldset.ing .jumper{
+        display:block;
+        margin-top:8px;
+    }
+    
+    form fieldset.ing .lesingredients input[type=text]{
+        width:57%;
+    }
+
+    form fieldset.ing .lesingredients label{     
+        width:70px;
+    }
+    
+    form fieldset.img .taillemax{
+        font-size:55%;
+    }
+    
+    form fieldset.ing .remove{
+        cursor: pointer;        
+    }
+
+    form label{
+        font-weight:bold;
+        padding-right: 10px;
+    }
+    form .explication{
+        font-weight: normal;
+        margin-right:4px;
+    }
+
+    form input{  
+        margin-right: 10px;
+        margin-left:-1px;
+        margin-top:-2px;
+        margin-bottom:10px;
+        padding:6px;
+        padding-bottom:4px;
+    }
+
+    form textarea{
+        width:100%;
+        resize: none;
+        margin-right:20px;
+        margin-top:5px;
+        font-family: arial;
+    }
+
+    form select{
+        margin-right: 10px;
+        margin-top:0px;
+        padding-top:4px;
+        padding-bottom:4px;
+        margin-left:-1px;
+    }
+
+    form legend
+    {
+        font-weight: bold;
+    }
+
+    form .liens_bouton{
+        text-align:right;   
+    }
+
+}
+
+@media only screen and ( max-width: 500px) {
+
+	.post .titre{
+		font-size:115%;
+	}
+	
+	.post .sommaire{
+		font-size:90%;
+	}
+	
+     .post .description{
+        display:none;
+    }
+    
+    .haut .post-inside{
+        height: 125px;
+    }
+    
+    .post .image .thumbnail{
+        height:120px;
+        width:auto;
+        border:3px solid white;
+    }
+    
+    .post .image .zoom
+    {
+        padding:2px;
+        width:20px;
+        height:20px;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    form fieldset .som .sommaire-inline{
+        display:block;
+    }
+    form fieldset.som label
+    {
+        float:left;
+        display:block;
+        width: 90px;
+    }
+    
+    form fieldset.som .sommaire{
+        display:block;
+    }
+    
+}
+
+
+
+@media only screen and (min-width: 768px) and ( max-width: 900px) {
+    .banniere
+    {
+        max-width: 900px;
+    }
+    
+    .post .sommaire{
+        margin-bottom:10px;
+    }
+
+    .post .sommaire .gauche{
+        width:100%;
+    }
+
+    .post .sommaire .droit{
+        float:none; 
+        width: 100%; 
+    }   
+   
+    
+    form .uploaded{
+        width:100%;
+    }
+
+    form .uploadedMain{
+        float:right;
+        margin:0;
+    }
+
+    form .recette_upload{
+        float:none;
+        width:100%;
+    }
+    
+    form fieldset.ing #jumpering{
+        display:block;
+        margin-top:8px;
+    }
+    
+    form fieldset.ing .lesingredients input[type=text]{
+        width:70%;
+    }
+    
+    form fieldset.ing .lesingredients label{     
+        width:70px;
+    }
+    
+}
