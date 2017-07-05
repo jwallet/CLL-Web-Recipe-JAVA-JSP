@@ -9,7 +9,7 @@
      url="jdbc:mysql://localhost/dbrecette"
      user="root"  password=""/>
  <sql:query dataSource="${snapshot}" var="user">SELECT * FROM redacteurs;</sql:query> 
- <c:set var="failed" value="<%=request.getParameter("failed")%>"/>
+ <c:set var="failed" value='<%=request.getParameter("failed")%>'/>
 
  <div class="carree_blanc">
      <form class='som' action="login_inprogress.jsp" method="post">

@@ -11,8 +11,8 @@
      user="root"  password=""/>
 
 <sql:query dataSource="${snapshot}" var="labels">SELECT * FROM p_type_label</sql:query>
-<c:set var="lblActuel" value="<%=request.getParameter("lbl")%>"/>
-<c:set var="id" value="<%=request.getParameter("id")%>"/>
+<c:set var="lblActuel" value='<%=request.getParameter("lbl")%>'/>
+<c:set var="id" value='<%=request.getParameter("id")%>'/>
 <c:set var="current" value="<%=request.getRequestURI().substring(request.getRequestURI().lastIndexOf('/')+1, request.getRequestURI().length()) %>"/>
 <div id='header'>
     <div class="icon"><a href="javascript:void(0);" onclick="burgerpourmobile()">&#9776;</a></div>

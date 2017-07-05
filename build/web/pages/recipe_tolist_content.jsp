@@ -11,7 +11,7 @@
 <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
      url="jdbc:mysql://localhost/dbrecette"
      user="root"  password=""/>
-<c:set var="lbl" value="<%=request.getParameter("lbl")%>"/>
+<c:set var="lbl" value='<%=request.getParameter("lbl")%>'/>
 <c:choose>
     <c:when test="${lbl eq null}">
         <sql:query dataSource="${snapshot}" var="recettes">SELECT * FROM recettes WHERE brouillon=0;</sql:query>

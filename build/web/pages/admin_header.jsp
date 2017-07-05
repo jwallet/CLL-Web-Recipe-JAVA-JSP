@@ -11,7 +11,7 @@
 
 <sql:query dataSource="${snapshot}" var="result">SELECT * from recettes;</sql:query>                                  
 <c:set var="current" value="<%=request.getRequestURI().substring(request.getRequestURI().lastIndexOf('/')+1, request.getRequestURI().length()) %>"/>
-<c:set var="id" value="<%=request.getParameter("id")%>"/> 
+<c:set var="id" value='<%=request.getParameter("id")%>'/> 
 <div id='header'>
     <div class="icon"><a href="javascript:void(0);" onclick="burgerpourmobile()">&#9776;</a></div>
     <div class="banniere"></div>    
